@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
+import Nav from './Components/Nav';
 
 function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
@@ -29,6 +30,7 @@ function App() {
   return (
     <div>
       <ErrorNotification error={error} />
+      <Nav />
       <Construct info={launchInfo} />
     </div>
   );
