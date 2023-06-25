@@ -19,13 +19,11 @@ class OptionOut(BaseModel):
 
 
 class OptionIn(BaseModel):
-    business_status: Optional[str]
-    name: str
-    picture_url: Optional[str]
-    google_place_id: Optional[str]
-    formatted_address: str
-    latitude: float
-    longitude: float
-    price_level: int
-    rating: float
-    user_ratings_count: float
+    querie: str
+    location: str
+    radius: int
+
+
+class OptionRepository:
+    def create(options: OptionIn):
+        pass
