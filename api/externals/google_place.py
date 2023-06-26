@@ -5,7 +5,7 @@ import os
 GOOGLE_MAPS_API_KEY = os.environ["GOOGLE_MAPS_API_KEY"]
 
 
-def get_options(query, location, radius):
+def get_google_options(query, location, radius):
     params = {
         "query": query,
         "location": location,
