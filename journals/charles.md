@@ -11,3 +11,5 @@ created P0 issues as a group with Kristen "driving"
 
 created each database table as a migration file.
 updated docker files with the postgres db commands.
+changed docker.dev file in api folder and edited docker compose files.
+fixed issue of psycopg_pool module not found.
