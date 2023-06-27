@@ -43,7 +43,7 @@ class OptionRepository:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    INSERT INTO options
+                    INSERT INTO option
                         (business_status,
                         name,
                         picture_url,
