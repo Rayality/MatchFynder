@@ -6,3 +6,8 @@
 ## 6/26/2023
 
 created P0 issues as a group with Kristen "driving"
+
+## 6/27/2023
+
+created each database table as a migration file.
+updated docker files with the postgres db commands.

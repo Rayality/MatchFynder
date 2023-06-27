@@ -10,11 +10,20 @@ Recommended naming convention is `first_last.md`.
 ## postgres info
 
 FIRST STEP: before compose up, remember to run the following cmd
-# docker volume create postgres-data
+<!--  docker volume create postgres-data  -->
 
-Any classes you write that talk to postgres will need to use the DATABASE_URL environment variable to create a connection.
+Any classes you write that talk to postgres will need to use the DATABASE_URL environment variable to create a connection. following comment is a reference.
 
-<!-- # ./api/queries/accounts.py
+<!-- # ./api/queries/some_file.py
 import os
 from psycopg_pool import ConnectionPool
 pool = ConnectionPool(conninfo=os.environ.get("DATABASE_URL")) -->
+
+## Redo your database
+ steps:
+-- Stop all services
+-- Run docker container prune -f
+-- Run docker volume rm postgres-data
+-- Run docker volume create postgres-data
+-- Run docker-compose build
+-- Run docker-compose up
