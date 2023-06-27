@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import Construct from "./Construct.js";
-import ErrorNotification from "./ErrorNotification";
-import "./App.css";
-import Nav from "./Components/Nav";
-import Login from "./Components/forms/Login.js";
+import Construct from "../Construct.js";
+import ErrorNotification from "../ErrorNotification";
+import "../App.css";
+import Nav from "../Components/Nav";
 
-function App() {
+export default function Root() {
   const [launchInfo, setLaunchInfo] = useState([]);
   const [error, setError] = useState(null);
 
@@ -37,5 +35,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
