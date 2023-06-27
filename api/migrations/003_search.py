@@ -1,6 +1,5 @@
 steps = [
     # "Up" SQL statement
-    # Should we store participant id's in an array here?
     """
     CREATE TABLE search (
         id SERIAL PRIMARY KEY NOT NULL,
