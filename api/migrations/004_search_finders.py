@@ -1,9 +1,10 @@
-steps = [
+steps = [[
         # "Up" SQL statement
         """
         CREATE TABLE search_finders (
-            finder_id INTEGER NOT NULL REFERENCES finder(id)
-            search_id INTEGER NOT NULL REFERENCES search(id)
+            id SERIAL NOT NULL,
+            finder_id INTEGER REFERENCES finder(id),
+            search_id INTEGER REFERENCES search(id),
             PRIMARY KEY (search_id, finder_id)
         );
         """,
@@ -11,4 +12,4 @@ steps = [
         """
         DROP TABLE search_finders;
         """
-    ]
+    ]]

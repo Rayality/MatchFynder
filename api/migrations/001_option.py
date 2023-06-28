@@ -1,4 +1,4 @@
-steps = [
+steps = [[
         # "Up" SQL statement
         """
         CREATE TABLE options (
@@ -14,11 +14,11 @@ steps = [
             rating REAL,
             user_ratings_count INTEGER,
             created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_on TIMESTAMP NOT NULL DEFAULT 0 ON UPDATE CURRENT_TIMESTAMP
+            updated_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
         );
         """,
         # "Down" SQL statement
         """
         DROP TABLE options;
         """
-    ]
+    ]]
