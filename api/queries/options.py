@@ -19,6 +19,8 @@ class OptionIn(BaseModel):
     price_level: Optional[int]
     rating: Optional[float]
     user_ratings_count: Optional[float]
+    created_on: datetime
+    updated_on: datetime
 
 
 class OptionOut(BaseModel):
@@ -39,38 +41,48 @@ class OptionOut(BaseModel):
 
 class OptionRepository:
     def create(self, option: OptionIn) -> OptionOut:
-        with pool.connection() as conn:
-            with conn.cursor() as db:
-                result = db.execute(
-                    """
-                    INSERT INTO option
-                        (business_status,
-                        name,
-                        picture_url,
-                        google_place_id,
-                        formatted_address,
-                        latitude,
-                        longitude,
-                        price_level,
-                        rating,
-                        user_ratings_count)
-                    VALUES
-                        (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                    RETURNING id;
-                    """,
-                    [
-                        option.business_status,
-                        option.name,
-                        option.picture_url,
-                        option.google_place_id,
-                        option.formatted_address,
-                        option.latitude,
-                        option.longitude,
-                        option.price_level,
-                        option.rating,
-                        option.user_ratings_count
-                    ]
-                )
-                id = result.fetchone()[0]
-                old_data = option.dict()
-                return OptionOut(id=id, **old_data)
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        INSERT INTO options
+                        (
+                            business_status,
+                            name,
+                            picture_url,
+                            google_place_id,
+                            formatted_address,
+                            latitude,
+                            longitude,
+                            price_level,
+                            rating,
+                            user_ratings_count,
+                            created_on,
+                            updated_on
+                        )
+                        VALUES
+                            (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        RETURNING id;
+                        """,
+                        [
+                            option.business_status,
+                            option.name,
+                            option.picture_url,
+                            option.google_place_id,
+                            option.formatted_address,
+                            option.latitude,
+                            option.longitude,
+                            option.price_level,
+                            option.rating,
+                            option.user_ratings_count,
+                            option.created_on,
+                            option.updated_on
+                        ]
+                    )
+                    id = result.fetchone()[0]
+                    old_data = option.dict()
+                    return OptionOut(id=id, **old_data)
+        except Exception as e:
+            print(e)
+            return {"message": "ERROR"}
