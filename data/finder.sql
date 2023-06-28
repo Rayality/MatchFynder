@@ -25,7 +25,7 @@ CREATE TABLE finder (
     email VARCHAR(100) NOT NULL UNIQUE,
     first_name VARCHAR(100),
     last_name VARCHAR(100),
-    pass VARCHAR(20)
+    hashed_password VARCHAR(200)
 );
 
 CREATE TABLE search (
