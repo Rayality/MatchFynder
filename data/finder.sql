@@ -1,40 +1,49 @@
 CREATE TABLE options (
-    id INTEGER NOT NULL UNIQUE,
+    id SERIAL PRIMARY KEY NOT NULL,
     business_status VARCHAR(1000),
     name TEXT NOT NULL,
-    picture_url IMAGE,
+    picture_url VARCHAR(1000),
     google_place_id TEXT,
     formatted_address TEXT,
-    latitude FLOAT,
-    longitude FLOAT,
-    price_level INTEGER,
-    rating FLOAT,
+    latitude DECIMAL,
+    longitude DECIMAL,
+    price_level SMALLINT,
+    rating REAL,
     user_ratings_count INTEGER,
-    created DATETIME,
-    updated DATETIME
+    created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE finder (
+    id SERIAL PRIMARY KEY NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100)
+);
+
+
 CREATE TABLE search (
-    id INTEGER NOT NULL UNIQUE,
-    owner INTEGER NOT NULL REFERENCES users("id") ON DELETE CASCADE,
+    id SERIAL PRIMARY KEY NOT NULL,
+    owner INTEGER REFERENCES finder(id),
     participant_count INTEGER,
-    match_made BOOLEAN NOT NULL DEFAULT false,
-)
+    match_made BOOLEAN NOT NULL DEFAULT false
+);
+
+CREATE TABLE search_finders (
+    id SERIAL NOT NULL,
+    finder_id INTEGER REFERENCES finder(id),
+    search_id INTEGER REFERENCES search(id),
+    PRIMARY KEY (search_id, finder_id)
+);
 
 
-CREATE TABLE search_in_progress (
+CREATE TABLE search_options (
     edible_count INTEGER,
-    option INTEGER NOT NULL REFERENCES options("id") ON DELETE CASCADE,
-    search INTEGER NOT NULL REFERENCES search("id") ON DELETE CASCADE
-)
+    option_id INTEGER NOT NULL REFERENCES options(id) ON DELETE CASCADE,
+    search_id INTEGER NOT NULL REFERENCES search(id) ON DELETE CASCADE,
+    PRIMARY KEY (option_id, search_id)
+);
 
-
-CREATE TABLE search_participation_in_progress (
-    edible BOOLEAN NOT NULL,
-    user INTEGER NOT NULL REFERENCES users("id") ON DELETE CASCADE,
-    option INTEGER NOT NULL REFERENCES options("id") ON DELETE CASCADE,
-    search INTEGER NOT NULL REFERENCES search("id") ON DELETE CASCADE
-)
 
 
 

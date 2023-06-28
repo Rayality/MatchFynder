@@ -3,7 +3,9 @@ volumes:
         external: true
 services:
   postgres:
-    image: postgres:14.5-bullseye
+    build:
+      context: data
+      dockerfile: Dockerfile.dev
     volumes:
         - postgres-data:/var/lib/postgresql/data
     environment:
@@ -16,10 +18,9 @@ services:
     environment:
       DATABASE_URL: postgresql://example_user:secret@postgres/example_db
       WAIT_HOSTS: postgres:5432
-      PORT: 8000
       CORS_HOST: http://localhost:3000
     build:
-      context: ./api
+      context: api
       dockerfile: Dockerfile.dev
     ports:
       - "8000:8000"
