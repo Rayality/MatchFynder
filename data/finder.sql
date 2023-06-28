@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS options;
+DROP TABLE IF EXISTS finder;
+DROP TABLE IF EXISTS search;
+DROP TABLE IF EXISTS search_finders;
+DROP TABLE IF EXISTS search_options;
+
 CREATE TABLE options (
     id SERIAL PRIMARY KEY NOT NULL,
     business_status VARCHAR(1000),
@@ -18,7 +24,8 @@ CREATE TABLE finder (
     id SERIAL PRIMARY KEY NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     first_name VARCHAR(100),
-    last_name VARCHAR(100)
+    last_name VARCHAR(100),
+    pass VARCHAR(20)
 );
 
 CREATE TABLE search (
