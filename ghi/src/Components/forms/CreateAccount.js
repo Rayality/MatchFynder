@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import FetchData from "../../logic/FetchData";
 import { useEffect, useState } from "react";
+import SendData from "../../logic/SendData";
 
 export default function CreateAccountForm() {
   const [userData, setUserData] = useState({
@@ -10,6 +11,12 @@ export default function CreateAccountForm() {
     email: "",
     password: "",
   });
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const url = "";
+    setUserData(SendData(url, "post", userData));
+  };
 
   return (
     <div className='container mb-3 shadow'>
