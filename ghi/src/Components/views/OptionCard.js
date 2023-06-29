@@ -15,12 +15,12 @@ function Option(props) {
   // Get the data to populate the options list
   // and set the first option at index 0
   const fetchData = async () => {
-    const url = "http://localhost:8100/api/options/";
+    const url = "http://localhost:8000/options/";
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
-      setOptions(data.options);
-      setOption(data.options.at(index));
+      setOptions(data);
+      setOption(data.at(index));
     } else {
       console.error(response);
     }
@@ -69,7 +69,7 @@ function Option(props) {
               <h4>{option.name}</h4>
               <p>Price: {option.price_level} out of 5</p>
               <p>Rating: {option.rating} out of 5</p>
-              <p class="d-flex justify-content-between">
+              <p className="d-flex justify-content-between">
                 <button onClick={handleButton} className="btn btn-light">
                   <box-icon
                     name="x-circle"
