@@ -3,10 +3,17 @@ import "boxicons";
 import { useSwipeable } from "react-swipeable";
 
 function Option(props) {
+  // Create variables leveraging React's useState functionality
+  // in order to
+  // (i) get a list of options that will be displayed in order
+  // (ii) set/reset the active option to display on the options page
+  // (iii) set/reset the index of the action option from the options list
   const [options, setOptions] = useState([]);
   const [option, setOption] = useState({});
   const [index, setIndex] = useState(0);
 
+  // Get the data to populate the options list
+  // and set the first option at index 0
   const fetchData = async () => {
     const url = "http://localhost:8100/api/options/";
     const response = await fetch(url);
@@ -22,6 +29,8 @@ function Option(props) {
     fetchData();
   }, []);
 
+  // Upon button click, prevent the page from refreshing
+  // and reset the index and the option to be displayed
   const handleButton = async (event) => {
     event.preventDefault();
     setIndex(index + 1);
@@ -29,12 +38,18 @@ function Option(props) {
     setOption(next_option);
   };
 
+  // Upon swipe (or click/drag),
+  // reset the index and the option to be displayed
   const handleSwipe = async (event) => {
     setIndex(index + 1);
     const next_option = options.at(index);
     setOption(next_option);
   };
 
+  // Create a variable to be able to set where in the html
+  // to detect swipe/click and drag
+  // leverage useSwipeable package to call handleSwipe
+  // with the trackMouse parameter set to true
   const handlers = useSwipeable({
     onTouchEndOrOnMouseUp: (event) => handleSwipe(event),
     trackMouse: true,
