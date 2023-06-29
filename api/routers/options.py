@@ -21,6 +21,10 @@ def create_option(
 
 
 
-@router.get("/options")
-def get_options(option: OptionOut):
-    pass
+@router.get("/options", response_model=Union[Error, list[OptionOut]])
+def get_options(
+    response: Response,
+    repo: OptionRepository = Depends(),
+):
+    response.status_code = 200
+    return repo.get_options()
