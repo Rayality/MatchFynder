@@ -43,3 +43,10 @@ def delete_option(
     repo: OptionRepository = Depends(),
 ) -> bool:
     return repo.delete_option(option_id)
+
+@router.get('/options/{option_id}', response_model = Union[OptionOut, Error])
+def get_single_option(
+    option_id: int,
+    repo: OptionRepository = Depends(),
+) -> OptionOut:
+    return repo.get_single_option(option_id)
