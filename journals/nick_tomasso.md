@@ -11,3 +11,7 @@ created P0 issues as a group with Kristen "driving"
 ## 6/27/2023
 
 Picked up account creation/login issue
+
+## 6/28/2023
+
+Found the right librabry for JWT Tokens got blocked on a syntax error
