@@ -1,9 +1,48 @@
 import { NavLink } from "react-router-dom";
+import FetchData from "../../logic/FetchData";
+import { useEffect, useState } from "react";
+import SendData from "../../logic/SendData";
 
 export default function CreateAccountForm() {
+  const [userData, setUserData] = useState({
+    username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const url = "";
+    setUserData(SendData(url, "post", userData));
+  };
+
   return (
     <div className='container mb-3 shadow'>
-      <form className='mb-3'>
+      <form className='form-floating mb-3'>
+        <div className='mb-3'>
+          <label for='inputFName' className='form-label'>
+            First Name
+          </label>
+          <input
+            type='text'
+            className='form-control'
+            id='inputFName'
+            aria-describedby='emailHelp'
+          />
+        </div>
+        <div className='mb-3'>
+          <label for='inputLName' className='form-label'>
+            Last Name
+          </label>
+          <input
+            type='text'
+            className='form-control'
+            id='inputLName'
+            aria-describedby='emailHelp'
+          />
+        </div>
         <div className='mb-3'>
           <label for='exampleInputEmail1' className='form-label'>
             Email address

@@ -22,6 +22,7 @@ CREATE TABLE options (
 
 CREATE TABLE finder (
     id SERIAL PRIMARY KEY NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     first_name VARCHAR(100),
     last_name VARCHAR(100),
@@ -43,12 +44,12 @@ CREATE TABLE search_finders (
 );
 
 CREATE TABLE search_options (
-    edible_count INTEGER,
+    id SERIAL NOT NULL,
+    edible_count INTEGER DEFAULT 0,
     option_id INTEGER NOT NULL REFERENCES options(id) ON DELETE CASCADE,
     search_id INTEGER NOT NULL REFERENCES search(id) ON DELETE CASCADE,
     PRIMARY KEY (option_id, search_id)
 );
-
 
 -- nosql data version of in progress data
 -- id = search_id

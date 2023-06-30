@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/root";
 import Login from "./routes/login";
 import CreateAccount from "./routes/createAccount";
+import PresentOption from "./routes/presentOption";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "signup/",
     element: <CreateAccount />,
+  },
+  {
+    path: "options/",
+    element: <PresentOption />,
   },
 ]);
 

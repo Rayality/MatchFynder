@@ -20,12 +20,8 @@ def create_option(
     return repo.create(option)
 
 
-
 @router.get("/options", response_model=Union[Error, list[OptionOut]])
-def get_options(
-    response: Response,
-    repo: OptionRepository = Depends(),
-):
+def get_options(response: Response, repo: OptionRepository = Depends()):
     response.status_code = 200
     return repo.get_options()
 
