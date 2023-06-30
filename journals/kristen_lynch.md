@@ -3,6 +3,11 @@
 --A reflection on any design conversations that you had
 --At least one ah-ha! moment that you had during your coding, however small
 
+## 6/29/2023
+
+--learned that npm install executed inside terminal also adds dependencies within package.json
+--merge request complete and launched for frontend
+
 ## 6/28/2023
 
 --transfered front end from old project to new and tested.

@@ -32,7 +32,9 @@ CREATE TABLE search (
     id SERIAL PRIMARY KEY NOT NULL,
     owner INTEGER REFERENCES finder(id),
     participant_count INTEGER,
-    match_made BOOLEAN NOT NULL DEFAULT false
+    match_made BOOLEAN NOT NULL DEFAULT false,
+    created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE search_finders (
@@ -46,14 +48,7 @@ CREATE TABLE search_options (
     edible_count INTEGER,
     option_id INTEGER NOT NULL REFERENCES options(id) ON DELETE CASCADE,
     search_id INTEGER NOT NULL REFERENCES search(id) ON DELETE CASCADE,
-    PRIMARY KEY (option_id, search_id)
+    PRIMARY KEY (option_id, search_id),
+    created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
-
--- nosql data version of in progress data
--- id = search_id
--- option_counts = {option_id: count, ....}
--- participant_feedback = {user_id: {option_id: bool}}, {user_id: {option_id: bool}, {option_id: bool}}
-
--- Future:
--- consider future enhancements that involve search filters
