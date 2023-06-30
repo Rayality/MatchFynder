@@ -44,16 +44,13 @@ CREATE TABLE search_finders (
 );
 
 CREATE TABLE search_options (
-    edible_count INTEGER,
+    id SERIAL NOT NULL,
+    edible_count INTEGER DEFAULT 0,
     option_id INTEGER NOT NULL REFERENCES options(id) ON DELETE CASCADE,
     search_id INTEGER NOT NULL REFERENCES search(id) ON DELETE CASCADE,
     PRIMARY KEY (option_id, search_id)
 );
 
-INSERT INTO finder VALUES
-  ("username1", "email_one@this.is", "user", "name", "pas1s"),
-  ("abusername2", "email_two@this.is", "abuser", "surname", "pas2s")
-  
 -- nosql data version of in progress data
 -- id = search_id
 -- option_counts = {option_id: count, ....}

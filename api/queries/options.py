@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
 from queries.pool import pool
-from .search import generic_insert
+from .generic_sql import generic_insert
 
 class Error(BaseModel):
     message: str
@@ -35,8 +35,8 @@ class OptionOut(BaseModel):
     price_level: Optional[int]
     rating: Optional[float]
     user_ratings_count: Optional[float]
-    created_on: datetime
-    updated_on: datetime
+    # created_on: datetime
+    # updated_on: datetime
 
 
 class OptionRepository:
