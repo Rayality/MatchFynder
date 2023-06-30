@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Union
 from datetime import datetime
 from queries.pool import pool
 
@@ -40,6 +40,66 @@ class OptionOut(BaseModel):
 
 
 class OptionRepository:
+    def delete_option(self, option_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM options
+                        WHERE id = %s
+                        """,
+                        [option_id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
+
+
+    def update_option(self, option_id: int, option: OptionIn) -> Union[OptionOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE options
+                        SET business_status = %s
+                            , name = %s
+                            , picture_url = %s
+                            , formatted_address = %s
+                            , latitude = %s
+                            , longitude = %s
+                            , price_level = %s
+                            , rating = %s
+                            , user_ratings_count = %s
+                            , created_on = %s
+                            , updated_on = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            option.business_status,
+                            option.name,
+                            option.picture_url,
+                            option.formatted_address,
+                            option.latitude,
+                            option.longitude,
+                            option.price_level,
+                            option.rating,
+                            option.user_ratings_count,
+                            option.created_on,
+                            option.updated_on,
+                            option_id
+
+                        ]
+                    )
+                    old_data = option.dict()
+                    return OptionOut(id=option_id, **old_data)
+
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get options"}
+
     def get_options(self) -> list[OptionOut]:
         try:
             with pool.connection() as conn:

@@ -28,3 +28,18 @@ def get_options(
 ):
     response.status_code = 200
     return repo.get_options()
+
+@router.put("/options/{option_id}", response_model=Union[Error, OptionOut])
+def update_option(
+    option_id: int,
+    option: OptionIn,
+    repo: OptionRepository = Depends(),
+) -> Union[Error, OptionOut]:
+    return repo.update_option(option_id, option)
+
+@router.delete("/options/{option_id}", response_model = bool)
+def delete_option(
+    option_id: int,
+    repo: OptionRepository = Depends(),
+) -> bool:
+    return repo.delete_option(option_id)
