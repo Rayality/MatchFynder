@@ -2,10 +2,11 @@ from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from pydantic import BaseModel
-from routers import options
+from routers import options, search
 
 app = FastAPI()
 app.include_router(options.router)
+app.include_router(search.router)
 
 app.add_middleware(
     CORSMiddleware,

@@ -22,6 +22,7 @@ CREATE TABLE options (
 
 CREATE TABLE finder (
     id SERIAL PRIMARY KEY NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     first_name VARCHAR(100),
     last_name VARCHAR(100),
@@ -49,7 +50,10 @@ CREATE TABLE search_options (
     PRIMARY KEY (option_id, search_id)
 );
 
-
+INSERT INTO finder VALUES
+  ("username1", "email_one@this.is", "user", "name", "pas1s"),
+  ("abusername2", "email_two@this.is", "abuser", "surname", "pas2s")
+  
 -- nosql data version of in progress data
 -- id = search_id
 -- option_counts = {option_id: count, ....}
