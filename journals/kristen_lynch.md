@@ -13,6 +13,11 @@
 --transfered front end from old project to new and tested.
 --found dependency on building out GET options
 
+## 6/28/2023
+
+--transfered front end from old project to new and tested.
+--found dependency on building out GET options
+
 ## 6/27/2023
 
 --worked on a basic version of the front end for the option selection page based upon Figma designs from NT
