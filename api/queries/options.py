@@ -81,7 +81,6 @@ class OptionRepository:
                             user_ratings_count=record[10],
                             created_on=record[11],
                             updated_on=record[12]
-
                         )
                         result.append(option)
                     return result
