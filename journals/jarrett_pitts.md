@@ -9,3 +9,5 @@ June 26, 2023
 
 June 27, 2023
     Aha moment was looking at the connection pool and understanding how it worked.
+
+June 28, 2023
