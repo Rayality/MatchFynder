@@ -1,0 +1,139 @@
+from pydantic import BaseModel
+from .pool import pool
+from .generic_sql import generic_insert
+
+
+class Search(BaseModel):
+    owner: int
+    participant_count: int
+    match_made: bool
+
+
+class SearchOut(BaseModel):
+    id: int
+    owner: int
+    participant_count: int
+
+
+class SearchOptions(BaseModel):
+    edible_count: int | None = None
+    option_id: int
+    search_id: int
+
+
+class SearchOptionsLink(BaseModel):
+    option_id: int
+    search_id: int
+
+
+class SearchFinders(BaseModel):
+    id: int
+    finder_id: int
+    search_id: int
+
+
+class SearchRepository:
+    def add_search_finder(self, search_id: int, finder_id: int) -> list[SearchFinders]:
+        try:
+            generic_insert("search_finders", {"search_id": search_id, "finder_id": finder_id})
+            finders = self.get_search_finders(search_id)
+            return finders
+        except Exception as e:
+            return {"message": e}
+
+    def add_search_option(self, search_id: int, option_id: int) -> list[SearchOptions]:
+        try:
+            generic_insert("search_options", {"search_id": search_id, "option_id": option_id})
+            options = self.get_search_options(search_id)
+            return options
+        except Exception as e:
+            return {"message": e}
+
+    def get_search_finders(self, search_id: int) -> list[int]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT *
+                        FROM search_finders sf
+                        WHERE search_id = %s
+                        """,
+                        [search_id]
+                    )
+                    search_finders = []
+                    finders = db.fetchall()
+                    for finder in finders:
+                        search_finders.append(finder[3])
+                    return search_finders
+
+        except Exception as e:
+            return {"message": f"{e}"}
+
+    def get_search_options(self, search_id: int) -> SearchOptions:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    search_options = db.execute(
+                        """
+                        SELECT *
+                        FROM search_options
+                        WHERE search_id = %s
+                        """,
+                        [search_id]
+                    )
+                    search_options = []
+                    options = db.fetchall()
+                    for option in options:
+                        search_options.append(option[3])
+                    return search_options
+
+        except Exception as e:
+            return {"message": f"{e}"}
+
+    def create_search(self, search: Search) -> SearchOut:
+        out = generic_insert("search", search)
+        try:
+            search = SearchOut(**out)
+            s_id = search.id
+            o_id = search.owner
+            self.add_search_finder(s_id, o_id)
+            return search
+        except Exception as e:
+            return {"message": f"{e}"}
+
+    def set_match_made_true(self, search_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE search
+                        SET match_made = true
+                        WHERE search_id = %s
+                        """,
+                        [search_id]
+                    )
+                    return True
+
+        except Exception as e:
+            return {"message": f"{e}"}
+
+    def update_edible_count(self, search_id: int, option_id: int) -> int:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    option = db.execute(
+                        """
+                        UPDATE search_options
+                        SET edible_count = edible_count + 1
+                        WHERE search_id = %s AND option_id = %s
+                        RETURNING edible_count;
+                        """,
+                        [search_id, option_id]
+                    )
+                    count = option.fetchone()[0]
+                    return count
+
+        except Exception as e:
+            return {"message": f"{e}"}
