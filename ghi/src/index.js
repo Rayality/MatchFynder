@@ -9,23 +9,34 @@ import CreateAccount from "./routes/createAccount";
 import PresentOption from "./routes/presentOption";
 import { Provider } from "react-redux";
 import { store } from "./Redux/store";
+import Logout from "./Components/views/Logout";
+import Layout from "./routes/Layout";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Root />,
-  },
-  {
-    path: "login/",
-    element: <Login />,
-  },
-  {
-    path: "signup/",
-    element: <CreateAccount />,
-  },
-  {
-    path: "options/",
-    element: <PresentOption />,
+    Component: Layout,
+    children: [
+      {
+        path: "*",
+        Component: Root,
+      },
+      {
+        path: "login/",
+        Component: Login,
+      },
+      {
+        path: "signup/",
+        Component: CreateAccount,
+      },
+      {
+        path: "options/",
+        Component: PresentOption,
+      },
+      {
+        path: "logout/",
+        Component: Logout,
+      },
+    ],
   },
 ]);
 

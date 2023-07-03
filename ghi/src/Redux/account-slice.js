@@ -19,8 +19,14 @@ const accountSlice = createSlice({
       state.value[val.payload[0]] = val.payload[1];
     },
     reset(state) {
-      console.log(state.value);
-      state.value = initialState;
+      state.value = {
+        username: "",
+        email: "",
+        first_name: "",
+        last_name: "",
+        password: "",
+        confirmPassword: "",
+      };
     },
   },
 });

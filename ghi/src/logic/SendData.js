@@ -1,4 +1,4 @@
-export default async function SendData(url, method, data) {
+export default async function SendData(url, method, data = {}) {
   let fetchConfig = {
     method: method,
     body: JSON.stringify(data),

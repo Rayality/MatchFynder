@@ -4,9 +4,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { updated, reset } from "../../Redux/account-slice";
 
 export default function CreateAccountForm() {
-  const account = useSelector((state) => state.updater.value);
+  const account = useSelector((state) => state.accountCreator.value);
   const dispatch = useDispatch();
   const url = "http://localhost:8000/api/accounts/";
+
+  function cleanData(data = {}) {
+    const clean = {};
+    for (let [key, val] of Object.entries(data)) {
+      if (key !== "confirmPassword") {
+        clean[key] = val;
+      }
+    }
+    return clean;
+  }
 
   function handleChange(e) {
     let value = [e.target.name, e.target.value];
@@ -15,17 +25,20 @@ export default function CreateAccountForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const confirm = document.getElementById("inputConfirmPassword");
-    if (confirm.value === account.password) {
-      SendData(url, "post", account);
+    if (account.confirmPassword === account.password) {
+      const data = cleanData(account);
+      SendData(url, "post", data);
       dispatch(reset());
     } else {
-      console.log("you suck at typing");
+      console.log("Passwords do not match");
     }
   }
 
   return (
     <div className='container mb-3 shadow'>
+      <div className='mb-3'>
+        <h1>Create An Account</h1>
+      </div>
       <form onSubmit={handleSubmit} className='form-floating mb-3'>
         <div className='mb-3'>
           <label htmlFor='inputFName' className='form-label'>
@@ -104,6 +117,8 @@ export default function CreateAccountForm() {
             Confirm Password
           </label>
           <input
+            onChange={handleChange}
+            value={account.confirmPassword}
             name='confirmPassword'
             type='password'
             className='form-control'
