@@ -13,3 +13,8 @@ created each database table as a migration file.
 updated docker files with the postgres db commands.
 changed docker.dev file in api folder and edited docker compose files.
 fixed issue of psycopg_pool module not found.
+
+## 6/28/2023
+
+started building function components to expedite database interactions.
+aha - npm modules get stored in the package.json when installed.

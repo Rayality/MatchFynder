@@ -1,97 +1,139 @@
 from pydantic import BaseModel
-from typing import Optional
-from datetime import datetime
-from queries.pool import pool
+from .pool import pool
+from .generic_sql import generic_insert
 
 
-class Error(BaseModel):
-    message: str
-
-
-class SearchIn(BaseModel):
+class Search(BaseModel):
     owner: int
     participant_count: int
+    match_made: bool
 
 
 class SearchOut(BaseModel):
     id: int
     owner: int
     participant_count: int
-    match_made: bool
-    created_on: datetime
-    updated_on: datetime
+
+
+class SearchOptions(BaseModel):
+    edible_count: int | None = None
+    option_id: int
+    search_id: int
+
+
+class SearchOptionsLink(BaseModel):
+    option_id: int
+    search_id: int
+
+
+class SearchFinders(BaseModel):
+    id: int
+    finder_id: int
+    search_id: int
 
 
 class SearchRepository:
-    def create(self, search: SearchIn) -> SearchOut:
+    def add_search_finder(self, search_id: int, finder_id: int) -> list[SearchFinders]:
+        try:
+            generic_insert("search_finders", {"search_id": search_id, "finder_id": finder_id})
+            finders = self.get_search_finders(search_id)
+            return finders
+        except Exception as e:
+            return {"message": e}
+
+    def add_search_option(self, search_id: int, option_id: int) -> list[SearchOptions]:
+        try:
+            generic_insert("search_options", {"search_id": search_id, "option_id": option_id})
+            options = self.get_search_options(search_id)
+            return options
+        except Exception as e:
+            return {"message": e}
+
+    def get_search_finders(self, search_id: int) -> list[int]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
-                        INSERT INTO search
-                        (
-                            owner,
-                            participant_count
-                        )
-                        VALUES
-                            (%s, %s, %s, %s)
-                        RETURNING id, match_made, created_on, updated_on;
+                        SELECT *
+                        FROM search_finders sf
+                        WHERE search_id = %s
                         """,
-                        [
-                            search.owner,
-                            search.participant_count
-                        ]
+                        [search_id]
                     )
-                    id = result.fetchone()[0]
-                    match_made = result.fetchone()[1]
-                    created_on = result.fetchone()[2]
-                    updated_on = result.fetchone()[3]
-                    old_data = search.dict()
-                    return SearchOut(
-                        id=id,
-                        **old_data,
-                        match_made=match_made,
-                        created_on=created_on,
-                        updated_on=updated_on
-                        )
-        except Exception as e:
-            print(e)
-            return {"message": "ERROR"}
+                    search_finders = []
+                    finders = db.fetchall()
+                    for finder in finders:
+                        search_finders.append(finder[3])
+                    return search_finders
 
-    def get_searches(self) -> list[SearchOut]:
+        except Exception as e:
+            return {"message": f"{e}"}
+
+    def get_search_options(self, search_id: int) -> SearchOptions:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    # Run our SELECT statement
-                    result = db.execute(
+                    search_options = db.execute(
                         """
-                        SELECT id,
-                        owner,
-                        participant_count,
-                        match_made,
-                        created_on,
-                        updated_on
-
-                        FROM search
-                        ORDER BY id;
-
-                        """
+                        SELECT *
+                        FROM search_options
+                        WHERE search_id = %s
+                        """,
+                        [search_id]
                     )
-                    result = []
-                    for record in db:
-                        search = SearchOut(
-                            id=record[0],
-                            owner=record[1],
-                            participant_count=record[2],
-                            match_made=record[3],
-                            created_on=record[4],
-                            updated_on=record[5]
-
-                        )
-                        result.append(search)
-                    return result
+                    search_options = []
+                    options = db.fetchall()
+                    for option in options:
+                        search_options.append(option[3])
+                    return search_options
 
         except Exception as e:
-            print(e)
-            return {"message": "Could not get searches"}
+            return {"message": f"{e}"}
+
+    def create_search(self, search: Search) -> SearchOut:
+        out = generic_insert("search", search)
+        try:
+            search = SearchOut(**out)
+            s_id = search.id
+            o_id = search.owner
+            self.add_search_finder(s_id, o_id)
+            return search
+        except Exception as e:
+            return {"message": f"{e}"}
+
+    def set_match_made_true(self, search_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE search
+                        SET match_made = true
+                        WHERE search_id = %s
+                        """,
+                        [search_id]
+                    )
+                    return True
+
+        except Exception as e:
+            return {"message": f"{e}"}
+
+    def update_edible_count(self, search_id: int, option_id: int) -> int:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    option = db.execute(
+                        """
+                        UPDATE search_options
+                        SET edible_count = edible_count + 1
+                        WHERE search_id = %s AND option_id = %s
+                        RETURNING edible_count;
+                        """,
+                        [search_id, option_id]
+                    )
+                    count = option.fetchone()[0]
+                    return count
+
+        except Exception as e:
+            return {"message": f"{e}"}
