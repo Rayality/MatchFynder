@@ -7,7 +7,6 @@ import ErrorNotification from "../../ErrorNotification";
 function Option(props) {
   // Create a local index variable leveraging React's useState functionality
   // in order to set/reset the index of the action option from the options list
-  const [option, setOption] = useState({});
   const [index, setIndex] = useState(0);
 
   // use useGetOptionsQuery to populate the list of options

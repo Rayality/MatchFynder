@@ -5,7 +5,10 @@
 
 ## 7/10/2023
 
+--demos as a team
 --refactor options frontend to use redux
+--Aha: using tags to update particular data is SUPER useful
+--started work on search
 
 ## 6/30/2023
 
