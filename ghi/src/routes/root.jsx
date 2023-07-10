@@ -30,7 +30,6 @@ export default function Root() {
   return (
     <div>
       <ErrorNotification error={error} />
-      <Nav />
       <Construct info={launchInfo} />
     </div>
   );
