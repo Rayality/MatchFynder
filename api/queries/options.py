@@ -106,8 +106,7 @@ class OptionRepository:
                             , price_level = %s
                             , rating = %s
                             , user_ratings_count = %s
-                            , created_on = %s
-                            , updated_on = %s
+
                         WHERE id = %s
                         """,
                         [
@@ -120,8 +119,7 @@ class OptionRepository:
                             option.price_level,
                             option.rating,
                             option.user_ratings_count,
-                            option.created_on,
-                            option.updated_on,
+
                             option_id
 
                         ]
