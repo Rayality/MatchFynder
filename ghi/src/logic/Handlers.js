@@ -1,7 +1,5 @@
-import SendData from "./SendData";
-
-function formChange(e, oldData) {
-  const data = e.target.value;
-  const name = e.target.name;
-  return { ...oldData, [name]: data };
+function updated(state, val) {
+  state.value[val.payload[0]] = val.payload[1];
 }
+
+export { updated };
