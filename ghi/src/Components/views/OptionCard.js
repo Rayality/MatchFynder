@@ -1,49 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useGetOptionsQuery } from "../../Redux/optionsApi";
 import "boxicons";
 import { useSwipeable } from "react-swipeable";
+import ErrorNotification from "../../ErrorNotification";
 
 function Option(props) {
-  // Create variables leveraging React's useState functionality
-  // in order to
-  // (i) get a list of options that will be displayed in order
-  // (ii) set/reset the active option to display on the options page
-  // (iii) set/reset the index of the action option from the options list
-  const [options, setOptions] = useState([]);
+  // Create a local index variable leveraging React's useState functionality
+  // in order to set/reset the index of the action option from the options list
   const [option, setOption] = useState({});
   const [index, setIndex] = useState(0);
 
-  // Get the data to populate the options list
-  // and set the first option at index 0
-  const fetchData = async () => {
-    const url = "http://localhost:8000/options/";
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      setOptions(data);
-      setOption(data.at(index));
-    } else {
-      console.error(response);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // use useGetOptionsQuery to populate the list of options
+  const { data, error, isLoading } = useGetOptionsQuery();
 
   // Upon button click, prevent the page from refreshing
-  // and reset the index and the option to be displayed
+  // and reset the index of the option to be displayed
   const handleButton = async (event) => {
     event.preventDefault();
     setIndex(index + 1);
-    const next_option = options.at(index);
-    setOption(next_option);
   };
 
   // Upon swipe (or click/drag),
-  // reset the index and the option to be displayed
+  // reset the index of the option to be displayed
   const handleSwipe = async (event) => {
     setIndex(index + 1);
-    const next_option = options.at(index);
-    setOption(next_option);
   };
 
   // Create a variable to be able to set where in the html
@@ -55,20 +35,26 @@ function Option(props) {
     trackMouse: true,
   });
 
+  // handle loading
+  if (isLoading) {
+    return <progress className="progress is-primary" max="100"></progress>;
+  }
+
   return (
     <div className="prevent-select">
       <div className="d-flex container justify-content-center">
         <div className="thumbnail">
+          <ErrorNotification error={error} />
           <div {...handlers}>
             <img
               draggable="false"
-              src={option.picture_url}
-              alt="google maps sourced image associated with restaurant"
+              src={data[index].picture_url}
+              alt="google maps sourced pic associated with restaurant"
             />
             <div className="caption">
-              <h4>{option.name}</h4>
-              <p>Price: {option.price_level} out of 5</p>
-              <p>Rating: {option.rating} out of 5</p>
+              <h4>{data[index].name}</h4>
+              <p>Price: {data[index].price_level} out of 5</p>
+              <p>Rating: {data[index].rating} out of 5</p>
               <p className="d-flex justify-content-between">
                 <button onClick={handleButton} className="btn btn-light">
                   <box-icon

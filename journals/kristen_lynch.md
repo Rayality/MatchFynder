@@ -3,6 +3,10 @@
 --A reflection on any design conversations that you had
 --At least one ah-ha! moment that you had during your coding, however small
 
+## 7/10/2023
+
+--refactor options frontend to use redux
+
 ## 6/30/2023
 
 --demos as a team: options endpoints, generic way to insert data into tables, login/out
