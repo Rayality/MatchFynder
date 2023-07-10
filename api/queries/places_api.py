@@ -14,8 +14,12 @@ class PlacesRepository:
     def search_from_zipcode(self, zip: int):
         zipcode_info = geo.query_postal_code(zip)
         location_string = f"{zipcode_info["latitude"]}, {zipcode_info["longitude"]}"
-        results = get_google_options(location=location_string)
+        try:
+            results = get_google_options(location=location_string)
+        except Exception as e:
+            results = {"message": f"{e}"}
         return results
+
 
     def search_from_city(self, city: str, state: str):
     # The query gets all cities with the input name
@@ -43,12 +47,8 @@ class PlacesRepository:
         latitude_mean = round(latitudes / len(lats_longs), 4)
         longitude_mean = round(longitudes / len(lats_longs), 4)
         location_string = f"{latitude_mean}, {longitude_mean}"
-        results = get_google_options(location=location_string)
-        return results
-
-    def api_query(self, lat_long: str):
         try:
-            results = get_google_options(location=lat_long)
+            results = get_google_options(location=location_string)
         except Exception as e:
             results = {"message": f"{e}"}
         return results
