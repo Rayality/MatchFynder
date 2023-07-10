@@ -10,6 +10,8 @@ export const optionsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8000",
   }),
+  // setup tag for the option list
+  tagTypes: ["OptionList"],
   // use the endpoints function, which takes a
   // builder object and creates each of our endpoints
   endpoints: (builder) => ({
@@ -18,7 +20,8 @@ export const optionsApi = createApi({
     getOptions: builder.query({
       // define a query function to return
       // the endpoints
-      query: () => "/api/options/",
+      query: () => "/options",
+      providesTags: ["OptionList"],
     }),
   }),
 });
