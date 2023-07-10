@@ -5,7 +5,7 @@ import os
 GOOGLE_MAPS_API_KEY = os.environ["GOOGLE_MAPS_API_KEY"]
 
 
-def get_google_options(query, location, radius):
+def get_google_options(query= "restaurants", location, radius=1500):
     params = {
         "query": query,
         "location": location,
@@ -20,9 +20,7 @@ def get_google_options(query, location, radius):
         try:
             photo_ref = item["photos"][0]["photo_reference"]
             photo_width = 400
-            item[
-                "picture_url"
-            ] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
+            item["picture_url"] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
 
         except (KeyError, IndexError):
             item["picture_url"] = None
