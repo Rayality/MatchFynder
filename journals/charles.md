@@ -18,3 +18,9 @@ fixed issue of psycopg_pool module not found.
 
 started building function components to expedite database interactions.
 aha - npm modules get stored in the package.json when installed.
+
+
+## 6/29-30/2023
+
+--created search repo and functions. Totalling 7 functions and
+    endpoints to process data between tables.
