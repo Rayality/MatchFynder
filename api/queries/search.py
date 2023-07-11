@@ -2,6 +2,13 @@ from pydantic import BaseModel
 from .pool import pool
 from .generic_sql import generic_insert
 
+class MatchMade(BaseModel):
+    match_made: bool
+class SearchDad(BaseModel):
+    id: int
+    owner: int
+    participant_count: int
+    match_made: bool
 
 class Search(BaseModel):
     owner: int
@@ -137,3 +144,70 @@ class SearchRepository:
 
         except Exception as e:
             return {"message": f"{e}"}
+
+
+    def get_search(self) -> list[SearchDad]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                   result = db.execute(
+                        """
+                        SELECT *
+                        FROM search
+                        """
+                   )
+                   return [
+                       self.record_to_search(record)
+                       for record in result
+                   ]
+        except Exception as e:
+            print(e.errors())
+            return {"message": "Could not get options"}
+
+    def get_single_search(self, search_id: int) -> Search:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                   result = db.execute(
+                        """
+                        SELECT *
+                        FROM search
+                        WHERE id = %s
+                        """,
+                        [search_id]
+                   )
+                   record = result.fetchone()
+                   return self.record_to_search(record)
+
+        except Exception as e:
+            print(e)
+            return None
+
+    def get_match_made(self, search_id: int) -> MatchMade:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                   result = db.execute(
+                        """
+                        SELECT *
+                        FROM search
+                        WHERE id = %s
+                        """,
+                        [search_id]
+                   )
+                   record = result.fetchone()
+                   return self.record_to_search(record)
+
+        except Exception as e:
+            print(e)
+            return None
+
+
+
+    def record_to_search(self, record):
+        return SearchDad(
+            id=record[0],
+            owner=record[1],
+            participant_count=record[2],
+            match_made=record[3]
+        )

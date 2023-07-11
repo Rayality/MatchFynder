@@ -5,6 +5,8 @@ from queries.search import (
     SearchOptions,
     SearchRepository,
     SearchOptionsLink,
+    SearchDad,
+    MatchMade
 
 )
 from queries.options import Error
@@ -21,7 +23,7 @@ def update_edible_option(s: SearchOptionsLink, response: Response, repo: SearchR
 
 
 @router.get(
-        "/search/{search_id}/options", response_model=Union[Error, list[SearchOptions]]
+        "/search/{search_id}/options", response_model=Union[list[SearchOptions], Error]
 )
 def get_search_options(search_id: int, response: Response, repo: SearchRepository = Depends()):
     return repo.get_search_options(search_id)
@@ -34,7 +36,7 @@ def add_search_option(s: SearchOptionsLink, response: Response, repo: SearchRepo
     return repo.add_search_option(s.search_id, s.option_id)
 
 @router.get(
-        "/search/{search_id}/finders", response_model=Union[Error, list[int]]
+        "/search/{search_id}/finders", response_model=Union[list[int], Error]
 )
 def get_search_finders(search_id: int, response: Response, repo: SearchRepository = Depends()):
     return repo.get_search_finders(search_id)
@@ -45,3 +47,24 @@ def get_search_finders(search_id: int, response: Response, repo: SearchRepositor
 )
 def create_search(search: Search, response: Response, repo: SearchRepository = Depends()):
     return repo.create_search(search)
+
+
+
+
+@router.get(
+    "/search/", response_model=Union[list[SearchDad], Error]
+)
+def get_searches(response: Response, repo: SearchRepository = Depends()):
+    return repo.get_search()
+
+@router.get(
+    "/search/{search_id}/", response_model = Union[Search, Error]
+)
+def get_single_search(search_id: int, response: Response, repo: SearchRepository = Depends()) -> Search:
+    return repo.get_single_search(search_id)
+
+@router.get(
+    "/search/{search_id}/match_made", response_model =Union[MatchMade, Error]
+)
+def get_match_made(search_id: int, response: Response, repo: SearchRepository = Depends()) -> MatchMade:
+    return repo.get_match_made(search_id)
