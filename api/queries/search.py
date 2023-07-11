@@ -6,7 +6,6 @@ from .generic_sql import generic_insert
 class Search(BaseModel):
     owner: int
     participant_count: int
-    match_made: bool
 
 
 class SearchOut(BaseModel):
