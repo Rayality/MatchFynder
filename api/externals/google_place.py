@@ -8,35 +8,32 @@ GOOGLE_MAPS_API_KEY = os.environ["GOOGLE_MAPS_API_KEY"]
 
 
 def create_from_request(json_dict):
-        try:
-            # option = OptionRepository.get_single_option(OptionRepository, json_dict.get("place_id"))
-            place_id = json_dict.get('place_id')
-            option = generic_find("options", "google_place_id", place_id)
-            if option.get('id') is None:
-                print("making new option")
-                new_item = {}
-                new_item["business_status"] = json_dict.get("business_status")
-                new_item["name"] = json_dict.get("name")
-                new_item["google_place_id"] = json_dict.get("place_id")
-                new_item["formatted_address"] = json_dict.get("formatted_address")
-                new_item["latitude"] = (
-                    json_dict.get("geometry", {}).get("location", {}).get("lat")
-                )  # noqa
-                new_item["longitude"] = (
-                    json_dict.get("geometry", {}).get("location", {}).get("lng")
-                )  # noqa
-                new_item["price_level"] = json_dict.get("price_level")
-                new_item["rating"] = json_dict.get("rating")
-                new_item["user_ratings_count"] = json_dict.get("user_ratings_total")  # noqa
-                new_item["picture_url"] = json_dict.get("picture_url")
-                option_in = OptionIn(**new_item)
-                option = OptionRepository.create(OptionRepository, option_in)
-            return option
-        except Exception as e:
-            print(e)
-            return {"message": "error in update_create_from_request"}
-
-
+    try:
+        place_id = json_dict.get('place_id')
+        option = generic_find("options", "google_place_id", place_id)
+        if option is None:
+            print("making new option")
+            new_item = {}
+            new_item["business_status"] = json_dict.get("business_status")
+            new_item["name"] = json_dict.get("name")
+            new_item["google_place_id"] = json_dict.get("place_id")
+            new_item["formatted_address"] = json_dict.get("formatted_address")
+            new_item["latitude"] = (
+                json_dict.get("geometry", {}).get("location", {}).get("lat")
+            )  # noqa
+            new_item["longitude"] = (
+                json_dict.get("geometry", {}).get("location", {}).get("lng")
+            )  # noqa
+            new_item["price_level"] = json_dict.get("price_level")
+            new_item["rating"] = json_dict.get("rating")
+            new_item["user_ratings_count"] = json_dict.get("user_ratings_total")  # noqa
+            new_item["picture_url"] = json_dict.get("picture_url")
+            option_in = OptionIn(**new_item)
+            option = OptionRepository.create(OptionRepository, option_in)
+        return option
+    except Exception as e:
+        print(e)
+        return {"message": "error in update_create_from_request"}
 
 
 def get_google_options(location, query="restaurants", radius=1500):
@@ -59,6 +56,7 @@ def get_google_options(location, query="restaurants", radius=1500):
 
             except (KeyError, IndexError):
                 item["picture_url"] = None
+            print(item)
             output_list.append(create_from_request(item))
 
         return output_list
