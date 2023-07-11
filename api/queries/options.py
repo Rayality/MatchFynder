@@ -70,7 +70,7 @@ class OptionRepository:
 
         except Exception as e:
             print(e)
-            return None
+            return {"message": "Error in get_single_option"}
 
 
     def delete_option(self, option_id: int) -> bool:
