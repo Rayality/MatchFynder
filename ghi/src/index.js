@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import { store } from "./Redux/store";
 import Logout from "./Components/views/Logout";
 import Layout from "./routes/Layout";
+import NewSearch from "./routes/search";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "logout/",
         Component: Logout,
+      },
+      {
+        path: "search/",
+        Component: NewSearch,
       },
     ],
   },
