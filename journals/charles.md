@@ -24,3 +24,14 @@ aha - npm modules get stored in the package.json when installed.
 
 --created search repo and functions. Totalling 7 functions and
     endpoints to process data between tables.
+
+## 6/10/2023
+
+--created google API query endpoints and functions
+--created a generic find function to simplify future database queries
+
+## 6/11/2023
+
+--researched location functionality/implementation on the front-end
+--started the landing page for a "match made" in a search
+-aha- docker compose up, also builds

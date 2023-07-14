@@ -26,12 +26,13 @@ def update_edible_option(s: SearchOptionsLink, response: Response, repo: SearchR
 def get_search_options(search_id: int, response: Response, repo: SearchRepository = Depends()):
     return repo.get_search_options(search_id)
 
-#
+
 @router.post(
     "/search/{search_id}/options"
 )
 def add_search_option(s: SearchOptionsLink, response: Response, repo: SearchRepository = Depends()):
     return repo.add_search_option(s.search_id, s.option_id)
+
 
 @router.get(
         "/search/{search_id}/finders", response_model=Union[Error, list[int]]

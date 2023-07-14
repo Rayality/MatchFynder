@@ -12,6 +12,7 @@ import { store } from "./Redux/store";
 import Logout from "./Components/views/Logout";
 import Layout from "./routes/Layout";
 import NewSearch from "./routes/search";
+import MatchMadePage from "./routes/matchMade";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "search/",
         Component: NewSearch,
+      },
+      {
+        path: "match/",
+        Component: MatchMadePage,
       },
     ],
   },

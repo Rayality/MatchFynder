@@ -4,6 +4,7 @@ import os
 from queries.generic_sql import generic_insert, generic_find
 from queries.options import OptionIn, OptionRepository
 
+
 GOOGLE_MAPS_API_KEY = os.environ["GOOGLE_MAPS_API_KEY"]
 
 
@@ -32,8 +33,8 @@ def create_from_request(json_dict):
             option = OptionRepository.create(OptionRepository, option_in)
         return option
     except Exception as e:
-        print(e)
-        return {"message": "error in update_create_from_request"}
+        raise e.errors[0]
+
 
 
 def get_google_options(location, query="restaurants", radius=1500):
@@ -56,10 +57,8 @@ def get_google_options(location, query="restaurants", radius=1500):
 
             except (KeyError, IndexError):
                 item["picture_url"] = None
-            print(item)
             output_list.append(create_from_request(item))
 
         return output_list
     except Exception as e:
-        print(e)
-        return {"message": "error in get_google_options"}
+        raise e.errors[0]

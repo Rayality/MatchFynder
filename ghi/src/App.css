@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+body {
+  overflow-y: hidden;
+  overflow-y: hidden;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -11,4 +16,13 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Radialprpblue {
+  position: absolute;
+  z-index: -3;
+  min-width: 100%;
+  min-height: 100%;
+  background: rgb(95,84,189);
+  background: radial-gradient(circle, rgba(95,84,189,1) 0%, rgba(0,212,255,1) 100%);
 }
