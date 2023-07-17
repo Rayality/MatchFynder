@@ -7,8 +7,8 @@ router = APIRouter()
 
 
 @router.get("/query/zipcode", response_model=Union[Optional[Error], Optional[list[OptionOut]]])
-def get_google_options_zipcode(zipcode, response: Response, repo: PlacesRepository = Depends()):
-    return repo.search_from_zipcode(zipcode)
+def get_google_options_zipcode(zipcode, search_id, response: Response, repo: PlacesRepository = Depends()):
+    return repo.search_from_zipcode(zipcode, search_id)
 
 
 @router.get("/query/city", response_model=Union[Optional[Error], Optional[list[OptionOut]]])

@@ -10,7 +10,7 @@ from typing import Union
 router = APIRouter()
 
 
-@router.post("/options", response_model=Union[OptionOut, Error])
+@router.post("/options")
 def create_option(
     option: OptionIn,
     response: Response,

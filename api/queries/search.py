@@ -1,17 +1,25 @@
 from pydantic import BaseModel
+from datetime import datetime
 from .pool import pool
-from .generic_sql import generic_insert
+from .generic_sql import (
+    generic_insert,
+    generic_find,
+    generic_get_all,
+    generic_update
+    )
 
 
 class Search(BaseModel):
     owner: int
-    participant_count: int
 
 
 class SearchOut(BaseModel):
     id: int
     owner: int
     participant_count: int
+    match_made: bool
+    created_on: datetime
+    updated_on: datetime
 
 
 class SearchOptions(BaseModel):
@@ -32,88 +40,57 @@ class SearchFinders(BaseModel):
 
 
 class SearchRepository:
-    def add_search_finder(self, search_id: int, finder_id: int) -> list[SearchFinders]:
+    # create search and create a search_finder record for the search owner
+    # using generic_insert and returning the search record upon creation
+    def create_search(self, search: Search):
         try:
-            generic_insert("search_finders", {"search_id": search_id, "finder_id": finder_id})
-            finders = self.get_search_finders(search_id)
-            return finders
+            new_record = (generic_insert("search", search))[0]
+            self.add_search_finder(new_record['id'], new_record['owner'])
+            return new_record
+        except Exception as e:
+            return {"message": f"{e}"}
+
+    # using the search id and the user id, create a search_finder record
+    def add_search_finder(
+            self,
+            search_id: int,
+            finder_id: int
+            ):
+        try:
+            return generic_insert(
+                "search_finders",
+                {"search_id": search_id, "finder_id": finder_id}
+                )
         except Exception as e:
             return {"message": e}
 
-    def add_search_option(self, search_id: int, option_id: int) -> list[SearchOptions]:
+    # using the search_id, get a list of associated search_finders
+    def get_search_finders(self, search_id: int):
         try:
-            generic_insert("search_options", {"search_id": search_id, "option_id": option_id})
-            options = self.get_search_options(search_id)
-            return options
+            results = generic_find("search_finders", "search_id", search_id)
+            return results
         except Exception as e:
             return {"message": e}
 
-    def get_search_finders(self, search_id: int) -> list[int]:
+    # using the search_id and the option_id, create a search_options record
+    def add_search_option(
+            self,
+            search_id: int,
+            option_id: int
+            ):
         try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db.execute(
-                        """
-                        SELECT *
-                        FROM search_finders sf
-                        WHERE search_id = %s
-                        """,
-                        [search_id]
-                    )
-                    search_finders = []
-                    finders = db.fetchall()
-                    for finder in finders:
-                        search_finders.append(finder[3])
-                    return search_finders
-
+            return generic_insert(
+                "search_options",
+                {"search_id": search_id, "option_id": option_id}
+                )
         except Exception as e:
+            return {"message": e}
             return {"message": f"{e}"}
 
-    def get_search_options(self, search_id: int) -> SearchOptions:
+    # using the search_id, get the associated search_options
+    def get_search_options(self, search_id: int):
         try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    search_options = db.execute(
-                        """
-                        SELECT *
-                        FROM search_options
-                        WHERE search_id = %s
-                        """,
-                        [search_id]
-                    )
-                    search_options = []
-                    options = db.fetchall()
-                    for option in options:
-                        search_options.append(option[3])
-                    return search_options
-
-        except Exception as e:
-            return {"message": f"{e}"}
-
-    def create_search(self, search: Search) -> SearchOut:
-        out = generic_insert("search", search)
-        try:
-            search = SearchOut(**out)
-            s_id = search.id
-            o_id = search.owner
-            self.add_search_finder(s_id, o_id)
-            return search
-        except Exception as e:
-            return {"message": f"{e}"}
-
-    def set_match_made_true(self, search_id: int) -> bool:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db.execute(
-                        """
-                        UPDATE search
-                        SET match_made = true
-                        WHERE search_id = %s
-                        """,
-                        [search_id]
-                    )
-                    return True
+            return generic_find("search_options", "search_id", search_id)
 
         except Exception as e:
             return {"message": f"{e}"}
@@ -133,6 +110,23 @@ class SearchRepository:
                     )
                     count = option.fetchone()[0]
                     return count
+
+        except Exception as e:
+            return {"message": f"{e}"}
+
+    def set_match_made_true(self, search_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE search
+                        SET match_made = true
+                        WHERE id = %s
+                        """,
+                        [search_id]
+                    )
+                    return True
 
         except Exception as e:
             return {"message": f"{e}"}
