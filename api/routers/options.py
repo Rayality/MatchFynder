@@ -10,7 +10,7 @@ from typing import Union
 router = APIRouter()
 
 
-@router.post("/options", response_model=Union[OptionOut, Error])
+@router.post("/options")
 def create_option(
     option: OptionIn,
     response: Response,
@@ -20,7 +20,7 @@ def create_option(
     return repo.create(option)
 
 
-@router.get("/options", response_model=Union[Error, list[OptionOut]])
+@router.get("/options", response_model=Union[list[OptionOut], Error])
 def get_options(response: Response, repo: OptionRepository = Depends()):
     response.status_code = 200
     return repo.get_options()

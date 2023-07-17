@@ -54,3 +54,40 @@ CREATE TABLE search_options (
     created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+-- create trigger function to update the updated_on attribute
+-- to the current datetime whenever called
+CREATE  FUNCTION update_updated_on()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_on = now();
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+-- add trigger to options table to call the
+-- update_updated_on function whenever any row is updated
+CREATE TRIGGER update_updated_on_options
+    BEFORE UPDATE
+    ON
+        options
+    FOR EACH ROW
+EXECUTE PROCEDURE update_updated_on();
+
+-- add trigger to search table to call the
+-- update_updated_on function whenever any row is updated
+CREATE TRIGGER update_updated_on_search
+    BEFORE UPDATE
+    ON
+        search
+    FOR EACH ROW
+EXECUTE PROCEDURE update_updated_on();
+
+-- add trigger to search_options table to call the
+-- update_updated_on function whenever any row is updated
+CREATE TRIGGER update_updated_on_search_options
+    BEFORE UPDATE
+    ON
+        search_options
+    FOR EACH ROW
+EXECUTE PROCEDURE update_updated_on();
