@@ -23,7 +23,7 @@ def create_search(
 
 
 # get search finders
-@router.get("/search/{search_id}/options")
+@router.get("/search/{search_id}/finders")
 def get_search_finders(
     search_id: int, response: Response, repo: SearchRepository = Depends()
 ):
@@ -76,7 +76,7 @@ def update_match_made(
 
 @router.get("/search/", response_model=Union[list[SearchDad], Error])
 def get_searches(response: Response, repo: SearchRepository = Depends()):
-    return repo.get_search()
+    return repo.get_searches()
 
 
 @router.get("/search/{search_id}/", response_model=Union[SearchDad, Error])

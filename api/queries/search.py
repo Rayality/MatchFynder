@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
+from typing import Union, Optional
 from .pool import pool
 from .generic_sql import (
     generic_insert,
@@ -112,8 +113,8 @@ class SearchRepository:
                         [search_id, option_id],
                     )
                     edible_count = option.fetchone()[0]
-                    search = self.get_single_search(search_id)
-                    if search.participant_count <= edible_count:
+                    search = generic_find("search", "id", search_id)[0]
+                    if search["participant_count"] <= edible_count:
                         self.set_match_made_true(search_id)
                     return edible_count
 
@@ -136,3 +137,28 @@ class SearchRepository:
 
         except Exception as e:
             return {"message": f"{e}"}
+
+    def get_single_search(self, search_id: int) -> SearchDad:
+        try:
+            return generic_find("search", "id", search_id)[0]
+
+        except Exception as e:
+            print(e)
+            return None
+
+    def get_searches(self) -> list[SearchDad]:
+        try:
+            return generic_get_all("search")
+
+        except Exception as e:
+            print(e.errors())
+            return {"message": "Could not get searches"}
+
+    def get_match_made(self, search_id: int):
+        try:
+            search_record = generic_find("search", "id", search_id)[0]
+            return search_record
+
+        except Exception as e:
+            print(e)
+            return None

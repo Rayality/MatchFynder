@@ -12,10 +12,11 @@ export default function CreateSearchForm() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [location, setLocation] = useState("");
-  const [queryApiZip, apiZipResult, lastPromise] =
-    useLazyOptionsApiZipQuery();
-    // location
-    // search_id
+  const [search_id, setSearchId] = useState(0);
+  const [queryApiZip, apiZipResult, lastPromise] = useLazyOptionsApiZipQuery(
+    location,
+    search_id
+  );
 
   const [createSearch, searchResult] = useCreateSearchMutation();
 
@@ -26,8 +27,15 @@ export default function CreateSearchForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     createSearch();
-    const search_id = searchResult.id;
-    queryApiZip(location, search_id);
+    console.log(searchResult);
+    if (searchResult) {
+      setSearchId(searchResult.id);
+    }
+    console.log(location);
+    console.log(search_id);
+    if (search_id) {
+      queryApiZip(location, search_id);
+    }
   }
 
   if (apiZipResult.isSuccess) {

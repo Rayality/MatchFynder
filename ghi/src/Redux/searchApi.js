@@ -35,7 +35,7 @@ export const searchApi = createApi({
       providesTags: ["Search"],
     }),
     optionsApiZip: builder.query({
-      query: (zipcode, search_id) => ({
+      query: ({ zipcode, search_id }) => ({
         url: `/query/zipcode`,
         params: { zipcode, search_id },
       }),
