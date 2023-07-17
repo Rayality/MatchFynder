@@ -5,6 +5,7 @@ import { useSwipeable } from "react-swipeable";
 import ErrorNotification from "../../ErrorNotification";
 import { useAddSearchOptionMutation, useGetMatchMadeQuery } from "../../Redux/searchApi";
 import { useGetSearchQuery } from "../../Redux/searchApi";
+import { useUpdateEdibleOptionMutation } from "../../Redux/searchApi";
 
 //export let optionId = null;
 
@@ -19,6 +20,7 @@ function Option(props) {
   const { data: matchMadeData } = useGetMatchMadeQuery(2);
   const {data: getSearchData} = useGetSearchQuery(2);
   const [addSearchOptionMutation,  searchOptionData ] = useAddSearchOptionMutation()
+  const [updateEdibleOptionMutation, edibleOptionData ] = useUpdateEdibleOptionMutation()
 
 
   const optionId = (data?.[index].id)
@@ -41,7 +43,7 @@ function Option(props) {
 
 
 
-    if (optionId) {addSearchOptionMutation({ option_id: optionId, search_id: 5});
+    if (optionId) {updateEdibleOptionMutation({ option_id: optionId, search_id: 5});
     }
   };
 
