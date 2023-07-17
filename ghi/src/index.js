@@ -12,6 +12,8 @@ import { store } from "./Redux/store";
 import Logout from "./Components/views/Logout";
 import Layout from "./routes/Layout";
 import NewSearch from "./routes/search";
+import WSTest from "./routes/MeTestWS";
+import { ApiProvider } from "@reduxjs/toolkit/dist/query/react";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "search/",
         Component: NewSearch,
+      },
+      {
+        path: "ws-test/",
+        Component: WSTest,
       },
     ],
   },

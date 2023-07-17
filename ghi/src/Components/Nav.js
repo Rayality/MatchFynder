@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import ModalForm from "./forms/Modal";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { shown } from "../Redux/modal-slice";
 
 function Nav() {

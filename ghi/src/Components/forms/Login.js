@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import SendData from "../../logic/SendData";
+import { sendLoginData } from "../../logic/SendData";
 import { updated, reset } from "../../Redux/login-slice";
 
 export default function LoginForm() {
@@ -15,7 +14,7 @@ export default function LoginForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    SendData(url, "post", account);
+    sendLoginData(url, "post", account);
     dispatch(reset());
   }
   return (

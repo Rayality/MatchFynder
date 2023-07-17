@@ -1,9 +1,10 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from auth.authenticator import authenticator
 import os
-from pydantic import BaseModel
 from routers import options, search, accounts, search
+from websockets.server import serve
+from socks import search_socket, test
 
 app = FastAPI()
 app.include_router(options.router)
@@ -11,6 +12,9 @@ app.include_router(search.router)
 app.include_router(authenticator.router)
 app.include_router(accounts.router)
 app.include_router(search.router)
+app.include_router(search_socket.router)
+app.include_router(test.router)
+
 
 app.add_middleware(
     CORSMiddleware,
