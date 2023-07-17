@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from auth.authenticator import authenticator
 import os
 from routers import options, search, accounts, search, places_api
+from socks import test, search_socket
 
 app = FastAPI()
 app.include_router(options.router)

@@ -16,32 +16,32 @@ export default function CreateSearchForm() {
   }
 
   if (result.isSuccess) {
-    navigate("/options");
+    navigate(`${result.data.id}/options`);
   } else if (result.isError) {
     setError(result.error);
   }
 
   return (
-    <div className="container mb-3 shadow">
-      <div className="mb-3">
+    <div className='container mb-3 shadow'>
+      <div className='mb-3'>
         <h1>Find a Restaurant Match</h1>
       </div>
-      <form onSubmit={handleSubmit} className="form-floating mb-3">
-        <div className="mb-3">
+      <form onSubmit={handleSubmit} className='form-floating mb-3'>
+        <div className='mb-3'>
           <ErrorNotification error={error} />
-          <label htmlFor="inputLocation" className="form-label">
+          <label htmlFor='inputLocation' className='form-label'>
             Location
           </label>
           <input
             onChange={setLocation}
-            name="location"
-            type="text"
-            className="form-control"
-            id="inputLocation"
-            placeholder="zip code OR city, state"
+            name='location'
+            type='text'
+            className='form-control'
+            id='inputLocation'
+            placeholder='zip code OR city, state'
           />
         </div>
-        <button type="submit" className="btn btn-primary mb-3">
+        <button type='submit' className='btn btn-primary mb-3'>
           Submit
         </button>
       </form>

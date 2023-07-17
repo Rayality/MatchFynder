@@ -1,27 +1,32 @@
+import React, { useState, useEffect } from "react";
+import useWebSocket from "react-use-websocket";
 import { Button, Form } from "react-bootstrap";
-import {
-  useGetMessagesQuery,
-  useSendMessagesMutation,
-} from "../Redux/webSocket-slice";
-import { useState } from "react";
 
 export default function WSTest() {
-  const { data } = useGetMessagesQuery();
   const [outgoing, setOutgoing] = useState("");
-  const [send, result] = useSendMessagesMutation();
+  const [socketUrl, setSocketUrl] = useState("ws://localhost:8000/ws");
+  const [messageHistory, setMessageHistory] = useState([]);
+
+  const { sendMessage, lastMessage } = useWebSocket(socketUrl);
+
+  useEffect(() => {
+    if (lastMessage !== null) {
+      setMessageHistory((prev) => prev.concat(lastMessage));
+    }
+  }, [lastMessage, setMessageHistory]);
+
   const handleChange = (e) => {
     setOutgoing(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleClickSendMessage = (e) => {
     e.preventDefault();
-    send(data);
-    setOutgoing("");
+    sendMessage(outgoing);
   };
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleClickSendMessage}>
         <Form.Group className='mb-3' controlId='formWS'>
           <Form.Label>Send message here</Form.Label>
           <Form.Control onChange={handleChange} value={outgoing} type='text' />
@@ -32,7 +37,11 @@ export default function WSTest() {
         </Button>
       </Form>
       <div className='mb-3'>
-        <p>{data}</p>
+        <ul>
+          {messageHistory.map((message, idx) => (
+            <span key={idx}>{message ? message.data : null}</span>
+          ))}
+        </ul>
       </div>
     </div>
   );

@@ -32,16 +32,21 @@ const router = createBrowserRouter([
         Component: CreateAccount,
       },
       {
-        path: "options/",
-        Component: PresentOption,
-      },
-      {
         path: "logout/",
         Component: Logout,
       },
       {
         path: "search/",
         Component: NewSearch,
+        children: [
+          {
+            path: ":searchId/options/",
+            Component: PresentOption,
+            loader: async ({ params }) => {
+              return;
+            },
+          },
+        ],
       },
       {
         path: "ws-test/",
