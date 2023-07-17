@@ -1,9 +1,9 @@
 import React from "react";
-import "../../App.css";
+import "../EaseOfAccess/match-made.css";
 
 export const BadgeCard = () => {
   return (
-    <div className={`badge-card `}>
+    <div className="badge-card">
       <div className="overlap">
         <div className="PIC">PIC</div>
       </div>

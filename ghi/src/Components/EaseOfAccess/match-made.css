@@ -1,0 +1,180 @@
+
+.match-view {
+    background-color: #000000;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100vh;
+}
+
+.match-view .pictures {
+    display: flex;
+    height: 300px;
+    width: 100%;
+    justify-content: center;
+}
+
+.match-view .pictures-bg {
+    align-items: center;
+    /* background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.32) 0.52%, rgba(0, 0, 0, 0.5) 100%); */
+    background: white;
+    border-radius: 147px;
+    display: flex;
+    gap: 20px;
+    height: 300px;
+    justify-content: center;
+    overflow: hidden;
+    padding: 10px 14px;
+    width: 1104px;
+    justify-self: center;
+}
+
+.match-view .side-pic {
+    height: 250px;
+    min-width: 209px;
+    object-fit: cover;
+    position: relative;
+}
+
+.match-view .pic {
+    height: 278px;
+    margin-bottom: -3px;
+    min-width: 262px;
+    object-fit: cover;
+    position: relative;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 16px 0;
+}
+
+.match-view .info {
+    display: inline-flex;
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 400;
+    height: 117px;
+    text-align: center;
+    padding: 0 15%;
+}
+
+.match-view .top-badges {
+    align-items: center;
+    display: flex;
+    gap: 102px;
+    justify-content: center;
+    padding: 0;
+}
+
+.match-view .button-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    justify-content: center;
+    padding: 23px 37px;
+    position: absolute;
+    left: -5vh;
+}
+
+.match-view .badges-button {
+    display: flex;
+    background-color: #00a3ff;
+    border-radius: 20px 0 20px 0;
+    box-shadow: 0px 4px 4px 3px #ffffff;
+    height: 131px;
+    min-width: 137px;
+    position: relative;
+    justify-content: center;
+    align-content: center;
+    padding: 1em;
+}
+
+.match-view .price {
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 400;
+    height: 58px;
+    text-align: center;
+    width: 180px;
+}
+
+.match-view .restaurant-title {
+    color: #ffffff;
+    font-size: 52px;
+    font-weight: 400;
+    height: 69px;
+    text-align: center;
+}
+
+/* ########################################    BADGE RELATED BELOW     ############################### */
+.badge-card {
+    background-color: #ffffff;
+    border: 2px solid;
+    border-color: #ffffff;
+    height: 30vh;
+    position: relative;
+    width: 20vw;
+}
+
+.badge-card .PIC {
+    color: #000000;
+    font-family: "Itim-Regular", Helvetica;
+    font-size: 32px;
+    font-weight: 400;
+    height: 14px;
+    left: 2px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 16px;
+    white-space: nowrap;
+    width: 61px;
+}
+
+.badge-card .username {
+    color: #000000;
+    font-family: "Itim-Regular", Helvetica;
+    font-size: 32px;
+    font-weight: 400;
+    height: 21px;
+    left: 41px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 76px;
+    white-space: nowrap;
+    width: 139px;
+}
+
+.badge-card .overlap-group {
+    background-color: #d9d9d9;
+    height: 103px;
+    left: 15px;
+    position: absolute;
+    top: 119px;
+    width: 186px;
+}
+
+.badge-card .badge-award {
+    color: #000000;
+    font-family: "Itim-Regular", Helvetica;
+    font-size: 32px;
+    font-weight: 400;
+    height: 38px;
+    left: 4px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 29px;
+    white-space: nowrap;
+}

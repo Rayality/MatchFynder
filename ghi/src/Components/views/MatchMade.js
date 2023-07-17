@@ -1,52 +1,48 @@
 import { useEffect, useState } from 'react';
-import { Container, Card, Spinner, Button,} from '../EaseOfAccess/ReactBootstrap';
+import { Container, Card, Spinner, Button,} from '../EaseOfAccess/MatchMadeBootstrap';
 import '../../App.css';
 import React from "react";
 import { BadgeCard } from "./BadgeCard";
-import "../../App.css";
-import medal from "../images/medal.png"
+import "../EaseOfAccess/match-made.css";
+import {medal, menu, page, map} from "../EaseOfAccess/MatchMadadeImgs"
 
 
 const MatchMade = () => {
   return (
     <div className="match-view">
-      <div className="div">
-        <div className="overlap-2">
-          <div className="overlap-3">
-            <div className="pictures">
-              <div className="overlap-group-2">
-                <div className="pictures-bg">
-                  <img className="side-pic" alt="" src="" />
-                  <img className="pic" alt="" src="" />
-                  <img className="side-pic" alt="" src="" />
-                </div>
-              </div>
-            </div>
-            <p className="rating">Rating</p>
-            <div className="top-badges">
-              <BadgeCard className="badge-card-instance" />
-              <BadgeCard className="badge-card-instance" />
-              <BadgeCard className="badge-card-instance" />
-            </div>
-            <div className="frame-3">
-              <div className="link-button">
-                <img alt="Menu" src="" />
-              </div>
-              <div className="link-button">
-                <img alt="Description" src="" />
-              </div>
-              <div className="link-button">
-                <img alt="Directions" src=""/>
-              </div>
-              <button className="link-button">
-                <img alt="Badges" src={medal} />
-              </button>
-            </div>
-          </div>
-          <p className="price">Price-point</p>
-        </div>
+    <div>
         <h1 className="restaurant-title">Restaurant Title</h1>
-      </div>
+        <div className="pictures">
+            <div className="pictures-bg">
+                <img className="side-pic" alt="" src="" />
+                <img className="pic" alt="" src={menu} />
+                <img className="side-pic" alt="" src="" />
+            </div>
+        </div>
+        <div className='info-container'>
+            <p className="info">Rating</p>
+            <p className="info">Price-point</p>
+        </div>
+        <div className="top-badges">
+            <BadgeCard className="badge-card" />
+            <BadgeCard className="badge-card" />
+            <BadgeCard className="badge-card" />
+        </div>
+    </div>
+    <div className="button-container">
+        <button className="badges-button">
+            <img alt="Menu" src={menu} />
+        </button>
+        <button className="badges-button">
+            <img alt="Description" src={page} />
+        </button>
+        <button className="badges-button">
+            <img alt="Directions" src={map}/>
+        </button>
+        <button className="badges-button">
+            <img alt="Badges" src={medal} />
+        </button>
+    </div>
     </div>
   );
 };
