@@ -2,14 +2,13 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from auth.authenticator import authenticator
 import os
-from routers import options, search, accounts, search, places_api
+from routers import options, search, accounts, places_api
 
 app = FastAPI()
 app.include_router(options.router)
 app.include_router(search.router)
 app.include_router(authenticator.router)
 app.include_router(accounts.router)
-app.include_router(search.router)
 app.include_router(places_api.router)
 
 app.add_middleware(
