@@ -2,8 +2,8 @@ services:
   - docker:dind
 
 stages:
-  - test
-  - build
+  - test # run tests
+  - build # build assets
   - deploy
 
 # Run flake8 to check for code quality
@@ -13,7 +13,6 @@ lint-test-job:
   script:
     - pip install flake8
     - flake8 api
-
 # # Run the unit tests
 # api-unit-tests-job:
 #   image: python:3-bullseye
@@ -39,7 +38,6 @@ lint-test-job:
 #     - docker push $GITLAB_IMAGE:latest
 #   only:
 #     - main
-
 
 # # Build the React/JavaScript front-end
 # build-front-end-job:

@@ -2,19 +2,22 @@ from pgeocode import Nominatim
 from typing import Optional, Union
 from .options import OptionOut, Error
 from externals.google_place import get_google_options
+from .search import SearchRepository
 
 
 class PlacesRepository:
     country_code = "US"
     geo = Nominatim(country_code)
 
-    def search_from_zipcode(self, zip) -> Union[Optional[Error], Optional[OptionOut]]:
+    def search_from_zipcode(self, zip, search_id) -> Union[Optional[Error], Optional[OptionOut]]:
         try:
             zipcode_info = self.geo.query_postal_code(zip)
             lat = zipcode_info["latitude"]
             long = zipcode_info["longitude"]
             location_string = f"{lat}, {long}"
             results = get_google_options(location=location_string)
+            for option in results:
+                SearchRepository.add_search_option(self, search_id, option['id'])
             return results
         except Exception as e:
             print(e)
