@@ -1,10 +1,8 @@
-from fastapi import FastAPI, Depends, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from auth.authenticator import authenticator
 import os
-from routers import options, search, accounts, search
-from websockets.server import serve
-from socks import search_socket, test
+from routers import options, search, accounts, search, places_api
 
 app = FastAPI()
 app.include_router(options.router)
@@ -15,6 +13,7 @@ app.include_router(search.router)
 app.include_router(search_socket.router)
 app.include_router(test.router)
 
+app.include_router(places_api.router)
 
 app.add_middleware(
     CORSMiddleware,
