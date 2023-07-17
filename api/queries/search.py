@@ -65,6 +65,7 @@ class SearchRepository:
                 {"search_id": search_id, "option_id": option_id},
             )
             options = self.get_search_options(search_id)
+
             return options
         except Exception as e:
             return {"message": e}
