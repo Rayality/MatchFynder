@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+//import Option, {optionId} from "../Components/views/OptionCard";
+//<Option optionId={optionId} />
 
 // create an API object called searchApi which
 // will contain (i) where in our store we'll
@@ -44,6 +46,20 @@ export const searchApi = createApi({
         body: data,
       }),
     }),
+
+    getMatchMade: builder.query({
+      query: (search_id) => ({ url: `search/${search_id}/match_made` }),
+    }),
+    addSearchOption: builder.mutation({
+      query: ({ search_id, option_id }) => ({
+        url: `/search/${search_id}/options`,
+        body: {
+          option_id: option_id,
+          search_id: search_id,
+        },
+        method: "post",
+      }),
+    }),
   }),
 });
 
@@ -51,6 +67,8 @@ export const searchApi = createApi({
 export const {
   useGetSearchQuery,
   useCreateSearchMutation,
+  useGetMatchMadeQuery,
+  useAddSearchOptionMutation,
   useLazyOptionsApiZipQuery,
   useOptionsApiCityQuery,
 } = searchApi;

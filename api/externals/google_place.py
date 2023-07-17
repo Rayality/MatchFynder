@@ -4,12 +4,13 @@ import os
 from queries.generic_sql import generic_insert, generic_find
 from queries.options import OptionIn, OptionRepository
 
+
 GOOGLE_MAPS_API_KEY = os.environ["GOOGLE_MAPS_API_KEY"]
 
 
 def create_from_request(json_dict):
     try:
-        place_id = json_dict.get('place_id')
+        place_id = json_dict.get("place_id")
         option = generic_find("options", "google_place_id", place_id)
         if len(option) == 0:
             print("making new option")
@@ -26,7 +27,9 @@ def create_from_request(json_dict):
             )  # noqa
             new_item["price_level"] = json_dict.get("price_level")
             new_item["rating"] = json_dict.get("rating")
-            new_item["user_ratings_count"] = json_dict.get("user_ratings_total")  # noqa
+            new_item["user_ratings_count"] = json_dict.get(
+                "user_ratings_total"
+            )  # noqa
             new_item["picture_url"] = json_dict.get("picture_url")
             option_in = OptionIn(**new_item)
             option = OptionRepository.create(OptionRepository, option_in)
@@ -52,7 +55,9 @@ def get_google_options(location, query="restaurants", radius=1500):
             try:
                 photo_ref = item["photos"][0]["photo_reference"]
                 photo_width = 400
-                item["picture_url"] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
+                item[
+                    "picture_url"
+                ] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
 
             except (KeyError, IndexError):
                 item["picture_url"] = None
