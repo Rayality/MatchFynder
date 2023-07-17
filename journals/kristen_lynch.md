@@ -3,6 +3,28 @@
 --A reflection on any design conversations that you had
 --At least one ah-ha! moment that you had during your coding, however small
 
+## 7/14/2023
+
+-- updated generic sql insert to return all fields so that all default updated fields are returned and match data validation.
+-- finished testing updates to updated at.
+
+## 7/13/2023
+
+-- Aha! getLazyQuery enables you to trigger the request manually
+--connected front end to be able to get oiptions from google api and create a new search when the user enters a zip code.
+-- tested updates to updated_at
+
+## 7/12/2023
+
+- Read documentation on RTK queries in an attempt to knit together our frontend and back end.
+  -- Got stuck on figuring out how to trigger a .query GET request in response to user action in the UI
+
+## 7/11/2023
+
+- investigated TRIGGERS to be able to update the updated_at field in our data set for PUT requests automatically
+- simplified/refactored our BaseModels for search to take advantage of default fields
+  -learned from NT that docker compose up also builds the images
+
 ## 7/10/2023
 
 --demos as a team

@@ -1,24 +1,47 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ErrorNotification from "../../ErrorNotification";
-import { useCreateSearchMutation } from "../../Redux/searchApi";
+import {
+  searchApi,
+  useCreateSearchMutation,
+  useLazyOptionsApiZipQuery,
+  useOptionsApiCityQuery,
+} from "../../Redux/searchApi";
 
 export default function CreateSearchForm() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [location, setLocation] = useState("");
-  const [createSearch, result] = useCreateSearchMutation();
+  const [search_id, setSearchId] = useState(0);
+  const [queryApiZip, apiZipResult, lastPromise] = useLazyOptionsApiZipQuery(
+    location,
+    search_id
+  );
 
+  const [createSearch, searchResult] = useCreateSearchMutation();
+
+  const handleLocationChange = (event) => {
+    const value = event.target.value;
+    setLocation(value);
+  };
   async function handleSubmit(e) {
     e.preventDefault();
-
-    createSearch({ location });
+    createSearch();
+    console.log(searchResult);
+    if (searchResult) {
+      setSearchId(searchResult.id);
+    }
+    console.log(location);
+    console.log(search_id);
+    if (search_id) {
+      queryApiZip(location, search_id);
+    }
   }
 
-  if (result.isSuccess) {
+  if (apiZipResult.isSuccess) {
     navigate("/options");
-  } else if (result.isError) {
-    setError(result.error);
+  } else if (apiZipResult.isError) {
+    setError(apiZipResult.error);
   }
 
   return (
@@ -33,17 +56,18 @@ export default function CreateSearchForm() {
             Location
           </label>
           <input
-            onChange={setLocation}
-            name="location"
-            type="text"
+            value={location}
+            onChange={handleLocationChange}
             className="form-control"
-            id="inputLocation"
+            id="location"
             placeholder="zip code OR city, state"
           />
         </div>
+        {/* <NavLink to="/options"> */}
         <button type="submit" className="btn btn-primary mb-3">
           Submit
         </button>
+        {/* </NavLink> */}
       </form>
     </div>
   );
