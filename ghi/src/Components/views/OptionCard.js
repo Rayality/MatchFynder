@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useGetOptionsQuery } from "../../Redux/optionsApi";
+import { useGetAllOptionsQuery } from "../../Redux/optionsApi";
 import "boxicons";
 import { useSwipeable } from "react-swipeable";
 import ErrorNotification from "../../ErrorNotification";
@@ -18,7 +18,7 @@ function Option(props) {
   const [index, setIndex] = useState(0);
 
   // use useGetOptionsQuery to populate the list of options
-  const { data, error, isLoading } = useGetOptionsQuery();
+  const { data, error, isLoading } = useGetAllOptionsQuery();
   const [addSearchOptionMutation, searchOptionData] =
     useAddSearchOptionMutation();
 

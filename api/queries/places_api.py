@@ -9,7 +9,9 @@ class PlacesRepository:
     country_code = "US"
     geo = Nominatim(country_code)
 
-    def search_from_zipcode(self, zip, search_id) -> Union[Optional[Error], Optional[OptionOut]]:
+    def search_from_zipcode(
+        self, zip, search_id
+    ) -> Union[Optional[Error], Optional[OptionOut]]:
         try:
             zipcode_info = self.geo.query_postal_code(zip)
             lat = zipcode_info["latitude"]
@@ -17,7 +19,9 @@ class PlacesRepository:
             location_string = f"{lat}, {long}"
             results = get_google_options(location=location_string)
             for option in results:
-                SearchRepository.add_search_option(self, search_id, option['id'])
+                SearchRepository.add_search_option(
+                    self, search_id, option["id"]
+                )
             return results
         except Exception as e:
             print(e)
@@ -26,7 +30,7 @@ class PlacesRepository:
     def search_from_city(self, city: str, state: str):
         try:
             cities_dataframe = self.geo.query_location(city)
-            filt = (cities_dataframe["state_name"] == state)
+            filt = cities_dataframe["state_name"] == state
             lats_longs = cities_dataframe.loc[filt, ["latitude", "longitude"]]
             latlong_list = lats_longs.to_dict("records")
             latitudes = 0.0
