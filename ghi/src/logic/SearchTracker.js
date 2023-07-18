@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from "react";
 import useWebSocket from "react-use-websocket";
 
-export default function SearchTracker(props) {
+export default function SearchTracker(searchParams) {
   const [socketUrl, setSocketUrl] = useState(
-    `ws://localhost:8000/search/${props.searchID}`
+    `ws://localhost:8000/search/${searchParams.searchID}`
   );
   const [searchData, setSearchData] = useState({
-    option_id: "",
-    participants: props.participants,
+    participants: searchParams.participants,
+    options: options,
   });
 
-  const { sendJsonMessage } = useWebSocket(socketUrl);
-
-  const updateEdibleCount = (id = props.option_id) => {
-    sendJsonMessage(searchData);
-  };
-  return <></>;
+  const { sendJsonMessage, lastJsonMessage } = useWebSocket(socketUrl);
 }

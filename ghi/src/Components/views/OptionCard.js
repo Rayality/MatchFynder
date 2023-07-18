@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useGetAllOptionsQuery } from "../../Redux/optionsApi";
+import { useGetOptionsQuery } from "../../Redux/optionsApi";
 import "boxicons";
 import { useSwipeable } from "react-swipeable";
 import ErrorNotification from "../../ErrorNotification";
+<<<<<<< Updated upstream
 import {
   useAddSearchOptionMutation,
   useGetMatchMadeQuery,
@@ -12,22 +13,36 @@ import { useGetSearchQuery } from "../../Redux/searchApi";
 //export let optionId = null;
 
 function Option(props) {
+=======
+
+function Option(props) {
+  const searchId = props.searchId;
+>>>>>>> Stashed changes
   // Create a local index variable leveraging React's useState functionality
   // in order to set/reset the index of the action option from the options list
   const [index, setIndex] = useState(0);
 
+  const [socketUrl, setSocketUrl] = useState(
+    `ws://localhost:8000/search/${searchId}`
+  );
+
   // use useGetOptionsQuery to populate the list of options
+<<<<<<< Updated upstream
   const { data, error, isLoading } = useGetAllOptionsQuery();
   const [addSearchOptionMutation, searchOptionData] =
     useAddSearchOptionMutation();
 
   const optionId = data?.[index].id;
   console.log(optionId);
+=======
+  const { data, error, isLoading } = useGetOptionsQuery();
+>>>>>>> Stashed changes
 
   // Upon button click, prevent the page from refreshing
   // and reset the index of the option to be displayed
   const handleButton = async (event) => {
     event.preventDefault();
+<<<<<<< Updated upstream
     setIndex(index);
 
     const optionId = data?.[index - 1].id;
@@ -36,6 +51,9 @@ function Option(props) {
     if (optionId) {
       addSearchOptionMutation({ option_id: optionId, search_id: 5 });
     }
+=======
+    setIndex(index + 1);
+>>>>>>> Stashed changes
   };
 
   // Upon swipe (or click/drag),
@@ -55,41 +73,44 @@ function Option(props) {
 
   // handle loading
   if (isLoading) {
-    return <progress className="progress is-primary" max="100"></progress>;
+    return <progress className='progress is-primary' max='100'></progress>;
   }
 
+<<<<<<< Updated upstream
   // if (matchMadeIsLoading) {
   //   return <progress className="progress is-primary" max="100"></progress>;
   // }
 
+=======
+>>>>>>> Stashed changes
   return (
-    <div className="prevent-select">
-      <div className="d-flex container justify-content-center">
-        <div className="thumbnail">
+    <div className='prevent-select'>
+      <div className='d-flex container justify-content-center'>
+        <div className='thumbnail'>
           <ErrorNotification error={error} />
           <div {...handlers}>
             <img
-              draggable="false"
+              draggable='false'
               src={data[index].picture_url}
-              alt="google maps sourced pic associated with restaurant"
+              alt='google maps sourced pic associated with restaurant'
             />
-            <div className="caption">
+            <div className='caption'>
               <h4>{data[index].name}</h4>
               <p>Price: {data[index].price_level} out of 5</p>
               <p>Rating: {data[index].rating} out of 5</p>
-              <p className="d-flex justify-content-between">
-                <button onClick={handleButton} className="btn btn-light">
+              <p className='d-flex justify-content-between'>
+                <button onClick={handleButton} className='btn btn-light'>
                   <box-icon
-                    name="x-circle"
-                    color="red"
-                    animation="tada-hover"
+                    name='x-circle'
+                    color='red'
+                    animation='tada-hover'
                   ></box-icon>
                 </button>
-                <button onClick={handleButton} className="btn btn-light">
+                <button onClick={handleButton} className='btn btn-light'>
                   <box-icon
-                    name="check-circle"
-                    color="green"
-                    animation="tada-hover"
+                    name='check-circle'
+                    color='green'
+                    animation='tada-hover'
                   ></box-icon>
                 </button>
               </p>
@@ -101,6 +122,3 @@ function Option(props) {
   );
 }
 export default Option;
-
-//const option_Id = Option().optionId
-//console.log(optionId)
