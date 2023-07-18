@@ -32,13 +32,18 @@ export const searchApi = createApi({
       // define a query function to return
       // the endpoints
       query: (search_id) => `search/${search_id}/options`,
+      transformResponse: (response, meta, arg) => response.data,
+      transformErrorResponse: (response, meta, arg) => response.status,
       providesTags: ["Search"],
     }),
     optionsApiZip: builder.query({
-      query: ({ zipcode, search_id }) => ({
-        url: `/query/zipcode`,
-        params: { zipcode, search_id },
-      }),
+      query: (params) => {
+        const zipCode = params["location"];
+        const searchId = params["search_id"];
+        return {
+          url: `/query/zipcode?zipcode=${zipCode}&search_id=${searchId}`,
+        };
+      },
     }),
     optionsApiCity: builder.query({
       query: (data) => ({
