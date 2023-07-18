@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import ErrorNotification from "../../ErrorNotification";
 import {
@@ -12,29 +12,37 @@ export default function CreateSearchForm() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [location, setLocation] = useState("");
-  const [search_id, setSearchId] = useState(0);
-  const [queryApiZip, apiZipResult, lastPromise] = useLazyOptionsApiZipQuery(
-    location,
-    search_id
-  );
-
   const [createSearch, searchResult] = useCreateSearchMutation();
+  const [queryApiZip, apiZipResult, lastPromise] = useLazyOptionsApiZipQuery();
 
+  // upon data entry set the location to the value of the entry
   const handleLocationChange = (event) => {
     const value = event.target.value;
     setLocation(value);
   };
+
+  // upon submit, prevent default page behavior,
+  // create a search record
+  // and use the location and searchId to
+  // check our db and/or google api for options
+  // and add them to that search's search_options
   async function handleSubmit(e) {
     e.preventDefault();
-    createSearch();
-    console.log(searchResult);
-    if (searchResult) {
-      setSearchId(searchResult.id);
+    try {
+      const search_payload = await createSearch().unwrap();
+      console.log("Search fulfilled: ", search_payload);
+    } catch (error) {
+      console.error("Create search rejected: ", error);
     }
-    console.log(location);
-    console.log(search_id);
-    if (search_id) {
-      queryApiZip(location, search_id);
+    try {
+      const search_id = await searchResult.data?.id;
+      const apizip_payload = await queryApiZip({
+        location: location,
+        search_id: search_id,
+      }).unwrap();
+      console.log("Options API fulfilled: ", apizip_payload);
+    } catch (error) {
+      console.error("Options API rejected: ", error);
     }
   }
 

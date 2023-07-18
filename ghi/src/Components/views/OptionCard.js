@@ -3,31 +3,27 @@ import { useGetOptionsQuery } from "../../Redux/optionsApi";
 import "boxicons";
 import { useSwipeable } from "react-swipeable";
 import ErrorNotification from "../../ErrorNotification";
-import { useAddSearchOptionMutation, useGetMatchMadeQuery } from "../../Redux/searchApi";
+import {
+  useAddSearchOptionMutation,
+  useGetMatchMadeQuery,
+} from "../../Redux/searchApi";
 import { useGetSearchQuery } from "../../Redux/searchApi";
 import { useUpdateEdibleOptionMutation } from "../../Redux/searchApi";
 
 //export let optionId = null;
 
 function Option(props) {
-
   // Create a local index variable leveraging React's useState functionality
   // in order to set/reset the index of the action option from the options list
   const [index, setIndex] = useState(0);
 
   // use useGetOptionsQuery to populate the list of options
   const { data, error, isLoading } = useGetOptionsQuery();
-  const { data: matchMadeData } = useGetMatchMadeQuery(2);
-  const {data: getSearchData} = useGetSearchQuery(2);
-  const [addSearchOptionMutation,  searchOptionData ] = useAddSearchOptionMutation()
-  const [updateEdibleOptionMutation, edibleOptionData ] = useUpdateEdibleOptionMutation()
+  const [addSearchOptionMutation, searchOptionData] =
+    useAddSearchOptionMutation();
 
-
-  const optionId = (data?.[index].id)
-  console.log(optionId)
-
-
-
+  const optionId = data?.[index].id;
+  console.log(optionId);
 
   // Upon button click, prevent the page from refreshing
   // and reset the index of the option to be displayed
@@ -38,12 +34,8 @@ function Option(props) {
     const optionId = data?.[index - 1].id;
     //console.log('optionId:', optionId)
 
-
-
-
-
-
-    if (optionId) {updateEdibleOptionMutation({ option_id: optionId, search_id: 5});
+    if (optionId) {
+      addSearchOptionMutation({ option_id: optionId, search_id: 5 });
     }
   };
 
@@ -70,7 +62,6 @@ function Option(props) {
   // if (matchMadeIsLoading) {
   //   return <progress className="progress is-primary" max="100"></progress>;
   // }
-
 
   return (
     <div className="prevent-select">
