@@ -13,7 +13,7 @@ def create_from_request(json_dict):
         place_id = json_dict.get("place_id")
         option = generic_find("options", "google_place_id", place_id)
         if len(option) == 0:
-            print("making new option")
+            print()
             new_item = {}
             new_item["business_status"] = json_dict.get("business_status")
             new_item["name"] = json_dict.get("name")
@@ -62,7 +62,6 @@ def get_google_options(location, query="restaurants", radius=1500):
             except (KeyError, IndexError):
                 item["picture_url"] = None
             output_list.append(create_from_request(item)[0])
-            print(output_list)
         return output_list
     except Exception as e:
         raise e.errors[0]

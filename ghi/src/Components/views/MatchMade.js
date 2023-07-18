@@ -6,45 +6,54 @@ import { BadgeCard } from "./BadgeCard";
 import "../EaseOfAccess/match-made.css";
 import {medal, menu, page, map} from "../EaseOfAccess/MatchMadadeImgs"
 
+const pictures = [
+    "https://images.pexels.com/photos/16377866/pexels-photo-16377866/free-photo-of-woman-wearing-dress-on-meadow.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+    "https://images.pexels.com/photos/17357107/pexels-photo-17357107/free-photo-of-landscape-field-summer-sun.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+    "https://images.pexels.com/photos/17444510/pexels-photo-17444510/free-photo-of-landscape-people-animal-farm.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+    "https://images.pexels.com/photos/17584116/pexels-photo-17584116.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+    "https://images.pexels.com/photos/17077794/pexels-photo-17077794/free-photo-of-tilt-house-behind-grass-on-montmartre.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+]
+const piclist = pictures.map((pic) => <img src={pic}/>)
 
 const MatchMade = () => {
-  return (
-    <div className="match-view">
-    <div>
-        <h1 className="restaurant-title">Restaurant Title</h1>
-        <div className="pictures">
-            <div className="pictures-bg">
-                <img className="side-pic" alt="" src="" />
-                <img className="pic" alt="" src={menu} />
-                <img className="side-pic" alt="" src="" />
+    const carousel = (listUrlStrings) => {
+        listUrlStrings.map((url, index) => <img key={index} src={url} />)
+    }
+    return (
+        <div className="match-view">
+            <div>
+                <h1 className="restaurant-title">Restaurant Title</h1>
+                <div className="pictures">
+                    <div className="pictures-bg">
+                        {pictures.map((pic) => <img className="pic" alt="Picture" src={pic}/>)}
+                    </div>
+                </div>
+                <div className='info-container'>
+                    <p className="info">Rating</p>
+                    <p className="info">Price-point</p>
+                </div>
+                <div className="top-badges">
+                    <BadgeCard className="badge-card" />
+                    <BadgeCard className="badge-card" />
+                    <BadgeCard className="badge-card" />
+                </div>
+            </div>
+            <div className="button-container">
+                <button className="badges-button">
+                    <img alt="Menu" src={menu} />
+                </button>
+                <button className="badges-button">
+                    <img alt="Description" src={page} />
+                </button>
+                <button className="badges-button">
+                    <img alt="Directions" src={map}/>
+                </button>
+                <button className="badges-button">
+                    <img alt="Badges" src={medal} />
+                </button>
             </div>
         </div>
-        <div className='info-container'>
-            <p className="info">Rating</p>
-            <p className="info">Price-point</p>
-        </div>
-        <div className="top-badges">
-            <BadgeCard className="badge-card" />
-            <BadgeCard className="badge-card" />
-            <BadgeCard className="badge-card" />
-        </div>
-    </div>
-    <div className="button-container">
-        <button className="badges-button">
-            <img alt="Menu" src={menu} />
-        </button>
-        <button className="badges-button">
-            <img alt="Description" src={page} />
-        </button>
-        <button className="badges-button">
-            <img alt="Directions" src={map}/>
-        </button>
-        <button className="badges-button">
-            <img alt="Badges" src={medal} />
-        </button>
-    </div>
-    </div>
-  );
+    );
 };
 export default MatchMade
 
