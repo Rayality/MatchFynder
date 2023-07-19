@@ -9,6 +9,7 @@ import {
 } from "../../Redux/searchApi";
 import { useGetSearchQuery } from "../../Redux/searchApi";
 import { useUpdateEdibleOptionMutation } from "../../Redux/searchApi";
+import { useGetOptionsBySearchQuery } from "../../Redux/searchApi";
 
 //export let optionId = null;
 
@@ -18,12 +19,14 @@ function Option(props) {
   const [index, setIndex] = useState(0);
 
   // use useGetOptionsQuery to populate the list of options
-  const { data, error, isLoading } = useGetAllOptionsQuery();
+  const { data, error, isLoading } = useGetOptionsBySearchQuery(5);
   const [addSearchOptionMutation, searchOptionData] =
     useAddSearchOptionMutation();
 
-  const optionId = data?.[index].id;
-  console.log(optionId);
+  //const optionId = data?.[index].id;
+  if (isLoading === false){
+  console.log(data)
+  };
 
   // Upon button click, prevent the page from refreshing
   // and reset the index of the option to be displayed
@@ -31,12 +34,12 @@ function Option(props) {
     event.preventDefault();
     setIndex(index);
 
-    const optionId = data?.[index - 1].id;
+    //const optionId = data?.[index - 1].id;
     //console.log('optionId:', optionId)
 
-    if (optionId) {
-      addSearchOptionMutation({ option_id: optionId, search_id: 5 });
-    }
+    //if (optionId) {
+     // addSearchOptionMutation({ option_id: optionId, search_id: 5 });
+    //}
   };
 
   // Upon swipe (or click/drag),
@@ -57,7 +60,7 @@ function Option(props) {
   // handle loading
   if (isLoading) {
     return <progress className="progress is-primary" max="100"></progress>;
-  }
+  } else {
 
   // if (matchMadeIsLoading) {
   //   return <progress className="progress is-primary" max="100"></progress>;
@@ -71,13 +74,13 @@ function Option(props) {
           <div {...handlers}>
             <img
               draggable="false"
-              src={data[index].picture_url}
+              src={data[index][0].picture_url}
               alt="google maps sourced pic associated with restaurant"
             />
             <div className="caption">
-              <h4>{data[index].name}</h4>
-              <p>Price: {data[index].price_level} out of 5</p>
-              <p>Rating: {data[index].rating} out of 5</p>
+              <h4>{data[index][0].name}</h4>
+              <p>Price: {data[index][0].price_level} out of 5</p>
+              <p>Rating: {data[index][0].rating} out of 5</p>
               <p className="d-flex justify-content-between">
                 <button onClick={handleButton} className="btn btn-light">
                   <box-icon
@@ -100,6 +103,7 @@ function Option(props) {
       </div>
     </div>
   );
+  }
 }
 export default Option;
 

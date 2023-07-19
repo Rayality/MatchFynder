@@ -75,6 +75,11 @@ export const searchApi = createApi({
         method: "post",
       })
     }),
+    getOptionsBySearch: builder.query({
+      query: (search_id) => ({
+        url: `/search/${search_id}/options/`
+      })
+    })
   }),
 });
 
@@ -86,4 +91,5 @@ export const {
   useAddSearchOptionMutation, useUpdateEdibleOptionMutation,
   useLazyOptionsApiZipQuery,
   useOptionsApiCityQuery,
+  useGetOptionsBySearchQuery,
 } = searchApi;
