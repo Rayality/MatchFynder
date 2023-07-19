@@ -25,7 +25,7 @@ function Option(props) {
 
   //const optionId = data?.[index].id;
   if (isLoading === false){
-  console.log(data)
+
   };
 
   // Upon button click, prevent the page from refreshing
