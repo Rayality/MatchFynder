@@ -65,6 +65,21 @@ export const searchApi = createApi({
         method: "post",
       }),
     }),
+    updateEdibleOption: builder.mutation({
+      query: ({option_id, search_id}) => ({
+        url: `/search/${search_id}/options/${option_id}`,
+        body: {
+          option_id: option_id,
+          search_id: search_id,
+        },
+        method: "post",
+      })
+    }),
+    getOptionsBySearch: builder.query({
+      query: (search_id) => ({
+        url: `/search/${search_id}/options/`
+      })
+    })
   }),
 });
 
@@ -73,7 +88,8 @@ export const {
   useGetSearchQuery,
   useCreateSearchMutation,
   useGetMatchMadeQuery,
-  useAddSearchOptionMutation,
+  useAddSearchOptionMutation, useUpdateEdibleOptionMutation,
   useLazyOptionsApiZipQuery,
   useOptionsApiCityQuery,
+  useGetOptionsBySearchQuery,
 } = searchApi;
