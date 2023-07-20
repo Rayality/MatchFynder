@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Construct from "../Construct.js";
 import ErrorNotification from "../ErrorNotification";
 import "../App.css";
-import Nav from "../Components/Nav";
 
 export default function Root() {
   const [launchInfo, setLaunchInfo] = useState([]);

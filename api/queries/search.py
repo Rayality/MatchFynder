@@ -116,7 +116,7 @@ class SearchRepository:
                     edible_count = option.fetchone()[0]
                     search = generic_find("search", "id", search_id)[0]
                     if search["participant_count"] <= edible_count:
-                        self.set_match_made_true(search_id)
+                        self.set_match_made_true(self, search_id)
                     return edible_count
 
         except Exception as e:

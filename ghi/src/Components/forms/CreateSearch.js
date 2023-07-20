@@ -61,29 +61,29 @@ export default function CreateSearchForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     const search_id = await handleApiCalls();
-    navigate(`/search/${search_id}/options`);
+    navigate(`${search_id}/options`);
   }
 
   return (
-    <div className="container mb-3 shadow">
-      <div className="mb-3">
+    <div className='container mb-3 shadow'>
+      <div className='mb-3'>
         <h1>Find a Restaurant Match</h1>
       </div>
-      <form onSubmit={handleSubmit} className="form-floating mb-3">
-        <div className="mb-3">
+      <form onSubmit={handleSubmit} className='form-floating mb-3'>
+        <div className='mb-3'>
           <ErrorNotification error={error} />
-          <label htmlFor="inputLocation" className="form-label">
+          <label htmlFor='inputLocation' className='form-label'>
             Location
           </label>
           <input
             value={location}
             onChange={handleLocationChange}
-            className="form-control"
-            id="location"
-            placeholder="zip code OR city, state"
+            className='form-control'
+            id='location'
+            placeholder='zip code OR city, state'
           />
         </div>
-        <button type="submit" className="btn btn-primary mb-3">
+        <button type='submit' className='btn btn-primary mb-3'>
           Submit
         </button>
       </form>
