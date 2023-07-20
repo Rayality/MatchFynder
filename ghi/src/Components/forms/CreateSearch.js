@@ -61,7 +61,7 @@ export default function CreateSearchForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     const search_id = await handleApiCalls();
-    navigate(`/search/${search_id}/options`);
+    navigate(`${search_id}/options`);
   }
 
   return (

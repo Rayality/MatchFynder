@@ -20,6 +20,6 @@ async def websocket_endpoint(websocket: WebSocket):
             data = await websocket.receive_text()
             print(data)
             for connection in connections:
-                await connection.send_text(data)
+                await connection.send_json({"hello": "world"})
     except WebSocketDisconnect:
         connections.remove(websocket)

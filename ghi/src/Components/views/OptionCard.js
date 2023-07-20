@@ -1,48 +1,48 @@
-import React, { useState } from "react";
-import { useGetOptionsQuery } from "../../Redux/optionsApi";
+import React, { useState, useEffect } from "react";
+import { useGetAllOptionsQuery } from "../../Redux/optionsApi";
 import "boxicons";
 import { useSwipeable } from "react-swipeable";
 import ErrorNotification from "../../ErrorNotification";
-<<<<<<< Updated upstream
 import {
   useAddSearchOptionMutation,
   useGetMatchMadeQuery,
+  useGetSearchQuery,
 } from "../../Redux/searchApi";
-import { useGetSearchQuery } from "../../Redux/searchApi";
+import useWebSocket from "react-use-websocket";
 
 //export let optionId = null;
 
 function Option(props) {
-=======
-
-function Option(props) {
   const searchId = props.searchId;
->>>>>>> Stashed changes
   // Create a local index variable leveraging React's useState functionality
   // in order to set/reset the index of the action option from the options list
   const [index, setIndex] = useState(0);
+  const [messageHistory, setMessageHistory] = useState({});
 
   const [socketUrl, setSocketUrl] = useState(
     `ws://localhost:8000/search/${searchId}`
   );
 
+  const { sendJsonMessage, lastJsonMessage } = useWebSocket(socketUrl);
+
   // use useGetOptionsQuery to populate the list of options
-<<<<<<< Updated upstream
   const { data, error, isLoading } = useGetAllOptionsQuery();
   const [addSearchOptionMutation, searchOptionData] =
     useAddSearchOptionMutation();
 
+  useEffect(() => {
+    if (lastJsonMessage !== null) {
+      setMessageHistory((prev) => prev.concat(lastJsonMessage));
+    }
+    console.log(messageHistory);
+  }, [lastJsonMessage, setMessageHistory, messageHistory]);
+
   const optionId = data?.[index].id;
-  console.log(optionId);
-=======
-  const { data, error, isLoading } = useGetOptionsQuery();
->>>>>>> Stashed changes
 
   // Upon button click, prevent the page from refreshing
   // and reset the index of the option to be displayed
   const handleButton = async (event) => {
     event.preventDefault();
-<<<<<<< Updated upstream
     setIndex(index);
 
     const optionId = data?.[index - 1].id;
@@ -51,15 +51,13 @@ function Option(props) {
     if (optionId) {
       addSearchOptionMutation({ option_id: optionId, search_id: 5 });
     }
-=======
-    setIndex(index + 1);
->>>>>>> Stashed changes
   };
 
   // Upon swipe (or click/drag),
   // reset the index of the option to be displayed
   const handleSwipe = async (event) => {
     setIndex(index + 1);
+    sendJsonMessage(JSON.stringify({ option_id: optionId }));
   };
 
   // Create a variable to be able to set where in the html
@@ -76,13 +74,10 @@ function Option(props) {
     return <progress className='progress is-primary' max='100'></progress>;
   }
 
-<<<<<<< Updated upstream
   // if (matchMadeIsLoading) {
   //   return <progress className="progress is-primary" max="100"></progress>;
   // }
 
-=======
->>>>>>> Stashed changes
   return (
     <div className='prevent-select'>
       <div className='d-flex container justify-content-center'>

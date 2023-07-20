@@ -1,5 +1,6 @@
+import { Outlet } from "react-router-dom";
 import CreateSearchForm from "../Components/forms/CreateSearch";
 
 export default function NewSearch() {
-  return <CreateSearchForm />;
+  return <CreateSearchForm></CreateSearchForm>;
 }
