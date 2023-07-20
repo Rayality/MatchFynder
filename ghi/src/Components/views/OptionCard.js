@@ -32,15 +32,6 @@ function Option(props) {
   const [addSearchOptionMutation, searchOptionData] =
     useAddSearchOptionMutation();
 
-  useEffect(() => {
-    if (lastJsonMessage !== null) {
-      setMessageHistory((prev) => prev.concat(lastJsonMessage));
-    }
-    console.log(messageHistory);
-  }, [lastJsonMessage, setMessageHistory, messageHistory]);
-
-  const optionId = data?.[index].id;
-
   // Upon button click, prevent the page from refreshing
   // and reset the index of the option to be displayed
   const handleButton = async (event) => {
@@ -57,10 +48,6 @@ function Option(props) {
 
   // Upon swipe (or click/drag),
   // reset the index of the option to be displayed
-  const handleSwipe = async (event) => {
-    setIndex(index + 1);
-    sendJsonMessage(JSON.stringify({ option_id: optionId }));
-  };
 
   // Create a variable to be able to set where in the html
   // to detect swipe/click and drag
@@ -75,47 +62,53 @@ function Option(props) {
   if (isLoading) {
     return <progress className='progress is-primary' max='100'></progress>;
   } else {
+    var optionId = data[index][0].id;
     // if (matchMadeIsLoading) {
     //   return <progress className="progress is-primary" max="100"></progress>;
-    // }
+  }
+  const handleSwipe = async (event) => {
+    setIndex(index + 1);
+    sendJsonMessage(JSON.stringify({ option_id: optionId }));
+    console.log(lastJsonMessage);
+  };
 
-    return (
-      <div className='prevent-select'>
-        <div className='d-flex container justify-content-center'>
-          <div className='thumbnail'>
-            <ErrorNotification error={error} />
-            <div {...handlers}>
-              <img
-                draggable='false'
-                src={data[index][0].picture_url}
-                alt='google maps sourced pic associated with restaurant'
-              />
-              <div className='caption'>
-                <h4>{data[index][0].name}</h4>
-                <p>Price: {data[index][0].price_level} out of 5</p>
-                <p>Rating: {data[index][0].rating} out of 5</p>
-                <p className='d-flex justify-content-between'>
-                  <button onClick={handleButton} className='btn btn-light'>
-                    <box-icon
-                      name='x-circle'
-                      color='red'
-                      animation='tada-hover'
-                    ></box-icon>
-                  </button>
-                  <button onClick={handleButton} className='btn btn-light'>
-                    <box-icon
-                      name='check-circle'
-                      color='green'
-                      animation='tada-hover'
-                    ></box-icon>
-                  </button>
-                </p>
-              </div>
+  return (
+    <div className='prevent-select'>
+      <div className='d-flex container justify-content-center'>
+        <div className='thumbnail'>
+          <ErrorNotification error={error} />
+          <div {...handlers}>
+            <img
+              draggable='false'
+              src={data[index][0].picture_url}
+              alt='google maps sourced pic associated with restaurant'
+            />
+            <div className='caption'>
+              <h4>{data[index][0].name}</h4>
+              <p>Price: {data[index][0].price_level} out of 5</p>
+              <p>Rating: {data[index][0].rating} out of 5</p>
+              <p className='d-flex justify-content-between'>
+                <button onClick={handleButton} className='btn btn-light'>
+                  <box-icon
+                    name='x-circle'
+                    color='red'
+                    animation='tada-hover'
+                  ></box-icon>
+                </button>
+                <button onClick={handleButton} className='btn btn-light'>
+                  <box-icon
+                    name='check-circle'
+                    color='green'
+                    animation='tada-hover'
+                  ></box-icon>
+                </button>
+              </p>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
 export default Option;

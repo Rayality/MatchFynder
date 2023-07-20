@@ -20,13 +20,18 @@ async def websocket_endpoint(websocket: WebSocket, search_id):
         while True:
             data = await websocket.receive_json()
             data = json.loads(data)
+
             for websocket in connections:
-                option_id = data.option_id
+                option_id = data.get("option_id")
                 count = SearchRepository.update_edible_count(
-                    search_id, option_id
+                    self=SearchRepository,
+                    search_id=search_id,
+                    option_id=option_id,
                 )
-                if count == search.participant_count:
-                    SearchRepository.set_match_made_true(search_id)
-                await websocket.send_json(data)
+                if count == search.get("participant_count"):
+                    SearchRepository.set_match_made_true(
+                        self=SearchRepository, search_id=search_id
+                    )
+                await websocket.send_json(json.dumps({"count": count}))
     except WebSocketDisconnect:
         connections.remove(websocket)

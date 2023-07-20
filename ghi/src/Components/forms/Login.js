@@ -14,7 +14,7 @@ export default function LoginForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    sendLoginData(url, "post", account);
+    sendLoginData(url, account);
     dispatch(reset());
   }
   return (
