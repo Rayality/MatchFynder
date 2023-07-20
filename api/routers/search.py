@@ -93,3 +93,10 @@ def get_match_made(
     search_id: int, response: Response, repo: SearchRepository = Depends()
 ) -> MatchMade:
     return repo.get_match_made(search_id)
+
+
+@router.get("/search/{search_id}/options/")
+def get_options_by_search(
+    search_id: int, response: Response, repo: SearchRepository = Depends()
+):
+    return repo.get_options_by_search(search_id)

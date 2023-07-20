@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         Component: CreateAccount,
       },
       {
-        path: "options/",
+        path: "options/:search_id",
         Component: PresentOption,
       },
       {

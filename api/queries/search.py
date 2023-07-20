@@ -8,6 +8,7 @@ from .generic_sql import (
     generic_get_all,
     generic_update,
 )
+from .options import OptionRepository
 
 
 class MatchMade(BaseModel):
@@ -162,3 +163,19 @@ class SearchRepository:
         except Exception as e:
             print(e)
             return None
+
+    def get_options_by_search(self, search_id: int):
+        try:
+            search_options_by_search_id = generic_find(
+                "search_options", "search_id", search_id
+            )
+            result = []
+            for row in search_options_by_search_id:
+                option = OptionRepository.get_single_option(
+                    self, row["option_id"]
+                )
+                result.append(option)
+            return result
+
+        except Exception as e:
+            return {"message": f"{e}"}
