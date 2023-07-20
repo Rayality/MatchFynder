@@ -12,6 +12,7 @@ import { store } from "./Redux/store";
 import Logout from "./Components/views/Logout";
 import Layout from "./routes/Layout";
 import NewSearch from "./routes/search";
+import Home from "./Components/views/home";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "*",
         Component: Root,
+      },
+      {
+        path: "home/",
+        Component: Home,
       },
       {
         path: "login/",

@@ -3,6 +3,29 @@
 --A reflection on any design conversations that you had
 --At least one ah-ha! moment that you had during your coding, however small
 
+## 7/20/2023
+
+--lots of CSS improvements
+--aha: play button in vscode!
+--aha: highlight and parenthesis/curly brackets/braces add them to either end of highlight!!
+
+## 7/19/2023
+
+--reviewed project requirements as a team
+--updated ReadMe
+--Built Home page
+
+## 7/18/2023
+
+--refactored search frontend to be cleaner
+--changed redirect from /options (which is an endpoint for all options) to /search/${search_id}/options (which is an endpoint for just those options associated with search_id)
+--started unit tests for options
+
+## 7/17/2023
+
+--refactored all fastAPI endpoints to be cleaner
+--added code comments for clarity
+
 ## 7/14/2023
 
 -- updated generic sql insert to return all fields so that all default updated fields are returned and match data validation.
