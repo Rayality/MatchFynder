@@ -9,20 +9,23 @@ import {
 } from "../../Redux/searchApi";
 import { useGetSearchQuery } from "../../Redux/searchApi";
 
+
+
+
+
+
 //export let optionId = null;
 
 function Option(props) {
   // Create a local index variable leveraging React's useState functionality
   // in order to set/reset the index of the action option from the options list
   const [index, setIndex] = useState(0);
-
   // use useGetOptionsQuery to populate the list of options
   const { data, error, isLoading } = useGetOptionsQuery();
   const [addSearchOptionMutation, searchOptionData] =
     useAddSearchOptionMutation();
 
   const optionId = data?.[index].id;
-  console.log(optionId);
 
   // Upon button click, prevent the page from refreshing
   // and reset the index of the option to be displayed
@@ -57,7 +60,7 @@ function Option(props) {
   if (isLoading) {
     return <progress className="progress is-primary" max="100"></progress>;
   }
-
+console.log(data[index].picture_url)
   // if (matchMadeIsLoading) {
   //   return <progress className="progress is-primary" max="100"></progress>;
   // }

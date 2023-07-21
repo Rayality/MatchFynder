@@ -1,7 +1,7 @@
 from pgeocode import Nominatim
 from typing import Optional, Union
 from .options import OptionOut, Error
-from externals.google_place import get_google_options
+from externals.google_place import get_google_options, get_place_details
 from .search import SearchRepository
 
 
@@ -42,3 +42,11 @@ class PlacesRepository:
         except Exception as e:
             print(e)
             return {"message": "error in search_from_city"}
+
+    def place_details(self, place_id):
+        try:
+            result = get_place_details(place_id)
+            return result
+        except Exception as e:
+            print(e)
+            return {"message": "error in getting place_details"}

@@ -38,7 +38,6 @@ def create_from_request(json_dict):
         raise e.errors[0]
 
 
-
 def get_google_options(location, query="restaurants", radius=1500):
     try:
         params = {
@@ -65,3 +64,35 @@ def get_google_options(location, query="restaurants", radius=1500):
         return output_list
     except Exception as e:
         raise e.errors[0]
+
+
+def get_place_details(place_id):
+    photo_list = []
+    # query = generic_find("place_pictures", "place_id", f"{place_id}")
+    # if len(query) > 3:
+    #     for row in query:
+    #         photo_list.append(row["picture_url"])
+    #     return {"photos": photo_list}
+    url = 'https://maps.googleapis.com/maps/api/place/details/json?'
+    params = {
+        "place_id": place_id,
+        "key": GOOGLE_MAPS_API_KEY
+    }
+    response = requests.get(url, params=params)
+    content = json.loads(response.content)
+    content = content["result"]
+    photo_info_list = content["photos"]
+    for info in photo_info_list:
+        photo_ref = info["photo_reference"]
+        photo_width = 400
+        photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
+        generic_insert(
+            "place_pictures",
+            {
+                "picture_url": photo_url,
+                "place_id": place_id
+            }
+        )
+        photo_list.append(photo_url)
+    content["photos"] = photo_list
+    return content

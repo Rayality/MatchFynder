@@ -1,5 +1,5 @@
 import React from "react";
-import "../EaseOfAccess/match-made.css";
+import "./match-made.css";
 
 export const BadgeCard = () => {
   return (
@@ -8,9 +8,7 @@ export const BadgeCard = () => {
         <div className="PIC">PIC</div>
       </div>
       <div className="username">Username</div>
-      <div className="overlap-group">
         <div className="badge-award">Badge award</div>
-      </div>
     </div>
   );
 };

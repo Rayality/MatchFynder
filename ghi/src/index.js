@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         Component: NewSearch,
       },
       {
-        path: "match/",
+        path: "match/:place_id/",
         Component: MatchMadePage,
       },
     ],
