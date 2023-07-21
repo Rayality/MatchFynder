@@ -2,53 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./routes/root";
-import Login from "./routes/login";
-import CreateAccount from "./routes/createAccount";
-import PresentOption from "./routes/presentOption";
+import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./Redux/store";
-import Logout from "./Components/views/Logout";
-import Layout from "./routes/Layout";
-import NewSearch from "./routes/search";
-import MatchMadePage from "./routes/matchMade";
-
-const router = createBrowserRouter([
-  {
-    Component: Layout,
-    children: [
-      {
-        path: "*",
-        Component: Root,
-      },
-      {
-        path: "login/",
-        Component: Login,
-      },
-      {
-        path: "signup/",
-        Component: CreateAccount,
-      },
-      {
-        path: "options/",
-        Component: PresentOption,
-      },
-      {
-        path: "logout/",
-        Component: Logout,
-      },
-      {
-        path: "search/",
-        Component: NewSearch,
-      },
-      {
-        path: "match/:place_id/",
-        Component: MatchMadePage,
-      },
-    ],
-  },
-]);
+import { router } from "./routes/BrowserRouter";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

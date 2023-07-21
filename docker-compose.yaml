@@ -18,7 +18,7 @@ services:
       - "15432:5432"
   fastapi:
     environment:
-      SIGNING_KEY: ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+      SIGNING_KEY: ${SIGNING_KEY}
       GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY}
       DATABASE_URL: postgresql://example_user:secret@postgres/example_db
       WAIT_HOSTS: postgres:5432
