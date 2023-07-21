@@ -12,11 +12,6 @@ import useWebSocket from "react-use-websocket";
 import { useUpdateEdibleOptionMutation } from "../../Redux/searchApi";
 import { useGetOptionsBySearchQuery } from "../../Redux/searchApi";
 
-
-
-
-
-
 //export let optionId = null;
 
 function Option(props) {
@@ -24,6 +19,13 @@ function Option(props) {
   // Create a local index variable leveraging React's useState functionality
   // in order to set/reset the index of the action option from the options list
   const [index, setIndex] = useState(0);
+  const [messageHistory, setMessageHistory] = useState({});
+
+  const [socketUrl, setSocketUrl] = useState(
+    `ws://localhost:8000/search/${searchId}`
+  );
+
+  const { sendJsonMessage, lastJsonMessage } = useWebSocket(socketUrl);
 
   // use useGetOptionsQuery to populate the list of options
   const { data, error, isLoading } = useGetOptionsBySearchQuery(5);
@@ -58,12 +60,17 @@ function Option(props) {
 
   // handle loading
   if (isLoading) {
-    return <progress className="progress is-primary" max="100"></progress>;
+    return <progress className='progress is-primary' max='100'></progress>;
+  } else {
+    var optionId = data[index][0].id;
+    // if (matchMadeIsLoading) {
+    //   return <progress className="progress is-primary" max="100"></progress>;
   }
-
-  // if (matchMadeIsLoading) {
-  //   return <progress className="progress is-primary" max="100"></progress>;
-  // }
+  const handleSwipe = async (event) => {
+    setIndex(index + 1);
+    sendJsonMessage(JSON.stringify({ option_id: optionId }));
+    console.log(lastJsonMessage);
+  };
 
   return (
     <div className='prevent-select'>
