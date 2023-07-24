@@ -1,10 +1,12 @@
+.header {
+  background-color: #dadff7;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #020122;
 }
 
 code {
@@ -24,4 +26,202 @@ img {
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
+}
+
+.hero-cover {
+  position: relative;
+  max-height: 420px;
+  overflow: hidden;
+}
+
+.search-jumbotron {
+  background-image: url(https://images.pexels.com/photos/6210505/pexels-photo-6210505.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  height: 420px;
+}
+
+.home-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  border-radius: 3%;
+  border: 10px;
+  border-color: #dadff7;
+  text-align: center;
+  background-color: rgba(252, 161, 125, 0.7);
+}
+
+.search-container {
+  background-color: rgba(252, 161, 125, 0.7);
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fynder-dark-text {
+  color: #020122;
+}
+
+.fynder-light-text {
+  color: #dadff7;
+}
+
+.fynder-slate-text {
+  color: #254441;
+}
+
+h1 {
+  text-transform: uppercase;
+  margin: 10px;
+  font-size: 3rem;
+  white-space: nowrap;
+  opacity: 1;
+}
+
+h2 {
+  text-align: center;
+}
+
+.btn3d {
+  position: relative;
+  top: -6px;
+  border: 0;
+  transition: all 40ms linear;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 2px;
+  margin-right: 2px;
+  color: white;
+  font-size: medium;
+}
+
+.btn3d.btn:hover {
+  color: #020122;
+  background-color: #dadff7;
+  /* box-shadow: 0 8px 0 0 #dadff7; */
+}
+
+.btn3d:active:focus,
+.btn3d:focus:hover,
+.btn3d:focus {
+  -moz-outline-style: none;
+  outline: medium none;
+}
+.btn3d:active,
+.btn3d.active {
+  top: 2px;
+}
+
+.btn3d.btn {
+  /* box-shadow: 0 8px 0 0 #020122; */
+  background-color: #020122;
+}
+.btn3d.btn:active,
+.btn3d.btn.active {
+  box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0);
+  background-color: #dadff7;
+}
+
+.bs-wizard {
+  margin-top: 40px;
+  color: #dadff7;
+}
+
+/*Form Wizard*/
+.bs-wizard {
+  border-bottom: solid 1px #e0e0e0;
+  padding: 0 0 10px 0;
+  border-bottom: 0;
+}
+.bs-wizard > .bs-wizard-step {
+  padding: 0;
+  position: relative;
+}
+.bs-wizard > .bs-wizard-step + .bs-wizard-step {
+}
+.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {
+  color: #254441;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.bs-wizard > .bs-wizard-step .bs-wizard-info {
+  color: #dadff7;
+  font-size: 14px;
+}
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  display: block;
+  background: rgba(252, 161, 125, 0.3);
+  top: 45px;
+  left: 50%;
+  margin-top: -15px;
+  margin-left: -15px;
+  border-radius: 50%;
+}
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {
+  content: " ";
+  width: 28px;
+  height: 28px;
+  background: #fca17d;
+  border-radius: 50px;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+.bs-wizard > .bs-wizard-step > .progress {
+  position: relative;
+  border-radius: 0px;
+  height: 8px;
+  box-shadow: none;
+  margin: 20px 0;
+}
+.bs-wizard > .bs-wizard-step > .progress > .progress-bar {
+  width: 0px;
+  box-shadow: none;
+  background: rgba(252, 161, 125, 0.7);
+}
+.bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {
+  width: 100%;
+}
+.bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {
+  width: 50%;
+}
+.bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {
+  width: 0%;
+}
+.bs-wizard > .bs-wizard-step:last-child.active > .progress > .progress-bar {
+  width: 100%;
+}
+.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot {
+  background-color: #dadff7;
+}
+.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot:after {
+  opacity: 0;
+}
+.bs-wizard > .bs-wizard-step:first-child > .progress {
+  left: 50%;
+  width: 50%;
+}
+.bs-wizard > .bs-wizard-step:last-child > .progress {
+  width: 50%;
+}
+.bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot {
+  pointer-events: none;
+}
+/*END Form Wizard*/
+
+#tooltip {
+  background-color: #020122;
+  color: #ffee93;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 13px;
 }

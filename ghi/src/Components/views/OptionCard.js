@@ -62,15 +62,10 @@ function Option(props) {
   if (isLoading) {
     return <progress className='progress is-primary' max='100'></progress>;
   } else {
-    var optionId = data[index][0].id;
-    // if (matchMadeIsLoading) {
-    //   return <progress className="progress is-primary" max="100"></progress>;
-  }
-  const handleSwipe = async (event) => {
-    setIndex(index + 1);
-    sendJsonMessage(JSON.stringify({ option_id: optionId }));
-    console.log(lastJsonMessage);
-  };
+
+  // if (matchMadeIsLoading) {
+  //   return <progress className="progress is-primary" max="100"></progress>;
+  // }
 
   return (
     <div className='prevent-select'>

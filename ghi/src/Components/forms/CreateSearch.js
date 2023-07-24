@@ -65,28 +65,94 @@ export default function CreateSearchForm() {
   }
 
   return (
-    <div className='container mb-3 shadow'>
-      <div className='mb-3'>
-        <h1>Find a Restaurant Match</h1>
-      </div>
-      <form onSubmit={handleSubmit} className='form-floating mb-3'>
-        <div className='mb-3'>
-          <ErrorNotification error={error} />
-          <label htmlFor='inputLocation' className='form-label'>
-            Location
-          </label>
-          <input
-            value={location}
-            onChange={handleLocationChange}
-            className='form-control'
-            id='location'
-            placeholder='zip code OR city, state'
-          />
+    <div className="cover-container d-flex mx-auto flex-column">
+      <div className="search-jumbotron jumbotron-fluid">
+        <div className="container mb-3 shadow search-container">
+          <div className="mb-3">
+            <h1>Fynd Restaurant</h1>
+          </div>
+          <form onSubmit={handleSubmit} className="form-floating mb-3">
+            <div className="mb-3">
+              <ErrorNotification error={error} />
+              <label
+                htmlFor="inputLocation"
+                className="form-label fynder-dark-text"
+              >
+                Location
+              </label>
+              <input
+                value={location}
+                onChange={handleLocationChange}
+                className="form-control"
+                id="location"
+                placeholder="zip code OR city, state"
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary mb-3 btn3d fynder-button"
+            >
+              Submit
+            </button>
+          </form>
         </div>
-        <button type='submit' className='btn btn-primary mb-3'>
-          Submit
-        </button>
-      </form>
+      </div>
+      <div class="container">
+        <h2 className="fynder-slate-text">how it works</h2>
+        <div class="row bs-wizard">
+          <div class="col bs-wizard-step active">
+            <div class="text-center bs-wizard-stepnum">enter location</div>
+            <div class="progress">
+              <div class="progress-bar"></div>
+            </div>
+            <a
+              href="#"
+              class="bs-wizard-dot"
+              aria-describedby="tooltip"
+              title="enter a zipcode or city, state"
+            ></a>
+          </div>
+
+          <div class="col bs-wizard-step disabled">
+            <div class="text-center bs-wizard-stepnum">invite others</div>
+            <div class="progress">
+              <div class="progress-bar"></div>
+            </div>
+            <a
+              href="#"
+              class="bs-wizard-dot"
+              aria-describedby="tooltip"
+              title="invite your family or friends to participate"
+            ></a>
+          </div>
+
+          <div class="col bs-wizard-step disabled">
+            <div class="text-center bs-wizard-stepnum">approve/veto</div>
+            <div class="progress">
+              <div class="progress-bar"></div>
+            </div>
+            <a
+              href="#"
+              class="bs-wizard-dot"
+              aria-describedby="tooltip"
+              title="everyone gets a chance to approve/veto restaurant options"
+            ></a>
+          </div>
+
+          <div class="col bs-wizard-step disabled">
+            <div class="text-center bs-wizard-stepnum">match</div>
+            <div class="progress">
+              <div class="progress-bar"></div>
+            </div>
+            <a
+              href="#"
+              class="bs-wizard-dot"
+              aria-describedby="tooltip"
+              title="get your match, along with fun/snarky participation badges"
+            ></a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

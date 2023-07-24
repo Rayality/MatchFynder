@@ -1,68 +1,32 @@
-# Module3 Project Gamma
+# Match Fynder
 
-## Getting started
+- Charles Cowan
+- Kristen Lynch
+- Jarrett Pitts
+- Nicholas Tomasso
 
-You have a project repository, now what? The next section
-lists all of the deliverables that are due at the end of the
-week. Below is some guidance for getting started on the
-tasks for this week.
+Match Fynder: Matching groups to a nearby restaurant
 
-## Install Extensions
+## Intended market
 
-- Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
-- Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+-People who want to eat food from a restaurant
+-People who've struggled to agree on where to eat
 
-## Deliverables
+## Functionality
 
-- [ ] Wire-frame diagrams
-- [ ] API documentation
-- [ ] Project is deployed to Caprover (BE, DB) & GitLab-pages (FE)
-- [ ] GitLab issue board is setup and in use (or project management tool of choice)
-- [ ] Journals
+--Site includes a Main page and About Page with company info and FAQ. The Account setup/login modals are accessible from either page.
+--Visitors to the site can set up an account which allows them to create a new search.
+--Searches involve entering a location (zipcode OR city, state) and inviting participants (other account holders or simply people with an email address)
+--Once a search is created, it is populated via options from the Fynder database and google maps API
+--Every search participant can engage in approving (or vetoing) options. Participants can click on links to each restaurant's web page to learn more.
+--Once every participant has approved any particular option, all participants have access to the 'Match Made' page
+--Participants earn fun 'badges' based upon their engagement in the search (eg: "picky eater" (most vetos) "decisive devourer" (fastest) "fastidious feaster" (most research) "giddy gastronomer" (most approvals))
 
-## Project layout
+## Design
 
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
-
-### Directories
-
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
-
-The other directories, `ghi` and `api`, are services, that
-you can start building off of.
-
-Inside of `ghi` is a minimal React app that has an "under
-construction" page. It is setup similarly to all of the
-other React projects that you have worked on.
-
-Inside of `api` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
-
-Also in `api` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
-
-The Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
+- Wire-frame diagrams
+- Data Model
+- API documentation
 
 ### Other files
 
