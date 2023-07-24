@@ -5,6 +5,12 @@
 
 ## 7/20/2023
 
+--reviewed project requirements as a team
+--began work on CI/CD in preparation for deployment
+--aha:
+
+## 7/20/2023
+
 --lots of CSS improvements
 --aha: play button in vscode!
 --aha: highlight and parenthesis/curly brackets/braces add them to either end of highlight!!
