@@ -25,7 +25,7 @@ export const searchApi = createApi({
         body: {
           owner: 1,
         },
-        method: "post",
+        method: "post"
       }),
     }),
     getSearch: builder.query({

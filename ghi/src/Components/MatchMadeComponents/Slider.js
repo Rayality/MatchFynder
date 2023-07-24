@@ -19,7 +19,7 @@ export default class MySlider extends Component {
         const settings = {
             className: "pic",
             centerMode: true,
-            infinite: true,
+            infinite: false,
             slidesToShow: 1,
             slidesToScroll: 1,
             speed: 500,

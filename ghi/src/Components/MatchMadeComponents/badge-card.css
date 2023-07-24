@@ -1,6 +1,5 @@
 .badge-card {
-    background: radial-gradient(ellipse, #020122 0%,#0201229a 40%,#02012238 60%,
-    #ffef9300 70%, rgb(0,0,0,0) 100%);;
+    background: radial-gradient(ellipse, #57a39c 30%,#57a39b62 60%, #57a39c 90%);
     height: 100%;
     position: relative;
     width: 25vw;

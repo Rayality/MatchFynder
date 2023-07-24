@@ -1,5 +1,5 @@
-## 'html attributions' = []
-## 'result'
+'html attributions' = []
+'result'
 {
 "address_components": [
 ##    {
@@ -370,7 +370,7 @@
 ##      "photo_reference": "Aaw_FcJ7eZ3BJMm_39KcwSVVxRqgG9yCdV004teP4_d2tLd1DTjqh2bcrtgfNbUL98ffHembtXuUNOKm_V3XDm81-bQ4n_rjWT-uHVN-XPp_LnFJQCL2nYit9SL7oJysOOzBFwKnopYhKy-uBcMVn7-SHpJQbDHUDHSiy4hj6zlmvy3KITFz",
 ##      "width": 2448
 ##    }
-##  ],
+] end of photos,
 ##  "place_id": "ChIJeyriAMrBOYgRGq6-7b2ZB_I",
 ##  "plus_code": {
 ##    "compound_code": "MFWM+GX Mansfield, OH, USA",
@@ -380,7 +380,7 @@
 ##  "rating": 4.4,
 ##  "reference": "ChIJeyriAMrBOYgRGq6-7b2ZB_I",
 ##  "reservable": false,
-##  "reviews": [
+"reviews": [
   ## {
 ##  ## "author_name": "James heath",
 ##  ## "author_url": "https://www.google.com/maps/contrib/117659875099199170063/reviews",
@@ -405,7 +405,7 @@
 ##  ## "time": 1688600459,
 ##  ## "translated": false
 ## }
-## ],
+] end of reviews,
 ##  "serves_beer": true,
 ##  "serves_breakfast": false,
 ##  "serves_dinner": true,
