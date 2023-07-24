@@ -12,9 +12,7 @@ router = APIRouter()
 
 @router.post("/options")
 def create_option(
-    option: OptionIn,
-    response: Response,
-    repo: OptionRepository = Depends()
+    option: OptionIn, response: Response, repo: OptionRepository = Depends()
 ):
     response.status_code = 200
     return repo.create(option)
@@ -35,7 +33,7 @@ def update_option(
     return repo.update_option(option_id, option)
 
 
-@router.delete("/options/{option_id}", response_model = bool)
+@router.delete("/options/{option_id}", response_model=bool)
 def delete_option(
     option_id: int,
     repo: OptionRepository = Depends(),
@@ -43,7 +41,7 @@ def delete_option(
     return repo.delete_option(option_id)
 
 
-@router.get('/options/{option_id}', response_model = Union[OptionOut, Error])
+@router.get("/options/{option_id}", response_model=Union[OptionOut, Error])
 def get_single_option(
     option_id: int,
     repo: OptionRepository = Depends(),
