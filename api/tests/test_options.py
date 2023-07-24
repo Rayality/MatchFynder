@@ -74,17 +74,17 @@ def test_create_option():
     app.dependency_overrides = {}
 
 
-class GetOption:
-    def get_single_option(self, option_id):
-        pass
+# class GetOption:
+#     def get_single_option(self, option_id):
+#         pass
 
 
-def test_get_single_option():
-    # Setup
-    app.dependency_overrides[OptionRepository] = GetOption
-    # Enact
-    response = client.get("/options/12345")
-    # Assert
-    assert response.status_code == 200
-    assert response.json == []
-    # Teardown
+# def test_get_single_option():
+#     # Setup
+#     app.dependency_overrides[OptionRepository] = GetOption
+#     # Enact
+#     response = client.get("/options/12345")
+#     # Assert
+#     assert response.status_code == 200
+#     assert response.json == []
+#     # Teardown

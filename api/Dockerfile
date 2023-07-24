@@ -9,8 +9,13 @@ COPY main.py main.py
 
 # Copy all of the subdirectories in your service's directory
 # Modify these instructions to do that
-# COPY queries queries
-# COPY routers routers
+
+COPY auth auth
+COPY externals externals
+COPY queries queries
+COPY routers routers
+COPY socks socks
+COPY tests tests
 
 RUN python -m pip install -r requirements.txt
 

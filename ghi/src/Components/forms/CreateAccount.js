@@ -6,7 +6,7 @@ import { updated, reset } from "../../Redux/account-slice";
 export default function CreateAccountForm() {
   const account = useSelector((state) => state.accountCreator.value);
   const dispatch = useDispatch();
-  const url = "http://localhost:8000/api/accounts/";
+  const url = process.env.REACT_APP_API_HOST + "/api/accounts/";
 
   function cleanData(data = {}) {
     const clean = {};

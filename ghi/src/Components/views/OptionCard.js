@@ -60,41 +60,46 @@ function Option(props) {
 
   // handle loading
   if (isLoading) {
-    return <progress className='progress is-primary' max='100'></progress>;
+    return <progress className="progress is-primary" max="100"></progress>;
   } else {
-
-  // if (matchMadeIsLoading) {
-  //   return <progress className="progress is-primary" max="100"></progress>;
-  // }
+    var optionId = data[index][0].id;
+    // if (matchMadeIsLoading) {
+    //   return <progress className="progress is-primary" max="100"></progress>;
+  }
+  const handleSwipe = async (event) => {
+    setIndex(index + 1);
+    sendJsonMessage(JSON.stringify({ option_id: optionId }));
+    console.log(lastJsonMessage);
+  };
 
   return (
-    <div className='prevent-select'>
-      <div className='d-flex container justify-content-center'>
-        <div className='thumbnail'>
+    <div className="prevent-select">
+      <div className="d-flex container justify-content-center">
+        <div className="thumbnail">
           <ErrorNotification error={error} />
           <div {...handlers}>
             <img
-              draggable='false'
+              draggable="false"
               src={data[index][0].picture_url}
-              alt='google maps sourced pic associated with restaurant'
+              alt="google maps sourced pic associated with restaurant"
             />
-            <div className='caption'>
+            <div className="caption">
               <h4>{data[index][0].name}</h4>
               <p>Price: {data[index][0].price_level} out of 5</p>
               <p>Rating: {data[index][0].rating} out of 5</p>
-              <p className='d-flex justify-content-between'>
-                <button onClick={handleButton} className='btn btn-light'>
+              <p className="d-flex justify-content-between">
+                <button onClick={handleButton} className="btn btn-light">
                   <box-icon
-                    name='x-circle'
-                    color='red'
-                    animation='tada-hover'
+                    name="x-circle"
+                    color="red"
+                    animation="tada-hover"
                   ></box-icon>
                 </button>
-                <button onClick={handleButton} className='btn btn-light'>
+                <button onClick={handleButton} className="btn btn-light">
                   <box-icon
-                    name='check-circle'
-                    color='green'
-                    animation='tada-hover'
+                    name="check-circle"
+                    color="green"
+                    animation="tada-hover"
                   ></box-icon>
                 </button>
               </p>
