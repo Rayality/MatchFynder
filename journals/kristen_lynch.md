@@ -7,7 +7,7 @@
 
 --reviewed project requirements as a team
 --began work on CI/CD in preparation for deployment
---aha:
+--aha: don't submit multiple merge requests at once!
 
 ## 7/20/2023
 

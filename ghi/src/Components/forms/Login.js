@@ -5,7 +5,7 @@ import { updated, reset } from "../../Redux/login-slice";
 export default function LoginForm() {
   const account = useSelector((state) => state.accountLogin.value);
   const dispatch = useDispatch();
-  const url = "http://localhost:8000/token/";
+  const url = process.env.REACT_APP_API_HOST;
 
   function handleChange(e) {
     let value = [e.target.name, e.target.value];
