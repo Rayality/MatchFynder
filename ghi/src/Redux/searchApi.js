@@ -10,7 +10,7 @@ export const searchApi = createApi({
   // save data within a search container in our store
   reducerPath: "",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000",
+    baseUrl: process.env.REACT_APP_API_HOST,
   }),
   // setup tag for searches
   tagTypes: ["Search"],
@@ -66,20 +66,20 @@ export const searchApi = createApi({
       }),
     }),
     updateEdibleOption: builder.mutation({
-      query: ({option_id, search_id}) => ({
+      query: ({ option_id, search_id }) => ({
         url: `/search/${search_id}/options/${option_id}`,
         body: {
           option_id: option_id,
           search_id: search_id,
         },
         method: "post",
-      })
+      }),
     }),
     getOptionsBySearch: builder.query({
       query: (search_id) => ({
-        url: `/search/${search_id}/options/`
-      })
-    })
+        url: `/search/${search_id}/options/`,
+      }),
+    }),
   }),
 });
 
@@ -88,7 +88,8 @@ export const {
   useGetSearchQuery,
   useCreateSearchMutation,
   useGetMatchMadeQuery,
-  useAddSearchOptionMutation, useUpdateEdibleOptionMutation,
+  useAddSearchOptionMutation,
+  useUpdateEdibleOptionMutation,
   useLazyOptionsApiZipQuery,
   useOptionsApiCityQuery,
   useGetOptionsBySearchQuery,

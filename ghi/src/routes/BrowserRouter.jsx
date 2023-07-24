@@ -6,6 +6,7 @@ import Logout from "../Components/views/Logout";
 import Layout from "./Layout";
 import NewSearch from "./search";
 import InviteFriends from "./inviteFriends";
+import Home from "../Components/views/home";
 import { createBrowserRouter } from "react-router-dom";
 import MatchMadePage from "./matchMade"
 
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "*",
         Component: Root,
+      },
+      {
+        path: "home/",
+        Component: Home,
       },
       {
         path: "login/",

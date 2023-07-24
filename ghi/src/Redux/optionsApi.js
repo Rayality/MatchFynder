@@ -8,7 +8,11 @@ export const optionsApi = createApi({
   // save data within an options container in our store
   reducerPath: "options",
   baseQuery: fetchBaseQuery({
+<<<<<<< HEAD
     baseUrl: "http://localhost:8000"
+=======
+    baseUrl: process.env.REACT_APP_API_HOST,
+>>>>>>> main
   }),
   // setup tag for the option list
   tagTypes: ["OptionList"],
