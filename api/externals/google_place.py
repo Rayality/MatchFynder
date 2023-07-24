@@ -62,7 +62,6 @@ def get_google_options(location, query="restaurants", radius=1500):
             except (KeyError, IndexError):
                 item["picture_url"] = None
             output_list.append(create_from_request(item)[0])
-            print(output_list)
         return output_list
     except Exception as e:
         print(e)
