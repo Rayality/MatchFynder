@@ -8,6 +8,7 @@ import NewSearch from "./search";
 import InviteFriends from "./inviteFriends";
 import Home from "../Components/views/home";
 import { createBrowserRouter } from "react-router-dom";
+import MatchMadePage from "./matchMade"
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         // loader: async ({ params }) => {
         //   // Do something to import contact list for user
         // },
+      },
+      {
+        path: "match/:place_id/",
+        Component: MatchMadePage
       },
       {
         path: "search/:searchId/options/",

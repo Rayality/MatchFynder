@@ -55,9 +55,15 @@ CREATE TABLE search_options (
     updated_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE place_pictures (
+    id SERIAL PRIMARY KEY NOT NULL,
+    picture_url VARCHAR(1000) NOT NULL,
+    place_id VARCHAR(150) NOT NULL
+);
+
 -- create trigger function to update the updated_on attribute
 -- to the current datetime whenever called
-CREATE  FUNCTION update_updated_on()
+CREATE FUNCTION update_updated_on()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_on = now();

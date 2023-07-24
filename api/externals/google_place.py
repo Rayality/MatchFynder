@@ -13,7 +13,7 @@ def create_from_request(json_dict):
         place_id = json_dict.get("place_id")
         option = generic_find("options", "google_place_id", place_id)
         if len(option) == 0:
-            print("making new option")
+            print()
             new_item = {}
             new_item["business_status"] = json_dict.get("business_status")
             new_item["name"] = json_dict.get("name")
@@ -35,8 +35,7 @@ def create_from_request(json_dict):
             option = OptionRepository.create(OptionRepository, option_in)
         return option
     except Exception as e:
-        print(e)
-        return {"message": "error in update_create_from_request"}
+        raise e.errors[0]
 
 
 def get_google_options(location, query="restaurants", radius=1500):
@@ -64,5 +63,36 @@ def get_google_options(location, query="restaurants", radius=1500):
             output_list.append(create_from_request(item)[0])
         return output_list
     except Exception as e:
-        print(e)
-        return {"message": "error in get_google_options"}
+        raise e.errors[0]
+
+
+def get_place_details(place_id):
+    photo_list = []
+    # query = generic_find("place_pictures", "place_id", f"{place_id}")
+    # if len(query) > 3:
+    #     for row in query:
+    #         photo_list.append(row["picture_url"])
+    #     return {"photos": photo_list}
+    url = 'https://maps.googleapis.com/maps/api/place/details/json?'
+    params = {
+        "place_id": place_id,
+        "key": GOOGLE_MAPS_API_KEY
+    }
+    response = requests.get(url, params=params)
+    content = json.loads(response.content)
+    content = content["result"]
+    photo_info_list = content["photos"]
+    for info in photo_info_list:
+        photo_ref = info["photo_reference"]
+        photo_width = 400
+        photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
+        generic_insert(
+            "place_pictures",
+            {
+                "picture_url": photo_url,
+                "place_id": place_id
+            }
+        )
+        photo_list.append(photo_url)
+    content["photos"] = photo_list
+    return content
