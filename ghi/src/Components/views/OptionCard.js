@@ -110,5 +110,5 @@ function Option(props) {
     </div>
   );
 }
-}
+
 export default Option;
