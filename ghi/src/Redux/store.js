@@ -15,7 +15,7 @@ export const store = configureStore({
     [optionsApi.reducerPath]: optionsApi.reducer,
     [searchApi.reducerPath]: searchApi.reducer,
     modalCheck: modalReducer,
-    [wsApi.reducerPath]: wsApi.reducer,
+    [wsApi.reducerPath]: wsApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
