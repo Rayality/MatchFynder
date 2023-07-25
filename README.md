@@ -82,10 +82,11 @@ but you can figure it out yourself from your GitLab project URL.
 If this is your project URL
 
 https://gitlab.com/GROUP_NAME/PROJECT_NAME
+https://gitlab.com/incognitoincredibles/module3-project-finder
 
 then your GitLab pages URL will be
 
-https://GROUP_NAME.gitlab.io/PROJECT_NAME
+https://incognitoincredibles.gitlab.io/module3-project-finder
 
 ### Initialize CapRover
 
