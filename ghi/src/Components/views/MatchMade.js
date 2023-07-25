@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import '../../App.css';
 import React from "react";
 import { BadgeCard } from "../MatchMadeComponents/BadgeCard";
-import { medal, contact, page, map } from "../MatchMadeComponents/MatchMadadeImgs";
+import { medal, page, map } from "../MatchMadeComponents/MatchMadadeImgs";
 import MySlider from '../MatchMadeComponents/Slider';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

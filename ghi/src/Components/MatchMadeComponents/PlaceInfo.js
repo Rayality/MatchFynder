@@ -25,24 +25,24 @@ export default class PlaceInfo extends Component{
             <div className='place-info' onClick={this.showfunc}>
                 <div className="features" onClick={this.showfunc}>Phone#: {this.phone}</div>
                 <div className="features">
-                    <div className="feature-block">Reservable: <img className="check-img" src={this.reservable}/></div>
-                    <div className="feature-block">Delivery: <img className="check-img" src={this.delivery}/></div>
+                    <div className="feature-block">Reservable: <img alt="icon" className="check-img" src={this.reservable}/></div>
+                    <div className="feature-block">Delivery: <img alt="icon" className="check-img" src={this.delivery}/></div>
                 </div>
                 <div className="features">
-                    <div className="feature-block">Dine in: <img className="check-img" src={this.dineIn}/></div>
-                    <div className="feature-block">Wheelchair Access: <img className="check-img" src={this.wheelchair}/></div>
+                    <div className="feature-block">Dine in: <img alt="icon" className="check-img" src={this.dineIn}/></div>
+                    <div className="feature-block">Wheelchair Access: <img alt="icon" className="check-img" src={this.wheelchair}/></div>
                 </div>
                 <div className="features">
-                    <div className="feature-block">Breakfast: <img className="check-img" src={this.breakfast}/></div>
-                    <div className="feature-block">Lunch: <img className="check-img" src={this.lunch}/></div>
+                    <div className="feature-block">Breakfast: <img alt="icon" className="check-img" src={this.breakfast}/></div>
+                    <div className="feature-block">Lunch: <img alt="icon" className="check-img" src={this.lunch}/></div>
                 </div>
                 <div className="features">
-                    <div className="feature-block">Dinner: <img className="check-img" src={this.dinner}/></div>
-                    <div className="feature-block">Vegetarian Options: <img className="check-img" src={this.veg}/></div>
+                    <div className="feature-block">Dinner: <img alt="icon" className="check-img" src={this.dinner}/></div>
+                    <div className="feature-block">Vegetarian Options: <img alt="icon" className="check-img" src={this.veg}/></div>
                 </div>
                 <div className="features">
-                    <div className="feature-block">Beer: <img className="check-img" src={this.beer}/></div>
-                    <div className="feature-block">Wine: <img className="check-img" src={this.wine}/></div>
+                    <div className="feature-block">Beer: <img alt="icon" className="check-img" src={this.beer}/></div>
+                    <div className="feature-block">Wine: <img alt="icon" className="check-img" src={this.wine}/></div>
                 </div>
             </div>
         </div>

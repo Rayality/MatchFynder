@@ -54,7 +54,6 @@ export default function CreateSearchForm() {
       console.error("Options API rejected: ", error);
     }
   }
-
   // upon submit, prevent default page behavior,
   // await the search id results of handleApiCalls
   // and navigate to the search_options page for that result
@@ -75,7 +74,7 @@ export default function CreateSearchForm() {
             <div className="mb-3">
               <ErrorNotification error={error} />
               <label
-                htmlFor="inputLocation"
+                htmlFor="location"
                 className="form-label fynder-dark-text"
               >
                 Location
@@ -97,56 +96,56 @@ export default function CreateSearchForm() {
           </form>
         </div>
       </div>
-      <div class="container">
+      <div className="container">
         <h2 className="fynder-slate-text">how it works</h2>
-        <div class="row bs-wizard">
-          <div class="col bs-wizard-step active">
-            <div class="text-center bs-wizard-stepnum">enter location</div>
-            <div class="progress">
-              <div class="progress-bar"></div>
+        <div className="row bs-wizard">
+          <div className="col bs-wizard-step active">
+            <div className="text-center bs-wizard-stepnum">enter location</div>
+            <div className="progress">
+              <div className="progress-bar"></div>
             </div>
             <a
               href="#"
-              class="bs-wizard-dot"
+              className="bs-wizard-dot"
               aria-describedby="tooltip"
               title="enter a zipcode or city, state"
             ></a>
           </div>
 
-          <div class="col bs-wizard-step disabled">
-            <div class="text-center bs-wizard-stepnum">invite others</div>
-            <div class="progress">
-              <div class="progress-bar"></div>
+          <div className="col bs-wizard-step disabled">
+            <div className="text-center bs-wizard-stepnum">invite others</div>
+            <div className="progress">
+              <div className="progress-bar"></div>
             </div>
             <a
               href="#"
-              class="bs-wizard-dot"
+              className="bs-wizard-dot"
               aria-describedby="tooltip"
               title="invite your family or friends to participate"
             ></a>
           </div>
 
-          <div class="col bs-wizard-step disabled">
-            <div class="text-center bs-wizard-stepnum">approve/veto</div>
-            <div class="progress">
-              <div class="progress-bar"></div>
+          <div className="col bs-wizard-step disabled">
+            <div className="text-center bs-wizard-stepnum">approve/veto</div>
+            <div className="progress">
+              <div className="progress-bar"></div>
             </div>
             <a
               href="#"
-              class="bs-wizard-dot"
+              className="bs-wizard-dot"
               aria-describedby="tooltip"
               title="everyone gets a chance to approve/veto restaurant options"
             ></a>
           </div>
 
-          <div class="col bs-wizard-step disabled">
-            <div class="text-center bs-wizard-stepnum">match</div>
-            <div class="progress">
-              <div class="progress-bar"></div>
+          <div className="col bs-wizard-step disabled">
+            <div className="text-center bs-wizard-stepnum">match</div>
+            <div className="progress">
+              <div className="progress-bar"></div>
             </div>
             <a
               href="#"
-              class="bs-wizard-dot"
+              className="bs-wizard-dot"
               aria-describedby="tooltip"
               title="get your match, along with fun/snarky participation badges"
             ></a>
