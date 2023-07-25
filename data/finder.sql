@@ -34,6 +34,7 @@ CREATE TABLE search (
     owner INTEGER REFERENCES finder(id),
     participant_count INTEGER DEFAULT 1,
     match_made BOOLEAN NOT NULL DEFAULT false,
+    next_page_token VARCHAR(1000) DEFAULT New,
     created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

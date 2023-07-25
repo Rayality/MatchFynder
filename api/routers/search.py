@@ -5,7 +5,7 @@ from queries.search import (
     SearchOptions,
     SearchRepository,
     SearchOptionsLink,
-    SearchDad,
+    SingleSearch,
     MatchMade,
 )
 from queries.options import Error
@@ -74,15 +74,15 @@ def update_match_made(
     return repo.set_match_made_true(search_id)
 
 
-@router.get("/search/", response_model=Union[list[SearchDad], Error])
+@router.get("/search/", response_model=Union[list[SingleSearch], Error])
 def get_searches(response: Response, repo: SearchRepository = Depends()):
     return repo.get_searches()
 
 
-@router.get("/search/{search_id}/", response_model=Union[SearchDad, Error])
+@router.get("/search/{search_id}/", response_model=Union[SingleSearch, Error])
 def get_single_search(
     search_id: int, response: Response, repo: SearchRepository = Depends()
-) -> SearchDad:
+) -> SingleSearch:
     return repo.get_single_search(search_id)
 
 
@@ -100,3 +100,8 @@ def get_options_by_search(
     search_id: int, response: Response, repo: SearchRepository = Depends()
 ):
     return repo.get_options_by_search(search_id)
+
+
+@router.get("/search/{search_id}/options/next/")
+def get_next_page(search_id: int, repo: SearchRepository = Depends()):
+    return repo.get_next_options(search_id)

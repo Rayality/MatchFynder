@@ -53,3 +53,8 @@ aha - npm modules get stored in the package.json when installed.
 --made the buttons on the match made page functional
     --redirects to directions for the matched place
     --displays overlay for additional information
+
+## 7/25/2023
+--added a column to the "search" table in sql to hold the
+    google api response code for more options.
+
