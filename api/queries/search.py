@@ -9,17 +9,19 @@ from .generic_sql import (
     generic_update,
 )
 from .options import OptionRepository
+from externals.google_place import get_next_page
 
 
 class MatchMade(BaseModel):
     match_made: bool
 
 
-class SearchDad(BaseModel):
+class SingleSearch(BaseModel):
     id: int
     owner: int
     participant_count: int
     match_made: bool
+    next_page_token: Union[str, None]
 
 
 class Search(BaseModel):
@@ -90,7 +92,6 @@ class SearchRepository:
             )
         except Exception as e:
             return {"message": e}
-            return {"message": f"{e}"}
 
     # using the search_id, get the associated search_options
     def get_search_options(self, search_id: int):
@@ -139,7 +140,7 @@ class SearchRepository:
         except Exception as e:
             return {"message": f"{e}"}
 
-    def get_single_search(self, search_id: int) -> SearchDad:
+    def get_single_search(self, search_id: int) -> SingleSearch:
         try:
             return generic_find("search", "id", search_id)[0]
 
@@ -147,7 +148,7 @@ class SearchRepository:
             print(e)
             return None
 
-    def get_searches(self) -> list[SearchDad]:
+    def get_searches(self) -> list[SingleSearch]:
         try:
             return generic_get_all("search")
 
@@ -171,11 +172,12 @@ class SearchRepository:
             )
             result = []
             for row in search_options_by_search_id:
-                option = OptionRepository.get_single_option(
-                    self, row["option_id"]
-                )
+                option = OptionRepository.get_single_option(self, row["option_id"])
                 result.append(option)
             return result
 
         except Exception as e:
             return {"message": f"{e}"}
+
+    def get_next_options(self, search_id):
+        return get_next_page(search_id)

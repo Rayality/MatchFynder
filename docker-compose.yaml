@@ -45,7 +45,6 @@ services:
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
       REACT_APP_API_HOST: ${REACT_APP_API_HOST}
-      REACT_APP_GOOGLE_API_KEY: ${GOOGLE_MAPS_API_KEY}
   pg-admin:
     image: dpage/pgadmin4
     volumes:
