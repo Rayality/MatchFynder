@@ -67,9 +67,10 @@ def get_google_options(location, search_id, query="restaurants", radius=1500):
         url = "https://maps.googleapis.com/maps/api/place/textsearch/json?"
         response = requests.get(url, params=params)
         content = json.loads(response.content)
-        token = content["next_page_token"]
-        search = update_search_token(token, search_id)
-        print(search)
+        token = content.get("next_page_token")
+        if token is None:
+            token = "NA"
+        update_search_token(token, search_id)
         output_list = []
         for item in content["results"]:
             try:
@@ -127,7 +128,6 @@ def get_next_page(search_id):
             }
             response = requests.get(url, params=params)
             content = json.loads(response.content)
-            print(content)
             if content["status"] == 'ZERO_RESULTS':
                 print("ZERO_RESULTS returned for next page")
                 return []
