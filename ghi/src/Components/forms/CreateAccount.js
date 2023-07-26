@@ -30,7 +30,7 @@ export default function CreateAccountForm() {
       SendData(url, "post", data);
       dispatch(reset());
     } else {
-      console.log("Passwords do not match");
+      console.log("Passwords do not match  1");
     }
   }
 
