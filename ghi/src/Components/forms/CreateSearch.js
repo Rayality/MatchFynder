@@ -1,44 +1,29 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorNotification from "../../ErrorNotification";
 import {
   useCreateSearchMutation,
   useLazyOptionsApiZipQuery,
-  useOptionsApiCityQuery,
 } from "../../Redux/searchApi";
-import { useSelector} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setAutoLat, setAutoLng } from "../../Redux/locationSlice";
 import AutoComplete from "../AutoComplete";
 
 export default function CreateSearchForm() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(``);
   const [createSearch] = useCreateSearchMutation();
   const [queryApiZip] = useLazyOptionsApiZipQuery();
-
-  const formLat = useSelector((state) => state.autoLocation.autoLat)
-  const formLng = useSelector((state) => state.autoLocation.autoLng)
-  // useEffect(() => {
-  //   let i = async () => {
-  //     const { AutocompleteService } = await window.google.maps.importLibrary("places")
-  //     console.log(AutocompleteService)
-  //   }
-  //   i();
-  // }, [])
-
-  // upon data entry set the location to the value of the entry
-  const handleLocationChange = (event) => {
-    const value = event.target.value;
-    setLocation(value);
-    console.log(formLat.payload)
-  };
+  const dispatch = useDispatch()
+  let formLat = useSelector((state) => state.autoLocation.autoLat)
+  let formLng = useSelector((state) => state.autoLocation.autoLng)
 
   // create a search record
   // and return the search id of that record
   async function handleSearchCreate() {
     try {
       const searchPayload = await createSearch().unwrap();
-      console.log("Search payload: ", searchPayload);
       return searchPayload.id;
     } catch (error) {
       console.error("Create search rejected: ", error);
@@ -54,13 +39,12 @@ export default function CreateSearchForm() {
   async function handleApiCalls() {
     const search_id = await handleSearchCreate();
     try {
-      console.log(search_id);
       if (search_id) {
+        let latLongString = `${formLat.payload} ${formLng.payload}`
         const apizip_payload = await queryApiZip({
-          location,
-          search_id,
+          location:latLongString,
+          search_id:search_id,
         }).unwrap();
-        console.log("Options API payload: ", apizip_payload);
         return search_id;
       }
     } catch (error) {
@@ -72,9 +56,15 @@ export default function CreateSearchForm() {
   // and navigate to the search_options page for that result
   async function handleSubmit(e) {
     e.preventDefault();
-    const search_id = await handleApiCalls();
-    navigate(`${search_id}/options`);
-  }
+    if (formLat != null && formLng != null) {
+      const latLongString = `${formLat.payload} ${formLng.payload}`
+      console.log("preventing default",latLongString)
+      dispatch(setAutoLat(null))
+      dispatch(setAutoLng(null))
+      const search_id = await handleApiCalls();
+      navigate(`${search_id}/options`);
+      }
+    }
 
   return (
     <div className="cover-container d-flex mx-auto flex-column">
@@ -86,21 +76,8 @@ export default function CreateSearchForm() {
           <form onSubmit={handleSubmit} className="form-floating mb-3">
             <div className="mb-3">
               <ErrorNotification error={error} />
-              <label
-                htmlFor="location"
-                className="form-label fynder-dark-text"
-              >
-                Location
-              </label>
-              <input
-                value={location}
-                onChange={handleLocationChange}
-                className="form-control"
-                id="location"
-                placeholder="zip code OR city, state"
-              />
-            </div>
             <AutoComplete />
+            </div>
             <button
               type="submit"
               className="btn btn-primary mb-3 btn3d fynder-button"

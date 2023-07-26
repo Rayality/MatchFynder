@@ -1,21 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
-    autoLat: "",
-    autoLng: ""
-}
-
 export const autoLocationSlice = createSlice({
     name: 'autoLocation',
-    initialState,
+    initialState: {
+        autoLat: null,
+        autoLng: null
+    },
     reducers: {
-        setAutoLocation: (state, lat, lng) => {
+        setAutoLat: (state, lat) => {
             state.autoLat = lat;
+        },
+        setAutoLng: (state, lng) => {
             state.autoLng = lng;
         }
     },
 })
 
-export const { setAutoLocation } = autoLocationSlice.actions
+export const { setAutoLat, setAutoLng } = autoLocationSlice.actions
 
 export default autoLocationSlice.reducer
