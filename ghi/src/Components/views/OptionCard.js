@@ -28,7 +28,8 @@ function Option(props) {
   const { sendJsonMessage, lastJsonMessage } = useWebSocket(socketUrl);
 
   // use useGetOptionsQuery to populate the list of options
-  const { data, error, isLoading } = useGetOptionsBySearchQuery(5);
+  const { data, error, isLoading } = useGetOptionsBySearchQuery(searchId);
+  console.log(data)
   const [addSearchOptionMutation, searchOptionData] =
     useAddSearchOptionMutation();
 

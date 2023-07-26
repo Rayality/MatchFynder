@@ -17,12 +17,12 @@ const Routes = () => {
   const publicRoutes = [
     {
       path: "/",
-      Component: Root,
+      Component: Home,
     },
   ];
   const authRoutes = [
     {
-      path: "/",
+      path: "*",
       Component: ProtectedRoute,
       children: [
         {
@@ -47,6 +47,10 @@ const Routes = () => {
           // loader: async ({ params }) => {},
         },
         {
+          path: "match/:place_id",
+          Component: MatchMadePage,
+        },
+        {
           path: "logout/",
           Component: Logout,
         },
@@ -56,7 +60,7 @@ const Routes = () => {
   const nonAuthRoutes = [
     {
       path: "/",
-      Component: Root,
+      Component: Home,
     },
     {
       path: "login/",
