@@ -1,3 +1,5 @@
+/* General Styling */
+
 .header {
   background-color: #dadff7;
 }
@@ -30,17 +32,42 @@ img {
 
 .hero-cover {
   position: relative;
-  max-height: 420px;
+  max-height: 520px;
   overflow: hidden;
 }
+/* END General Styling */
+
+/* Jumbotrons */
 
 .search-jumbotron {
   background-image: url(https://images.pexels.com/photos/6210505/pexels-photo-6210505.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position-y: center;
-  height: 420px;
+  position: relative;
+  height: 520px;
 }
+
+.options-jumbotron {
+  background-image: url(https://images.pexels.com/photos/4518646/pexels-photo-4518646.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  position: relative;
+  height: 520px;
+}
+
+.match-made-jumbotron {
+  background-image: url(https://images.pexels.com/photos/347139/pexels-photo-347139.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  position: relative;
+  height: 520px;
+}
+/* END Jumbotrons */
+
+/* Containers */
 
 .home-container {
   position: absolute;
@@ -64,6 +91,52 @@ img {
   transform: translate(-50%, -50%);
 }
 
+.options-container {
+  background-color: #dadff7;
+  padding: 1%;
+  position: absolute;
+}
+
+.match-view-container {
+  background-color: #dadff700;
+  background-size: cover;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  top: 0;
+  width: 100%;
+  height: 520px;
+  padding: 0;
+  column-gap: 2%;
+  justify-content: flex-start;
+  padding: 2rem 2rem 2rem 0;
+}
+
+.matched-container {
+  background-color: rgba(218, 223, 247, 0.6);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  height: 100%;
+  width: 70%;
+  flex: 1 1 20rem;
+}
+
+.match-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  gap: 30%;
+}
+
+/* END Containers */
+
+/*Text Styling*/
+
 .fynder-dark-text {
   color: #020122;
 }
@@ -86,7 +159,17 @@ h1 {
 
 h2 {
   text-align: center;
+  margin: 10px;
 }
+
+h4 {
+  margin: 10px;
+  font-size: medium;
+}
+
+/*END Text Styling*/
+
+/*3D Buttons*/
 
 .btn3d {
   position: relative;
@@ -104,7 +187,6 @@ h2 {
 .btn3d.btn:hover {
   color: #020122;
   background-color: #dadff7;
-  /* box-shadow: 0 8px 0 0 #dadff7; */
 }
 
 .btn3d:active:focus,
@@ -119,7 +201,6 @@ h2 {
 }
 
 .btn3d.btn {
-  /* box-shadow: 0 8px 0 0 #020122; */
   background-color: #020122;
 }
 .btn3d.btn:active,
@@ -127,13 +208,15 @@ h2 {
   box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0);
   background-color: #dadff7;
 }
+/*END 3D Buttons*/
 
+/*Form Wizard*/
 .bs-wizard {
   margin-top: 40px;
   color: #dadff7;
+  outline: none;
 }
 
-/*Form Wizard*/
 .bs-wizard {
   border-bottom: solid 1px #e0e0e0;
   padding: 0 0 10px 0;
@@ -213,15 +296,16 @@ h2 {
 .bs-wizard > .bs-wizard-step:last-child > .progress {
   width: 50%;
 }
-.bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot {
-  pointer-events: none;
-}
 /*END Form Wizard*/
 
-#tooltip {
-  background-color: #020122;
-  color: #ffee93;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 13px;
+/* Badges */
+.top-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 5%;
+  /* height: 100%; */
+  /* padding: 5%; */
+  flex: 1 1 20%;
 }

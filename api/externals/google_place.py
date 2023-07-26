@@ -13,10 +13,7 @@ GOOGLE_MAPS_API_KEY = os.environ["GOOGLE_MAPS_API_KEY"]
 def update_search_token(token, search_id):
     query = sql.SQL(
         "UPDATE search SET next_page_token = {t} WHERE id = {s} RETURNING *;"
-        ).format(
-            t=token,
-            s=search_id
-        )
+    ).format(t=token, s=search_id)
     try:
         with pool.connection() as conn:
             with conn.cursor(row_factory=dict_row) as db:
@@ -90,11 +87,8 @@ def get_google_options(location, search_id, query="restaurants", radius=1500):
 
 def get_place_details(place_id):
     photo_list = []
-    url = 'https://maps.googleapis.com/maps/api/place/details/json?'
-    params = {
-        "place_id": place_id,
-        "key": GOOGLE_MAPS_API_KEY
-    }
+    url = "https://maps.googleapis.com/maps/api/place/details/json?"
+    params = {"place_id": place_id, "key": GOOGLE_MAPS_API_KEY}
     response = requests.get(url, params=params)
     content = json.loads(response.content)
     content = content["result"]
@@ -104,11 +98,7 @@ def get_place_details(place_id):
         photo_width = 400
         photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
         generic_insert(
-            "place_pictures",
-            {
-                "picture_url": photo_url,
-                "place_id": place_id
-            }
+            "place_pictures", {"picture_url": photo_url, "place_id": place_id}
         )
         photo_list.append(photo_url)
     content["photos"] = photo_list
@@ -119,16 +109,13 @@ def get_next_page(search_id):
     try:
         search = generic_find("search", "id", str(search_id))
         search = search[0]
-        token = search['next_page_token']
+        token = search["next_page_token"]
         if token != 1:
             url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
-            params = {
-                "pagetoken": token,
-                "key": GOOGLE_MAPS_API_KEY
-            }
+            params = {"pagetoken": token, "key": GOOGLE_MAPS_API_KEY}
             response = requests.get(url, params=params)
             content = json.loads(response.content)
-            if content["status"] == 'ZERO_RESULTS':
+            if content["status"] == "ZERO_RESULTS":
                 print("ZERO_RESULTS returned for next page")
                 return []
             new_token = content.get("next_page_token")

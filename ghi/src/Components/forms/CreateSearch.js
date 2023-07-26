@@ -4,12 +4,11 @@ import ErrorNotification from "../../ErrorNotification";
 import {
   useCreateSearchMutation,
   useLazyOptionsApiZipQuery,
-  useOptionsApiCityQuery,
 } from "../../Redux/searchApi";
 
 export default function CreateSearchForm() {
   const navigate = useNavigate();
-  const [error, setError] = useState("");
+  const [error] = useState("");
   const [location, setLocation] = useState("");
   const [createSearch] = useCreateSearchMutation();
   const [queryApiZip] = useLazyOptionsApiZipQuery();
@@ -25,7 +24,6 @@ export default function CreateSearchForm() {
   async function handleSearchCreate() {
     try {
       const searchPayload = await createSearch().unwrap();
-      console.log("Search payload: ", searchPayload);
       return searchPayload.id;
     } catch (error) {
       console.error("Create search rejected: ", error);
@@ -41,13 +39,11 @@ export default function CreateSearchForm() {
   async function handleApiCalls() {
     const search_id = await handleSearchCreate();
     try {
-      console.log(search_id);
       if (search_id) {
         const apizip_payload = await queryApiZip({
           location,
           search_id,
         }).unwrap();
-        console.log("Options API payload: ", apizip_payload);
         return search_id;
       }
     } catch (error) {
@@ -97,59 +93,55 @@ export default function CreateSearchForm() {
           </form>
         </div>
       </div>
-      <div class="container">
+      <div className="container">
         <h2 className="fynder-slate-text">how it works</h2>
-        <div class="row bs-wizard">
-          <div class="col bs-wizard-step active">
-            <div class="text-center bs-wizard-stepnum">enter location</div>
-            <div class="progress">
-              <div class="progress-bar"></div>
+        <div className="row bs-wizard">
+          <div className="col bs-wizard-step active">
+            <div className="text-center bs-wizard-stepnum">enter location</div>
+            <div className="progress">
+              <div className="progress-bar"></div>
             </div>
-            <a
-              href="#"
-              class="bs-wizard-dot"
+            <button
+              className="bs-wizard-dot border-0"
               aria-describedby="tooltip"
               title="enter a zipcode or city, state"
-            ></a>
+            ></button>
           </div>
 
-          <div class="col bs-wizard-step disabled">
-            <div class="text-center bs-wizard-stepnum">invite others</div>
-            <div class="progress">
-              <div class="progress-bar"></div>
+          <div className="col bs-wizard-step disabled">
+            <div className="text-center bs-wizard-stepnum">invite others</div>
+            <div className="progress">
+              <div className="progress-bar"></div>
             </div>
-            <a
-              href="#"
-              class="bs-wizard-dot"
+            <button
+              className="bs-wizard-dot border-0"
               aria-describedby="tooltip"
               title="invite your family or friends to participate"
-            ></a>
+            ></button>
           </div>
 
-          <div class="col bs-wizard-step disabled">
-            <div class="text-center bs-wizard-stepnum">approve/veto</div>
-            <div class="progress">
-              <div class="progress-bar"></div>
+          <div className="col bs-wizard-step disabled">
+            <div className="text-center bs-wizard-stepnum">approve/veto</div>
+            <div className="progress">
+              <div className="progress-bar"></div>
             </div>
-            <a
-              href="#"
-              class="bs-wizard-dot"
+            <button
+              className="bs-wizard-dot border-0"
               aria-describedby="tooltip"
               title="everyone gets a chance to approve/veto restaurant options"
-            ></a>
+            ></button>
           </div>
 
-          <div class="col bs-wizard-step disabled">
-            <div class="text-center bs-wizard-stepnum">match</div>
-            <div class="progress">
-              <div class="progress-bar"></div>
+          <div className="col bs-wizard-step disabled">
+            <div className="text-center bs-wizard-stepnum">match</div>
+            <div className="progress">
+              <div className="progress-bar"></div>
             </div>
-            <a
-              href="#"
-              class="bs-wizard-dot"
+            <button
+              className="bs-wizard-dot border-0"
               aria-describedby="tooltip"
               title="get your match, along with fun/snarky participation badges"
-            ></a>
+            ></button>
           </div>
         </div>
       </div>
