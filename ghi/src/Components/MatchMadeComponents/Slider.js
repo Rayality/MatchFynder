@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import "./match-made.css"
+import "./match-pics.css"
 
 export default class MySlider extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ export default class MySlider extends Component {
     }
     componentDidUpdate(prevProps) {
         if (prevProps !== this.props) {
-            this.setState({pics: this.props.pictures})
+            this.setState({ pics: this.props.pictures })
         }
     }
 
@@ -29,13 +29,13 @@ export default class MySlider extends Component {
             focusOnSelect: true
         };
         return (
-        <Slider {...settings}>
-            {this.state.pics.map(function(pic, index) {
-                return (
-                    <img className='pic' key={index} alt="Pictures from google" src={pic}/>
-                );
-            })}
-        </Slider>
+            <Slider {...settings}>
+                {this.state.pics.map(function (pic, index) {
+                    return (
+                        <img className='pic' key={index} alt="Pictures from google" src={pic} />
+                    );
+                })}
+            </Slider>
         );
     }
 }
