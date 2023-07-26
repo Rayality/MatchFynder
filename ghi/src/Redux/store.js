@@ -4,6 +4,7 @@ import loginReducer from "./login-slice";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { optionsApi } from "./optionsApi";
 import { searchApi } from "./searchApi";
+import { loginApi } from "./loginAPI";
 import modalReducer from "./modal-slice";
 
 import { wsApi } from "./webSocket-slice";
@@ -14,6 +15,7 @@ export const store = configureStore({
     accountLogin: loginReducer,
     [optionsApi.reducerPath]: optionsApi.reducer,
     [searchApi.reducerPath]: searchApi.reducer,
+    [loginApi.reducerPath]: loginApi.reducer,
     modalCheck: modalReducer,
     [wsApi.reducerPath]: wsApi.reducer
   },
@@ -21,7 +23,8 @@ export const store = configureStore({
     getDefaultMiddleware().concat(
       optionsApi.middleware,
       searchApi.middleware,
-      wsApi.middleware
+      wsApi.middleware,
+      loginApi.middleware
     ),
 });
 

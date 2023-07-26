@@ -1,21 +1,27 @@
-import { useDispatch, useSelector } from "react-redux";
-import { sendLoginData } from "../../logic/SendData";
-import { updated, reset } from "../../Redux/login-slice";
+import encode from "../../logic/encodeAccount";
+import { usePostLoginMutation } from "../../Redux/loginAPI";
+import { useState } from "react";
+import { useAuth } from "../AuthProvider";
 
 export default function LoginForm() {
-  const account = useSelector((state) => state.accountLogin.value);
-  const dispatch = useDispatch();
-  const url = process.env.REACT_APP_API_HOST;
+  const { setToken } = useAuth();
+  const [account, setAccount] = useState({
+    username: "",
+    password: "",
+  });
+  const [loginPost] = usePostLoginMutation();
 
   function handleChange(e) {
-    let value = [e.target.name, e.target.value];
-    dispatch(updated(value));
+    let value = e.target.value;
+    let name = e.target.name;
+    setAccount({ ...account, [name]: value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    sendLoginData(url, account);
-    dispatch(reset());
+    encode(account);
+    const newToken = await loginPost(account);
+    setToken(newToken);
   }
   return (
     <div className="container mb-3 shadow">
