@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorNotification from "../../ErrorNotification";
 import {
@@ -6,6 +6,8 @@ import {
   useLazyOptionsApiZipQuery,
   useOptionsApiCityQuery,
 } from "../../Redux/searchApi";
+import { useSelector} from 'react-redux'
+import AutoComplete from "../AutoComplete";
 
 export default function CreateSearchForm() {
   const navigate = useNavigate();
@@ -14,10 +16,21 @@ export default function CreateSearchForm() {
   const [createSearch] = useCreateSearchMutation();
   const [queryApiZip] = useLazyOptionsApiZipQuery();
 
+  const formLat = useSelector((state) => state.autoLocation.autoLat)
+  const formLng = useSelector((state) => state.autoLocation.autoLng)
+  // useEffect(() => {
+  //   let i = async () => {
+  //     const { AutocompleteService } = await window.google.maps.importLibrary("places")
+  //     console.log(AutocompleteService)
+  //   }
+  //   i();
+  // }, [])
+
   // upon data entry set the location to the value of the entry
   const handleLocationChange = (event) => {
     const value = event.target.value;
     setLocation(value);
+    console.log(formLat.payload)
   };
 
   // create a search record
@@ -87,6 +100,7 @@ export default function CreateSearchForm() {
                 placeholder="zip code OR city, state"
               />
             </div>
+            <AutoComplete />
             <button
               type="submit"
               className="btn btn-primary mb-3 btn3d fynder-button"

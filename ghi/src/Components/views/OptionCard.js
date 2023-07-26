@@ -8,7 +8,7 @@ import {
   useGetMatchMadeQuery,
   useGetSearchQuery,
 } from "../../Redux/searchApi";
-import useWebSocket from "react-use-websocket";
+// import useWebSocket from "react-use-websocket";
 import { useUpdateEdibleOptionMutation } from "../../Redux/searchApi";
 import { useGetOptionsBySearchQuery } from "../../Redux/searchApi";
 
@@ -21,11 +21,11 @@ function Option(props) {
   const [index, setIndex] = useState(0);
   const [messageHistory, setMessageHistory] = useState({});
 
-  const [socketUrl, setSocketUrl] = useState(
-    `ws://localhost:8000/search/${searchId}`
-  );
+  // const [socketUrl, setSocketUrl] = useState(
+  //   `ws://localhost:8000/search/${searchId}`
+  // );
 
-  const { sendJsonMessage, lastJsonMessage } = useWebSocket(socketUrl);
+  // const { sendJsonMessage, lastJsonMessage } = useWebSocket(socketUrl);
 
   // use useGetOptionsQuery to populate the list of options
   const { data, error, isLoading } = useGetOptionsBySearchQuery(searchId);
@@ -68,8 +68,8 @@ function Option(props) {
   }
   const handleSwipe = async (event) => {
     setIndex(index + 1);
-    sendJsonMessage(JSON.stringify({ option_id: optionId }));
-    console.log(lastJsonMessage);
+    // sendJsonMessage(JSON.stringify({ option_id: optionId }));
+    // console.log(lastJsonMessage);
   };
 
   return (
