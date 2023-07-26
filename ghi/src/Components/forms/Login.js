@@ -2,6 +2,7 @@ import encode from "../../logic/encodeAccount";
 import { usePostLoginMutation } from "../../Redux/loginAPI";
 import { useState } from "react";
 import { useAuth } from "../AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
   const { setToken } = useAuth();
@@ -10,6 +11,7 @@ export default function LoginForm() {
     password: "",
   });
   const [loginPost] = usePostLoginMutation();
+  const navigate = useNavigate()
 
   function handleChange(e) {
     let value = e.target.value;
@@ -22,6 +24,7 @@ export default function LoginForm() {
     encode(account);
     const newToken = await loginPost(account);
     setToken(newToken);
+    navigate("/", { replace: true })
   }
   return (
     <div className="container mb-3 shadow">
