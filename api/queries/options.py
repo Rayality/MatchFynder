@@ -7,7 +7,7 @@ from .generic_sql import (
     generic_find,
     generic_get_all,
     generic_update,
-    )
+)
 
 
 class Error(BaseModel):
@@ -61,18 +61,14 @@ class OptionRepository:
                         DELETE FROM options
                         WHERE id = %s
                         """,
-                        [option_id]
+                        [option_id],
                     )
                     return True
         except Exception as e:
             print(e)
             return False
 
-    def update_option(
-            self,
-            option_id: int,
-            option
-            ) -> Union[OptionOut, Error]:
+    def update_option(self, option_id: int, option) -> Union[OptionOut, Error]:
         try:
             return generic_update("options", option, "id", option_id)
 

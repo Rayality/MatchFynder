@@ -37,7 +37,12 @@ class MyAuthenticator(Authenticator):
         self,
         account: AccountOut,
         bearer_token: Optional[str] = Depends(OAuth2PasswordBearer("token")),
-        cookie_token: Optional[str] = (Cookie(default=None, alias="fastapi_token")),
+        cookie_token: Optional[str] = (
+            Cookie(
+                default=None,
+                alias="fastapi_token",
+            )
+        ),
     ) -> dict:
         credentials_exception = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "boxicons";
 import { useSwipeable } from "react-swipeable";
 import ErrorNotification from "../../ErrorNotification";
-import {
-  useAddSearchOptionMutation
-} from "../../Redux/searchApi";
+// import {
+//   useAddSearchOptionMutation
+// } from "../../Redux/searchApi";
 import { useGetOptionsBySearchQuery } from "../../Redux/searchApi";
 
 function Option(props) {
@@ -21,8 +21,8 @@ function Option(props) {
 
   // use useGetOptionsQuery to populate the list of options
   const { data, error, isLoading } = useGetOptionsBySearchQuery(searchId);
-  const [addSearchOptionMutation, searchOptionData] =
-    useAddSearchOptionMutation();
+  // const [addSearchOptionMutation, searchOptionData] =
+  //   useAddSearchOptionMutation();
 
   // Upon button click, prevent the page from refreshing
   // and reset the index of the option to be displayed
@@ -54,7 +54,7 @@ function Option(props) {
   if (isLoading) {
     return <progress className="progress is-primary" max="100"></progress>;
   } else {
-    var optionId = data[index][0].id;
+    // var optionId = data[index][0].id;
   }
   const handleSwipe = async (event) => {
     setIndex(index + 1);
