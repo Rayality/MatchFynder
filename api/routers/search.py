@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, Response, HTTPException, status
 from queries.search import (
-    Search,
     SearchOptions,
     SearchRepository,
     SearchOptionsLink,

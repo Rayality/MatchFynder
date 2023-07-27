@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../../App.css';
 import React from "react";
-import { BadgeCard } from "../MatchMadeComponents/BadgeCard";
+// import { BadgeCard } from "../MatchMadeComponents/BadgeCard";
 import { medal, page, map } from "../MatchMadeComponents/MatchMadadeImgs";
 import MySlider from '../MatchMadeComponents/Slider';
 import 'slick-carousel/slick/slick.css';
@@ -27,7 +27,7 @@ function MatchMade(props) {
             }
         }
         getPictures();
-    }, [])
+    }, [place_id])
 
     function directionsClick(event) {
         window.open(googleDetails["url"]);
@@ -79,13 +79,7 @@ function MatchMade(props) {
                         <MySlider pictures={googlePictures} />
                     </div>
                     <div className='match-info-container'>
-
                     </div>
-                    {/* <div className="top-badges">
-                    <BadgeCard className="badge-card" />
-                    <BadgeCard className="badge-card" />
-                    <BadgeCard className="badge-card" />
-                </div> */}
                 </div>
             </div >
             <div className="container">

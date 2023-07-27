@@ -48,5 +48,8 @@ def get_google_options_city(
 
 
 @router.get("/place/details/")
-def get_google_place_details(place_id: str, repo: PlacesRepository = Depends()):
+def get_google_place_details(
+    place_id: str,
+    repo: PlacesRepository = Depends(),
+):
     return repo.place_details(place_id)

@@ -1,7 +1,6 @@
 import Login from "./login";
 import CreateAccount from "./createAccount";
 import PresentOption from "./presentOption";
-import Logout from "../Components/views/Logout";
 import Layout from "./Layout";
 import NewSearch from "./search";
 import InviteFriends from "./inviteFriends";
@@ -25,11 +24,6 @@ const Routes = () => {
       Component: ProtectedRoute,
       children: [
         {
-          path: "signup/",
-          Component: CreateAccount,
-        },
-
-        {
           path: "search/",
           Component: NewSearch,
         },
@@ -49,14 +43,14 @@ const Routes = () => {
           path: "match/:place_id",
           Component: MatchMadePage,
         },
-        {
-          path: "logout/",
-          Component: Logout,
-        },
       ],
     },
   ];
   const nonAuthRoutes = [
+    {
+      path: "signup/",
+      Component: CreateAccount,
+    },
     {
       path: "/",
       Component: Home,
