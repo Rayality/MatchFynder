@@ -17,13 +17,12 @@ class PlacesRepository:
             # lat = zipcode_info["latitude"]
             # long = zipcode_info["longitude"]
             # location_string = f"{lat}, {long}"
-            results = get_google_options(
-                location=latlong,
-                search_id=search_id
-            )
+            results = get_google_options(location=latlong, search_id=search_id)
             for option in results:
                 SearchRepository.add_search_option(
-                    self, search_id, option["id"]
+                    self,
+                    search_id,
+                    option["id"],
                 )
             return results
         except Exception as e:
@@ -45,9 +44,8 @@ class PlacesRepository:
             longitude_mean = round(longitudes / len(lats_longs), 4)
             location_string = f"{latitude_mean}, {longitude_mean}"
             results = get_google_options(
-                location=location_string,
-                search_id=search_id
-                )
+                location=location_string, search_id=search_id
+            )
             return results
         except Exception as e:
             print(e)

@@ -75,7 +75,7 @@ def get_google_options(location, search_id, query="restaurants", radius=1500):
                 photo_width = 400
                 item[
                     "picture_url"
-                ] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
+                ] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"  # noqa
 
             except (KeyError, IndexError):
                 item["picture_url"] = None
@@ -96,7 +96,7 @@ def get_place_details(place_id):
     for info in photo_info_list:
         photo_ref = info["photo_reference"]
         photo_width = 400
-        photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
+        photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"  # noqa
         generic_insert(
             "place_pictures", {"picture_url": photo_url, "place_id": place_id}
         )
@@ -128,7 +128,7 @@ def get_next_page(search_id):
                     photo_width = 400
                     item[
                         "picture_url"
-                    ] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
+                    ] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"  # noqa
 
                 except (KeyError, IndexError):
                     item["picture_url"] = None

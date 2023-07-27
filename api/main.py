@@ -28,7 +28,7 @@ app.add_middleware(
 
 @app.get("/api/launch-details")
 def launch_details():
-    account_data: dict = Depends(authenticator.get_current_account_data)
+    # account_data: dict = Depends(authenticator.get_current_account_data)
     return {
         "launch_details": {
             "module": 3,

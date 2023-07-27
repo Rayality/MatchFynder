@@ -66,7 +66,11 @@ def send_email_background(
         subtype="html",
     )
     fm = FastMail(conf)
-    background_tasks.add_task(fm.send_message, message, template_name="email.html")
+    background_tasks.add_task(
+        fm.send_message,
+        message,
+        template_name="email.html",
+    )
 
 
 @router.get("/send-email/asynchronous")
