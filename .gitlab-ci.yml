@@ -86,7 +86,7 @@ pages:
   needs:
     - build-front-end-job
   script:
-    - mv ghi/build/ public GENERATE_SOURCEMAP=false
+    - mv ghi/build/ public
   artifacts:
     paths:
       - public
