@@ -42,6 +42,7 @@ export default function CreateSearchForm() {
           location: latLongString,
           search_id: search_id,
         }).unwrap();
+        console.log(apizip_payload)
         return search_id;
       }
     } catch (error) {
@@ -54,12 +55,13 @@ export default function CreateSearchForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     if (formLat != null && formLng != null) {
-      if (formLat.payload != null && formLng.payload != null){
-      const search_id = await handleApiCalls();
-      dispatch(setAutoLng(null))
-      dispatch(setAutoLat(null))
-      navigate(`${search_id}/options`);
-    }}
+      if (formLat.payload != null && formLng.payload != null) {
+        const search_id = await handleApiCalls();
+        dispatch(setAutoLng(null))
+        dispatch(setAutoLat(null))
+        navigate(`${search_id}/options`);
+      }
+    }
   }
 
   return (

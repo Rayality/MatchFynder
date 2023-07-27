@@ -1,7 +1,6 @@
 import Login from "./login";
 import CreateAccount from "./createAccount";
 import PresentOption from "./presentOption";
-import Logout from "../Components/views/Logout";
 import Layout from "./Layout";
 import NewSearch from "./search";
 import InviteFriends from "./inviteFriends";
@@ -48,10 +47,6 @@ const Routes = () => {
         {
           path: "match/:place_id",
           Component: MatchMadePage,
-        },
-        {
-          path: "logout/",
-          Component: Logout,
         },
       ],
     },

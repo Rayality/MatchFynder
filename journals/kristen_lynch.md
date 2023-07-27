@@ -3,6 +3,11 @@
 --A reflection on any design conversations that you had
 --At least one ah-ha! moment that you had during your coding, however small
 
+## 7/27/2023
+
+--Integrated changes as a group
+--Prep for deployment as a group
+
 ## 7/26/2023
 
 --Aha! relative positioned parent element allows you to have children with absolute positioning within it

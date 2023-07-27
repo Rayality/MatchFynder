@@ -1,7 +1,7 @@
 import json
 import requests
 import os
-from queries.generic_sql import generic_insert, generic_find, generic_update
+from queries.generic_sql import generic_insert, generic_find
 from queries.options import OptionIn, OptionRepository
 from queries.pool import pool
 from psycopg import sql
@@ -36,10 +36,10 @@ def create_from_request(json_dict):
             new_item["formatted_address"] = json_dict.get("formatted_address")
             new_item["latitude"] = (
                 json_dict.get("geometry", {}).get("location", {}).get("lat")
-            )  # noqa
+            )
             new_item["longitude"] = (
                 json_dict.get("geometry", {}).get("location", {}).get("lng")
-            )  # noqa
+            )
             new_item["price_level"] = json_dict.get("price_level")
             new_item["rating"] = json_dict.get("rating")
             new_item["user_ratings_count"] = json_dict.get(
@@ -75,7 +75,7 @@ def get_google_options(location, search_id, query="restaurants", radius=1500):
                 photo_width = 400
                 item[
                     "picture_url"
-                ] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
+                ] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"  # noqa
 
             except (KeyError, IndexError):
                 item["picture_url"] = None
@@ -96,7 +96,7 @@ def get_place_details(place_id):
     for info in photo_info_list:
         photo_ref = info["photo_reference"]
         photo_width = 400
-        photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
+        photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"  # noqa
         generic_insert(
             "place_pictures", {"picture_url": photo_url, "place_id": place_id}
         )
@@ -111,7 +111,7 @@ def get_next_page(search_id):
         search = search[0]
         token = search["next_page_token"]
         if token != 1:
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"  # noqa
             params = {"pagetoken": token, "key": GOOGLE_MAPS_API_KEY}
             response = requests.get(url, params=params)
             content = json.loads(response.content)
@@ -128,7 +128,7 @@ def get_next_page(search_id):
                     photo_width = 400
                     item[
                         "picture_url"
-                    ] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"
+                    ] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_width}&photo_reference={photo_ref}&key={GOOGLE_MAPS_API_KEY}"  # noqa
 
                 except (KeyError, IndexError):
                     item["picture_url"] = None

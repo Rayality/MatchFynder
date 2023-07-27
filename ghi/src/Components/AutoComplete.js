@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setAutoLat, setAutoLng } from "../Redux/locationSlice";
 
 const AutoComplete = () => {
@@ -7,22 +7,23 @@ const AutoComplete = () => {
     const dispatch = useDispatch()
     const autoCompleteRef = useRef();
     const inputRef = useRef();
-    const options = {
-        componentRestrictions: { country: "us" },
-        fields: ["address_components", "geometry", "name"],
-        types: ["geocode"]
-    };
+
     useEffect(() => {
         let load = async () => {
+            const options = {
+                componentRestrictions: { country: "us" },
+                fields: ["address_components", "geometry", "name"],
+                types: ["geocode"]
+            };
             let google = window.google
-            let { AutocompleteService } = await google.maps.importLibrary("places");
+            await google.maps.importLibrary("places");
             autoCompleteRef.current = await new google.maps.places.Autocomplete(
                 inputRef.current,
                 options
             );
             autoCompleteRef.current.addListener("place_changed", async function () {
                 const place = await autoCompleteRef.current.getPlace();
-                if (place != undefined && place.hasOwnProperty('geometry')) {
+                if (place !== undefined && place.hasOwnProperty('geometry')) {
                     const lat = place.geometry.location.lat();
                     const lng = place.geometry.location.lng();
                     dispatch(setAutoLat(lat))
@@ -34,7 +35,7 @@ const AutoComplete = () => {
             );
         }
         load();
-    }, []);
+    }, [dispatch]);
     return (
         <div>
             <label>Select Location :</label>

@@ -1,8 +1,28 @@
 from fastapi.testclient import TestClient
 from main import app
 from queries.options import OptionRepository
+from pydantic import BaseModel
+from auth.authenticator import authenticator
 
 client = TestClient(app)
+
+
+class UserOut(BaseModel):
+    id: str
+    username: str
+    email: str
+    first_name: str
+    last_name: str
+
+
+def fake_get_current_account_data():
+    return UserOut(
+        id="1",
+        username="KDawg",
+        email="kdawg@gmail.com",
+        first_name="K",
+        last_name="Dawg",
+    )
 
 
 class EmptyOptionQueries:
@@ -12,6 +32,9 @@ class EmptyOptionQueries:
 
 def test_get_all_options():
     # Setup
+    app.dependency_overrides[
+        authenticator.get_current_account_data
+    ] = fake_get_current_account_data
     app.dependency_overrides[OptionRepository] = EmptyOptionQueries
     # Enact
     response = client.get("/options")
@@ -35,6 +58,9 @@ class CreateQueries:
 
 def test_create_option():
     # Setup
+    app.dependency_overrides[
+        authenticator.get_current_account_data
+    ] = fake_get_current_account_data
     app.dependency_overrides[OptionRepository] = CreateQueries
     json = {
         "business_status": "OPERATIONAL",
