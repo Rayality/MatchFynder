@@ -10,15 +10,15 @@ class PlacesRepository:
     geo = Nominatim(country_code)
 
     def search_from_zipcode(
-        self, zip, search_id
+        self, latlong, search_id
     ) -> Union[Optional[Error], Optional[OptionOut]]:
         try:
-            zipcode_info = self.geo.query_postal_code(zip)
-            lat = zipcode_info["latitude"]
-            long = zipcode_info["longitude"]
-            location_string = f"{lat}, {long}"
+            # zipcode_info = self.geo.query_postal_code(zip)
+            # lat = zipcode_info["latitude"]
+            # long = zipcode_info["longitude"]
+            # location_string = f"{lat}, {long}"
             results = get_google_options(
-                location=location_string,
+                location=latlong,
                 search_id=search_id
             )
             for option in results:
@@ -60,4 +60,3 @@ class PlacesRepository:
         except Exception as e:
             print(e)
             return {"message": "error in getting place_details"}
-

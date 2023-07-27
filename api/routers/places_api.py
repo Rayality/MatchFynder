@@ -14,18 +14,18 @@ not_authorized = HTTPException(
 
 
 @router.get(
-    "/query/zipcode",
+    "/query/latlong",
     response_model=Union[Optional[Error], Optional[list[OptionOut]]],
 )
 def get_google_options_zipcode(
-    zipcode,
+    latlong,
     search_id,
     response: Response,
     repo: PlacesRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     if account_data:
-        return repo.search_from_zipcode(zipcode, search_id)
+        return repo.search_from_zipcode(latlong, search_id)
     else:
         raise not_authorized
 

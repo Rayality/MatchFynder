@@ -3,7 +3,19 @@
 --A reflection on any design conversations that you had
 --At least one ah-ha! moment that you had during your coding, however small
 
-## 7/20/2023
+## 7/26/2023
+
+--Aha! relative positioned parent element allows you to have children with absolute positioning within it
+--CSS improvements continued
+--documentation continued (readme, api documentation, data structure documentation, etc)
+
+## 7/25/2023
+
+--CI/CD setup continued
+--matchmade CSS improvements
+--documentation (readme, api documentation, data structure documentation, etc)
+
+## 7/24/2023
 
 --reviewed project requirements as a team
 --began work on CI/CD in preparation for deployment

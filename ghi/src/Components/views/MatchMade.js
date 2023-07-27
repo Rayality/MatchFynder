@@ -2,15 +2,14 @@ import { useEffect, useState } from 'react';
 import '../../App.css';
 import React from "react";
 import { BadgeCard } from "../MatchMadeComponents/BadgeCard";
-import { medal, contact, page, map } from "../MatchMadeComponents/MatchMadadeImgs";
+import { medal, page, map } from "../MatchMadeComponents/MatchMadadeImgs";
 import MySlider from '../MatchMadeComponents/Slider';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import "../MatchMadeComponents/match-made.css";
+import "../MatchMadeComponents/match-pics.css";
 import "../MatchMadeComponents/match-made-buttons.css";
 import "../MatchMadeComponents/badge-card.css";
 import PlaceInfo from '../MatchMadeComponents/PlaceInfo';
-
 
 function MatchMade(props) {
     const place_id = props.place_id
@@ -39,48 +38,106 @@ function MatchMade(props) {
     }
 
     return (
-        <div className="match-view">
-            <div className="button-container">
-                <button className="badges-button">
-                    <div className="badges-button-div" onClick={toggle}>
-                        <h4>Extra Info</h4>
-                        <img alt="Details" src={page} />
-                    </div>
-                </button>
-                <button className="badges-button" onClick={directionsClick}>
-                    <div className="badges-button-div">
-                        <h4>Directions</h4>
-                        <img alt="Directions" src={map} />
-                    </div>
-                </button>
-                <button className="badges-button">
-                    <div className="badges-button-div">
-                        <h4>Badges</h4>
-                        <img alt="Badges" src={medal} />
-                    </div>
-                </button>
-            </div>
-            {show ? <PlaceInfo google={googleDetails} show={toggle} /> : null}
-            <div className="matched-content">
-                <h1 className="restaurant-title">{googleDetails["name"]}</h1>
-                <div className="pictures-bg">
-                    <MySlider pictures={googlePictures} />
+        <div>
+            <div className="match-view-container match-made-jumbotron">
+                <div className="button-container">
+                    <button className="badges-button">
+                        <div className="badges-button-div" onClick={toggle}>
+                            <h4>Extra Info</h4>
+                            <img alt="Details" src={page} />
+                        </div>
+                    </button>
+                    <button className="badges-button" onClick={directionsClick}>
+                        <div className="badges-button-div">
+                            <h4>Directions</h4>
+                            <img alt="Directions" src={map} />
+                        </div>
+                    </button>
+                    <button className="badges-button">
+                        <div className="badges-button-div">
+                            <h4>Badges</h4>
+                            <img alt="Badges" src={medal} />
+                        </div>
+                    </button>
                 </div>
-                <div className='info-container'>
-                    <div className="info">
-                        Rating: {googleDetails["rating"]}
-                        <p className="info-text">
-                            #{googleDetails["user_ratings_total"]}
-                        </p>
+                {show ? <PlaceInfo google={googleDetails} show={toggle} /> : null}
+                <div className="matched-container">
+                    <h4 className='fynder-dark-text'>
+                        You're going to . . .
+                    </h4>
+                    <h1 className='fynder-dark-text'>{googleDetails["name"]}</h1>
+                    <div className='match-info-container'>
+                        <h4 className='fynder-dark-text' aria-describedby="tooltip"
+                            title={googleDetails["user_ratings_total"]}>
+                            Rating: {googleDetails["rating"]} out of 5
+                        </h4>
+                        <h4 className='fynder-dark-text'>
+                            Price: {googleDetails["price_level"]} out of 5
+                        </h4>
                     </div>
-                    <p className="info-2">
-                        Price level: {googleDetails["price_level"]}
-                    </p>
+                    <div className="pictures-bg">
+                        <MySlider pictures={googlePictures} />
+                    </div>
+                    <div className='match-info-container'>
+
+                    </div>
+                    {/* <div className="top-badges">
+                    <BadgeCard className="badge-card" />
+                    <BadgeCard className="badge-card" />
+                    <BadgeCard className="badge-card" />
+                </div> */}
                 </div>
-                <div className="top-badges">
-                    <BadgeCard className="badge-card" />
-                    <BadgeCard className="badge-card" />
-                    <BadgeCard className="badge-card" />
+            </div >
+            <div className="container">
+                <h2 className="fynder-slate-text">how it works</h2>
+                <div className="row bs-wizard">
+                    <div className="col bs-wizard-step complete">
+                        <div className="text-center bs-wizard-stepnum">enter location</div>
+                        <div className="progress">
+                            <div className="progress-bar"></div>
+                        </div>
+                        <button
+                            className="bs-wizard-dot border-0"
+                            aria-describedby="tooltip"
+                            title="enter a zipcode or city, state"
+                        ></button>
+                    </div>
+
+                    <div className="col bs-wizard-step complete">
+                        <div className="text-center bs-wizard-stepnum">invite others</div>
+                        <div className="progress">
+                            <div className="progress-bar"></div>
+                        </div>
+                        <button
+                            className="bs-wizard-dot border-0"
+                            aria-describedby="tooltip"
+                            title="invite your family or friends to participate"
+                        ></button>
+                    </div>
+
+                    <div className="col bs-wizard-step complete">
+                        <div className="text-center bs-wizard-stepnum">approve/veto</div>
+                        <div className="progress">
+                            <div className="progress-bar"></div>
+                        </div>
+                        <button
+                            className="bs-wizard-dot border-0"
+                            aria-describedby="tooltip"
+                            title="everyone gets a chance to approve/veto restaurant options"
+                        ></button>
+                    </div>
+
+                    <div className="col bs-wizard-step active">
+                        <div className="text-center bs-wizard-stepnum">match</div>
+                        <div className="progress">
+                            <div className="progress-bar"></div>
+                        </div>
+                        <button
+                            className="bs-wizard-dot border-0"
+                            aria-describedby="tooltip"
+                            title="get your match, along with fun/snarky participation badges"
+                        ></button>
+                    </div>
                 </div>
             </div>
         </div>

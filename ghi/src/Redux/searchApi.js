@@ -42,10 +42,10 @@ export const searchApi = createApi({
     }),
     optionsApiZip: builder.query({
       query: (params) => {
-        const zipCode = params["location"];
+        const latLong = params["location"];
         const searchId = params["search_id"];
         return {
-          url: `/query/zipcode?zipcode=${zipCode}&search_id=${searchId}`,
+          url: `/query/latlong?latlong=${latLong}&search_id=${searchId}`,
           credentials: "include"
         };
       },
