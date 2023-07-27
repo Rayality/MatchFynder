@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setAutoLat, setAutoLng } from "../Redux/locationSlice";
 
 const AutoComplete = () => {
@@ -22,7 +22,7 @@ const AutoComplete = () => {
             );
             autoCompleteRef.current.addListener("place_changed", async function () {
                 const place = await autoCompleteRef.current.getPlace();
-                if (place != undefined && place.hasOwnProperty('geometry')) {
+                if (place !== undefined && place.hasOwnProperty('geometry')) {
                     const lat = place.geometry.location.lat();
                     const lng = place.geometry.location.lng();
                     dispatch(setAutoLat(lat))
