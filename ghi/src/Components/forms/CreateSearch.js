@@ -1,23 +1,20 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ErrorNotification from "../../ErrorNotification";
 import {
   useCreateSearchMutation,
   useLazyOptionsApiZipQuery,
 } from "../../Redux/searchApi";
+import { useSelector, useDispatch } from 'react-redux'
+import { setAutoLat, setAutoLng } from "../../Redux/locationSlice";
+import AutoComplete from "../AutoComplete";
+
 
 export default function CreateSearchForm() {
   const navigate = useNavigate();
-  const [error] = useState("");
-  const [location, setLocation] = useState("");
   const [createSearch] = useCreateSearchMutation();
   const [queryApiZip] = useLazyOptionsApiZipQuery();
-
-  // upon data entry set the location to the value of the entry
-  const handleLocationChange = (event) => {
-    const value = event.target.value;
-    setLocation(value);
-  };
+  const dispatch = useDispatch()
+  let formLat = useSelector((state) => state.autoLocation.autoLat)
+  let formLng = useSelector((state) => state.autoLocation.autoLng)
 
   // create a search record
   // and return the search id of that record
@@ -40,9 +37,10 @@ export default function CreateSearchForm() {
     const search_id = await handleSearchCreate();
     try {
       if (search_id) {
+        let latLongString = `${formLat.payload} ${formLng.payload}`
         const apizip_payload = await queryApiZip({
-          location,
-          search_id,
+          location:latLongString,
+          search_id:search_id,
         }).unwrap();
         return search_id;
       }
@@ -50,15 +48,18 @@ export default function CreateSearchForm() {
       console.error("Options API rejected: ", error);
     }
   }
-
   // upon submit, prevent default page behavior,
   // await the search id results of handleApiCalls
   // and navigate to the search_options page for that result
   async function handleSubmit(e) {
     e.preventDefault();
-    const search_id = await handleApiCalls();
-    navigate(`${search_id}/options`);
-  }
+    if (formLat.payload != null && formLng.payload != null) {
+      const search_id = await handleApiCalls();
+      dispatch(setAutoLng(null))
+      dispatch(setAutoLat(null))
+      navigate(`${search_id}/options`);
+      }
+    }
 
   return (
     <div className="cover-container d-flex mx-auto flex-column">
@@ -69,20 +70,7 @@ export default function CreateSearchForm() {
           </div>
           <form onSubmit={handleSubmit} className="form-floating mb-3">
             <div className="mb-3">
-              <ErrorNotification error={error} />
-              <label
-                htmlFor="inputLocation"
-                className="form-label fynder-dark-text"
-              >
-                Location
-              </label>
-              <input
-                value={location}
-                onChange={handleLocationChange}
-                className="form-control"
-                id="location"
-                placeholder="zip code OR city, state"
-              />
+            <AutoComplete />
             </div>
             <button
               type="submit"
@@ -99,49 +87,49 @@ export default function CreateSearchForm() {
           <div className="col bs-wizard-step active">
             <div className="text-center bs-wizard-stepnum">enter location</div>
             <div className="progress">
-              <div className="progress-bar"></div>
+              <div className="progress-bar"/>
             </div>
             <button
               className="bs-wizard-dot border-0"
               aria-describedby="tooltip"
               title="enter a zipcode or city, state"
-            ></button>
+            />
           </div>
 
           <div className="col bs-wizard-step disabled">
             <div className="text-center bs-wizard-stepnum">invite others</div>
             <div className="progress">
-              <div className="progress-bar"></div>
+              <div className="progress-bar"/>
             </div>
             <button
               className="bs-wizard-dot border-0"
               aria-describedby="tooltip"
               title="invite your family or friends to participate"
-            ></button>
+            />
           </div>
 
           <div className="col bs-wizard-step disabled">
             <div className="text-center bs-wizard-stepnum">approve/veto</div>
             <div className="progress">
-              <div className="progress-bar"></div>
+              <div className="progress-bar"/>
             </div>
             <button
               className="bs-wizard-dot border-0"
               aria-describedby="tooltip"
               title="everyone gets a chance to approve/veto restaurant options"
-            ></button>
+            />
           </div>
 
           <div className="col bs-wizard-step disabled">
             <div className="text-center bs-wizard-stepnum">match</div>
             <div className="progress">
-              <div className="progress-bar"></div>
+              <div className="progress-bar"/>
             </div>
             <button
               className="bs-wizard-dot border-0"
               aria-describedby="tooltip"
               title="get your match, along with fun/snarky participation badges"
-            ></button>
+            />
           </div>
         </div>
       </div>
