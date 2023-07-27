@@ -29,6 +29,10 @@ export default function LoginForm() {
     dispatch(setUsername(account.username))
     dispatch(setPassword(account.password))
     setToken(token);
+    setAccount({
+      username: "",
+      password: "",
+    })
     navigate("/", { replace: true })
   }
   return (

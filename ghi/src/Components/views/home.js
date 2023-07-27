@@ -1,4 +1,20 @@
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthProvider";
+import { shown } from "../../Redux/modal-slice";
+import { useDispatch } from "react-redux";
+
 function Home() {
+  const { token } = useAuth()
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    if (!token) {
+      dispatch(shown())
+    } else {
+      navigate('search/', { replace: true })
+    }
+  }
   return (
     <div>
       <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
@@ -15,12 +31,12 @@ function Home() {
                 <p>easy group decisions: local restaurants</p>
               </div>
               <div>
-                <a
-                  href="/search/"
+                <button
+                  onClick={handleClick}
                   className="btn btn-lg btn-secondary fynder-button btn3d"
                 >
                   new fynd
-                </a>
+                </button>
               </div>
             </div>
           </div>
