@@ -27,12 +27,12 @@ api-unit-tests-job:
     - export DATABASE_URL='postgresql://example_user:secret@postgres/example_db'
     - export SIGNING_KEY=${SIGNING_KEY}
     - export GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}
-    - export MAIL_USERNAME=${MAIL_USERNAME}
-    - export MAIL_PASSWORD=${MAIL_PASSWORD}
-    - export MAIL_FROM=${MAIL_FROM}
-    - export MAIL_PORT=${MAIL_PORT}
-    - export MAIL_SERVER=${MAIL_SERVER}
-    - export MAIL_FROM_NAME=${MAIL_FROM_NAME}
+    # - export MAIL_USERNAME=${MAIL_USERNAME}
+    # - export MAIL_PASSWORD=${MAIL_PASSWORD}
+    # - export MAIL_FROM=${MAIL_FROM}
+    # - export MAIL_PORT=${MAIL_PORT}
+    # - export MAIL_SERVER=${MAIL_SERVER}
+    # - export MAIL_FROM_NAME=${MAIL_FROM_NAME}
     - python -m pytest
 
 # # Build API Image:
