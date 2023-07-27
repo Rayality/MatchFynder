@@ -42,7 +42,9 @@ def create_from_request(json_dict):
             )
             new_item["price_level"] = json_dict.get("price_level")
             new_item["rating"] = json_dict.get("rating")
-            new_item["user_ratings_count"] = json_dict.get("user_ratings_total")
+            new_item["user_ratings_count"] = json_dict.get(
+                "user_ratings_total"
+            )  # noqa
             new_item["picture_url"] = json_dict.get("picture_url")
             option_in = OptionIn(**new_item)
             option = OptionRepository.create(OptionRepository, option_in)
