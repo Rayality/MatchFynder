@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from auth.authenticator import authenticator
 from routers import options, search, accounts, places_api
 from socks import search_socket
+import os
 
 # from externals import send_mail
 
@@ -18,7 +19,8 @@ app.include_router(places_api.router)
 
 origins = [
     "http://localhost:3000",
-    "https://incognitoincredibles.gitlab.io/"
+    os.environ.get("CORS_HOST", None),
+    "https://incognitoincredibles.gitlab.io"
 ]
 
 app.add_middleware(
