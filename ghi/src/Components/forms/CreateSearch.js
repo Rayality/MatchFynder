@@ -53,12 +53,13 @@ export default function CreateSearchForm() {
   // and navigate to the search_options page for that result
   async function handleSubmit(e) {
     e.preventDefault();
-    if (formLat.payload != null && formLng.payload != null) {
+    if (formLat != null && formLng != null) {
+      if (formLat.payload != null && formLng.payload != null){
       const search_id = await handleApiCalls();
       dispatch(setAutoLng(null))
       dispatch(setAutoLat(null))
       navigate(`${search_id}/options`);
-    }
+    }}
   }
 
   return (
