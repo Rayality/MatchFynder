@@ -23,8 +23,8 @@ api-unit-tests-job:
     - cd api
     - pip install --upgrade pip
     - pip install -r requirements.txt
-    # - export DATABASE_URL='postgresql://example_user:secret@postgres/example_db'
-    # - export SIGNING_KEY=${SIGNING_KEY}
+    - export DATABASE_URL='postgresql://example_user:secret@postgres/example_db'
+    - export SIGNING_KEY=${SIGNING_KEY}
     - python -m pytest
 
 # # Build API Image:
