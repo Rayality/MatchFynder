@@ -27,11 +27,11 @@ function Nav() {
           {/* <NavLink className="navbar-brand" href="#">Finder</NavLink> */}
           <button
             onClick={initModal}
-            className="btn btn-primary"
+            className="btn btn-lg btn-secondary fynder-button btn3d"
             data-bs-toggle="modal"
             data-bs-target="#loginModal"
           >
-            <box-icon name='user'></box-icon>
+            <box-icon name='user' color="white"></box-icon>
             {/* replace this with a vector image, ask Nick if this doesnt make sense */}
           </button>
           <button
@@ -53,7 +53,7 @@ function Nav() {
           >
             <div className="offcanvas-header">
               <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-                Offcanvas
+                Menu
               </h5>
               <button
                 type="button"
@@ -65,10 +65,10 @@ function Nav() {
             <div className="offcanvas-body">
               <ul className="navbar-nav justify-content-end flex-grow-1 pe-3 mb-3">
                 <li className="nav-item">
-                  <button onClick={() => navigate('/')} className="btn btn-primary mb-3" aria-current="page" to="/">Home</button>
+                  <button onClick={() => navigate('/')} className="btn btn-lg btn-secondary fynder-button btn3d" aria-current="page" to="/">Home</button>
                 </li>
                 <li className="nav-item">
-                  <button onClick={handleLogout} className="btn btn-primary mb-3" to="/logout">
+                  <button onClick={handleLogout} className="btn btn-lg btn-secondary fynder-button btn3d" to="/logout">
                     Logout
                   </button>
                 </li>
