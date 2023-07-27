@@ -1,7 +1,8 @@
 fastapi[all]==0.92.00
 uvicorn[standard]==0.17.6
 pytest==7.1.2
-psycopg[binary,pool]==3.1.2
+psycopg[pool]==3.1.2
+psycopg[binary]==3.1.4
 jwtdown-fastapi==0.5.0
 pgeocode==0.4.0
 websockets==11.0.3
