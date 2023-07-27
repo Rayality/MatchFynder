@@ -13,7 +13,7 @@ app.include_router(authenticator.router)
 app.include_router(accounts.router)
 app.include_router(search.router)
 app.include_router(search_socket.router)
-app.include_router(send_mail.router)
+# app.include_router(send_mail.router)
 
 app.include_router(places_api.router)
 
