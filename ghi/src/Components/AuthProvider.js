@@ -9,18 +9,14 @@ const AuthProvider = ({ children }) => {
 
   // Function to set the authentication token
   const setToken = (newToken) => {
-    setToken_(newToken);
-  };
-
-  useEffect(() => {
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = "bearer " + token;
-      localStorage.setItem("token", token);
-    } else {
-      delete axios.defaults.headers.common["Authorization"];
-      localStorage.removeItem("token");
+    try {
+      if (typeof newToken !== "string") throw typeof newToken;
+      setToken_(newToken);
+    } catch (e) {
+      console.error(`${e} is not string`)
     }
-  }, [token]);
+
+  };
 
   // Memoized value of the authentication context
   const contextValue = useMemo(

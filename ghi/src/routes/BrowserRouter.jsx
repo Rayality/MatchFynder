@@ -1,4 +1,3 @@
-import Root from "./root";
 import Login from "./login";
 import CreateAccount from "./createAccount";
 import PresentOption from "./presentOption";

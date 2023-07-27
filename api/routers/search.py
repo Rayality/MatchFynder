@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, Response
 from queries.search import (
     Search,
-    SearchOut,
     SearchOptions,
     SearchRepository,
     SearchOptionsLink,
@@ -10,6 +9,7 @@ from queries.search import (
 )
 from queries.options import Error
 from typing import Union
+from auth.authenticator import authenticator
 
 router = APIRouter()
 
@@ -17,17 +17,25 @@ router = APIRouter()
 # create search
 @router.post("/search/create")
 def create_search(
-    search: Search, response: Response, repo: SearchRepository = Depends()
+    search: Search,
+    response: Response,
+    repo: SearchRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return repo.create_search(search)
+    if account_data:
+        return repo.create_search(search)
 
 
 # get search finders
 @router.get("/search/{search_id}/finders")
 def get_search_finders(
-    search_id: int, response: Response, repo: SearchRepository = Depends()
+    search_id: int,
+    response: Response,
+    repo: SearchRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return repo.get_search_finders(search_id)
+    if account_data:
+        return repo.get_search_finders(search_id)
 
 
 # add search option
@@ -39,8 +47,10 @@ def add_search_option(
     s: SearchOptionsLink,
     response: Response,
     repo: SearchRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return repo.add_search_option(s.search_id, s.option_id)
+    if account_data:
+        return repo.add_search_option(s.search_id, s.option_id)
 
 
 # get search options
@@ -75,15 +85,24 @@ def update_match_made(
 
 
 @router.get("/search/", response_model=Union[list[SingleSearch], Error])
-def get_searches(response: Response, repo: SearchRepository = Depends()):
-    return repo.get_searches()
+def get_searches(
+    response: Response,
+    repo: SearchRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    if account_data:
+        return repo.get_searches()
 
 
 @router.get("/search/{search_id}/", response_model=Union[SingleSearch, Error])
 def get_single_search(
-    search_id: int, response: Response, repo: SearchRepository = Depends()
+    search_id: int,
+    response: Response,
+    repo: SearchRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> SingleSearch:
-    return repo.get_single_search(search_id)
+    if account_data:
+        return repo.get_single_search(search_id)
 
 
 @router.get(

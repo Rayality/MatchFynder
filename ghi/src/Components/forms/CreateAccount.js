@@ -1,12 +1,26 @@
 import { NavLink } from "react-router-dom";
 import SendData from "../../logic/SendData";
-import { useSelector, useDispatch } from "react-redux";
-import { updated, reset } from "../../Redux/account-slice";
+import { useDispatch } from "react-redux";
+import { setUsername, setPassword } from "../../Redux/account-slice";
+import { useState } from "react";
+import { useAuth } from "../AuthProvider";
+import { encodeAccount } from "../../logic/encodeAccount";
 
 export default function CreateAccountForm() {
-  const account = useSelector((state) => state.accountCreator.value);
+  const { setToken } = useAuth();
+  const [account, setAccount] = useState(
+    {
+      username: "",
+      email: "",
+      first_name: "",
+      last_name: "",
+      password: "",
+      confirmPassword: "",
+    },
+  )
   const dispatch = useDispatch();
   const url = process.env.REACT_APP_API_HOST + "/api/accounts/";
+  let agreed = false
 
   function cleanData(data = {}) {
     const clean = {};
@@ -19,8 +33,9 @@ export default function CreateAccountForm() {
   }
 
   function handleChange(e) {
-    let value = [e.target.name, e.target.value];
-    dispatch(updated(value));
+    let value = e.target.value;
+    let name = e.target.name
+    setAccount({ ...account, [name]: value });
   }
 
   function handleSubmit(e) {
@@ -28,7 +43,9 @@ export default function CreateAccountForm() {
     if (account.confirmPassword === account.password) {
       const data = cleanData(account);
       SendData(url, "post", data);
-      dispatch(reset());
+      dispatch(setUsername(account.username));
+      dispatch(setPassword(account.password));
+      setToken(encodeAccount(account.password));
     } else {
       console.log("Passwords do not match");
     }
@@ -126,7 +143,7 @@ export default function CreateAccountForm() {
           />
         </div>
         <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input" id="termsCheck" />
+          <input onClick={() => agreed = !agreed} type="checkbox" className="form-check-input" id="termsCheck" />
           <label className="form-check-label" htmlFor="exampleCheck1">
             I agree to the <NavLink href="#">terms and conditions</NavLink>
           </label>

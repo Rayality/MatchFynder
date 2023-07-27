@@ -1,10 +1,13 @@
-import encode from "../../logic/encodeAccount";
+import { encodeAccount } from "../../logic/encodeAccount";
 import { usePostLoginMutation } from "../../Redux/loginAPI";
 import { useState } from "react";
 import { useAuth } from "../AuthProvider";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUsername, setPassword } from '../../Redux/account-slice'
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
   const { setToken } = useAuth();
   const [account, setAccount] = useState({
     username: "",
@@ -21,9 +24,12 @@ export default function LoginForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    encode(account);
-    const newToken = await loginPost(account);
-    setToken(newToken);
+    let params = new URLSearchParams(account)
+    await loginPost(params);
+    dispatch(setUsername(account.username))
+    dispatch(setPassword(account.password))
+    const token = encodeAccount(account.password)
+    setToken(token);
     navigate("/", { replace: true })
   }
   return (
