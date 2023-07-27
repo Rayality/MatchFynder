@@ -46,7 +46,7 @@ build-front-end-job:
   stage: build
   image: node:lts-bullseye
   needs:
-    - api-unit-test-job
+    - api-unit-tests-job
     - lint-test-job
   variables:
     #     # If either of these variables is defined in the GitLab
