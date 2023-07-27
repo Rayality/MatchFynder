@@ -28,6 +28,7 @@ def create_search(
 ):
     if account_data:
         owner = account_data.get("id")
+        print(owner)
         return repo.create_search({"owner": owner})
     else:
         raise not_authorized
