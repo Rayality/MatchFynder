@@ -1,22 +1,23 @@
-import axios from "axios";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   // State to hold the authentication token
-  const [token, setToken_] = useState(localStorage.getItem("token"));
+  const [token, setToken_] = useState(localStorage.getItem("fastapi_token"));
 
   // Function to set the authentication token
   const setToken = (newToken) => {
-    try {
-      if (typeof newToken !== "string") throw typeof newToken;
-      setToken_(newToken);
-    } catch (e) {
-      console.error(`${e} is not string`)
-    }
-
+    setToken_(newToken);
   };
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem('fastapi_token', token)
+    } else {
+      localStorage.removeItem('fastapi_token')
+    }
+  })
 
   // Memoized value of the authentication context
   const contextValue = useMemo(

@@ -22,11 +22,18 @@ export const optionsApi = createApi({
     getAllOptions: builder.query({
       // define a query function to return
       // the endpoints
-      query: () => "/options",
-      providesTags: ["OptionList"]
+      query: () => ({
+        url: "/options",
+        credentials: "include",
+        providesTags: ["OptionList"]
+      }),
+
     }),
     getSearchOptions: builder.query({
-      query: ({ search_id }) => `/search/${search_id}/options`
+      query: ({ search_id }) => ({
+        url: `/search/${search_id}/options`,
+        credentials: "include",
+      })
     })
   })
 });

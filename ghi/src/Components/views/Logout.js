@@ -1,6 +1,6 @@
-import SendData from "../../logic/SendData";
+import { useLogoutMutation } from "../../Redux/loginAPI";
 
 export default function Logout() {
-  const url = process.env.REACT_APP_ACCOUNTS_HOST;
-  SendData(url, "delete");
+  // const [logout] = useLogoutMutation()
+  // logout()
 }

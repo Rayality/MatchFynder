@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, HTTPException, status
 from queries.search import (
     Search,
     SearchOptions,
@@ -12,18 +12,25 @@ from typing import Union
 from auth.authenticator import authenticator
 
 router = APIRouter()
+not_authorized = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="Invalid authentication credentials",
+    headers={"WWW-Authenticate": "Bearer"},
+)
 
 
 # create search
 @router.post("/search/create")
 def create_search(
-    search: Search,
     response: Response,
     repo: SearchRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     if account_data:
-        return repo.create_search(search)
+        owner = account_data.get("id")
+        return repo.create_search({"owner": owner})
+    else:
+        raise not_authorized
 
 
 # get search finders
@@ -36,6 +43,8 @@ def get_search_finders(
 ):
     if account_data:
         return repo.get_search_finders(search_id)
+    else:
+        raise not_authorized
 
 
 # add search option
@@ -51,6 +60,8 @@ def add_search_option(
 ):
     if account_data:
         return repo.add_search_option(s.search_id, s.option_id)
+    else:
+        raise not_authorized
 
 
 # get search options
@@ -92,6 +103,8 @@ def get_searches(
 ):
     if account_data:
         return repo.get_searches()
+    else:
+        raise not_authorized
 
 
 @router.get("/search/{search_id}/", response_model=Union[SingleSearch, Error])
@@ -103,6 +116,8 @@ def get_single_search(
 ) -> SingleSearch:
     if account_data:
         return repo.get_single_search(search_id)
+    else:
+        raise not_authorized
 
 
 @router.get(

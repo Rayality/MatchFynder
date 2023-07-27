@@ -1,13 +1,24 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ModalForm from "./forms/Modal";
 import { useDispatch } from "react-redux";
 import { shown } from "../Redux/modal-slice";
+import { useLogoutMutation } from "../Redux/loginAPI";
+import { useAuth } from "./AuthProvider";
 
 function Nav() {
   const dispatch = useDispatch();
   const initModal = () => {
     dispatch(shown());
   };
+  const navigate = useNavigate()
+  const [logout] = useLogoutMutation()
+  const { setToken } = useAuth()
+
+  const handleLogout = () => {
+    logout()
+    setToken(undefined)
+    navigate("/", { replace: true })
+  }
 
   return (
     <>
@@ -52,14 +63,14 @@ function Nav() {
               ></button>
             </div>
             <div className="offcanvas-body">
-              <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <ul className="navbar-nav justify-content-end flex-grow-1 pe-3 mb-3">
                 <li className="nav-item">
-                  {/* <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink> */}
+                  <button onClick={() => navigate('/')} className="btn btn-primary mb-3" aria-current="page" to="/">Home</button>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/logout">
+                  <button onClick={handleLogout} className="btn btn-primary mb-3" to="/logout">
                     Logout
-                  </NavLink>
+                  </button>
                 </li>
               </ul>
               <form className="d-flex mt-3" role="search">

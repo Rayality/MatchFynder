@@ -1,13 +1,11 @@
 import { NavLink } from "react-router-dom";
-import SendData from "../../logic/SendData";
-import { useDispatch } from "react-redux";
-import { setUsername, setPassword } from "../../Redux/account-slice";
 import { useState } from "react";
 import { useAuth } from "../AuthProvider";
-import { encodeAccount } from "../../logic/encodeAccount";
+import { useCreateAccountMutation } from "../../Redux/loginAPI";
 
 export default function CreateAccountForm() {
   const { setToken } = useAuth();
+  const [createAccount] = useCreateAccountMutation()
   const [account, setAccount] = useState(
     {
       username: "",
@@ -18,8 +16,6 @@ export default function CreateAccountForm() {
       confirmPassword: "",
     },
   )
-  const dispatch = useDispatch();
-  const url = process.env.REACT_APP_API_HOST + "/api/accounts/";
   let agreed = false
 
   function cleanData(data = {}) {
@@ -38,14 +34,13 @@ export default function CreateAccountForm() {
     setAccount({ ...account, [name]: value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (account.confirmPassword === account.password) {
       const data = cleanData(account);
-      SendData(url, "post", data);
-      dispatch(setUsername(account.username));
-      dispatch(setPassword(account.password));
-      setToken(encodeAccount(account.password));
+      const response = await createAccount(data);
+      const token = response.data.access_token;
+      setToken(token);
     } else {
       console.log("Passwords do not match");
     }

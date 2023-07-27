@@ -1,4 +1,3 @@
-import { encodeAccount } from "../../logic/encodeAccount";
 import { usePostLoginMutation } from "../../Redux/loginAPI";
 import { useState } from "react";
 import { useAuth } from "../AuthProvider";
@@ -25,10 +24,10 @@ export default function LoginForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     let params = new URLSearchParams(account)
-    await loginPost(params);
+    const response = await loginPost(params);
+    const token = response.data.access_token
     dispatch(setUsername(account.username))
     dispatch(setPassword(account.password))
-    const token = encodeAccount(account.password)
     setToken(token);
     navigate("/", { replace: true })
   }

@@ -11,9 +11,25 @@ export const loginApi = createApi({
         url: "/token",
         method: "POST",
         body: formBody,
+        credentials: "include"
       }),
     }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "/token",
+        method: "DELETE",
+        credentials: "include"
+      })
+    }),
+    createAccount: builder.mutation({
+      query: (formBody) => ({
+        url: "accounts",
+        method: "POST",
+        body: formBody,
+        credentials: "include",
+      })
+    })
   }),
 });
 
-export const { usePostLoginMutation } = loginApi;
+export const { usePostLoginMutation, useLogoutMutation, useCreateAccountMutation } = loginApi;

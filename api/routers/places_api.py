@@ -1,10 +1,16 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, HTTPException, status
 from queries.options import Error, OptionOut
 from queries.places_api import PlacesRepository
 from typing import Union, Optional
 from auth.authenticator import authenticator
 
 router = APIRouter()
+
+not_authorized = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="Invalid authentication credentials",
+    headers={"WWW-Authenticate": "Bearer"},
+)
 
 
 @router.get(
@@ -20,6 +26,8 @@ def get_google_options_zipcode(
 ):
     if account_data:
         return repo.search_from_zipcode(zipcode, search_id)
+    else:
+        raise not_authorized
 
 
 @router.get(
@@ -35,6 +43,8 @@ def get_google_options_city(
 ):
     if account_data:
         return repo.search_from_city(city, state)
+    else:
+        raise not_authorized
 
 
 @router.get("/place/details/")
