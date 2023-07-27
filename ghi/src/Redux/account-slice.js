@@ -1,13 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: {
+  account: {
     username: "",
-    email: "",
-    first_name: "",
-    last_name: "",
     password: "",
-    confirmPassword: "",
   },
 };
 
@@ -15,21 +11,20 @@ const accountSlice = createSlice({
   name: "account",
   initialState,
   reducers: {
-    updated(state, val) {
-      state.value[val.payload[0]] = val.payload[1];
-    },
     reset(state) {
-      state.value = {
-        username: "",
-        email: "",
-        first_name: "",
-        last_name: "",
+      state.account = {
+        account: "",
         password: "",
-        confirmPassword: "",
       };
     },
+    setUsername(state, val) {
+      state.account.username = val.payload[0]
+    },
+    setPassword(state, val) {
+      state.account.password = val.payload[0]
+    }
   },
 });
 
-export const { updated, reset } = accountSlice.actions;
+export const { updated, reset, setPassword, setUsername } = accountSlice.actions;
 export default accountSlice.reducer;

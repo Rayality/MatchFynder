@@ -39,8 +39,8 @@ export default function CreateSearchForm() {
       if (search_id) {
         let latLongString = `${formLat.payload} ${formLng.payload}`
         const apizip_payload = await queryApiZip({
-          location:latLongString,
-          search_id:search_id,
+          location: latLongString,
+          search_id: search_id,
         }).unwrap();
         return search_id;
       }
@@ -58,8 +58,8 @@ export default function CreateSearchForm() {
       dispatch(setAutoLng(null))
       dispatch(setAutoLat(null))
       navigate(`${search_id}/options`);
-      }
     }
+  }
 
   return (
     <div className="cover-container d-flex mx-auto flex-column">
@@ -70,7 +70,7 @@ export default function CreateSearchForm() {
           </div>
           <form onSubmit={handleSubmit} className="form-floating mb-3">
             <div className="mb-3">
-            <AutoComplete />
+              <AutoComplete />
             </div>
             <button
               type="submit"
@@ -82,54 +82,56 @@ export default function CreateSearchForm() {
         </div>
       </div>
       <div className="container">
-        <h2 className="fynder-slate-text">how it works</h2>
-        <div className="row bs-wizard">
-          <div className="col bs-wizard-step active">
-            <div className="text-center bs-wizard-stepnum">enter location</div>
-            <div className="progress">
-              <div className="progress-bar"/>
+        <div className="container">
+          <h2 className="fynder-slate-text">how it works</h2>
+          <div className="row bs-wizard">
+            <div className="col bs-wizard-step active">
+              <div className="text-center bs-wizard-stepnum">enter location</div>
+              <div className="progress">
+                <div className="progress-bar" />
+              </div>
+              <button
+                className="bs-wizard-dot border-0"
+                aria-describedby="tooltip"
+                title="enter a zipcode or city, state"
+              />
             </div>
-            <button
-              className="bs-wizard-dot border-0"
-              aria-describedby="tooltip"
-              title="enter a zipcode or city, state"
-            />
-          </div>
 
-          <div className="col bs-wizard-step disabled">
-            <div className="text-center bs-wizard-stepnum">invite others</div>
-            <div className="progress">
-              <div className="progress-bar"/>
+            <div className="col bs-wizard-step disabled">
+              <div className="text-center bs-wizard-stepnum">invite others</div>
+              <div className="progress">
+                <div className="progress-bar" />
+              </div>
+              <button
+                className="bs-wizard-dot border-0"
+                aria-describedby="tooltip"
+                title="invite your family or friends to participate"
+              />
             </div>
-            <button
-              className="bs-wizard-dot border-0"
-              aria-describedby="tooltip"
-              title="invite your family or friends to participate"
-            />
-          </div>
 
-          <div className="col bs-wizard-step disabled">
-            <div className="text-center bs-wizard-stepnum">approve/veto</div>
-            <div className="progress">
-              <div className="progress-bar"/>
+            <div className="col bs-wizard-step disabled">
+              <div className="text-center bs-wizard-stepnum">approve/veto</div>
+              <div className="progress">
+                <div className="progress-bar" />
+              </div>
+              <button
+                className="bs-wizard-dot border-0"
+                aria-describedby="tooltip"
+                title="everyone gets a chance to approve/veto restaurant options"
+              />
             </div>
-            <button
-              className="bs-wizard-dot border-0"
-              aria-describedby="tooltip"
-              title="everyone gets a chance to approve/veto restaurant options"
-            />
-          </div>
 
-          <div className="col bs-wizard-step disabled">
-            <div className="text-center bs-wizard-stepnum">match</div>
-            <div className="progress">
-              <div className="progress-bar"/>
+            <div className="col bs-wizard-step disabled">
+              <div className="text-center bs-wizard-stepnum">match</div>
+              <div className="progress">
+                <div className="progress-bar" />
+              </div>
+              <button
+                className="bs-wizard-dot border-0"
+                aria-describedby="tooltip"
+                title="get your match, along with fun/snarky participation badges"
+              />
             </div>
-            <button
-              className="bs-wizard-dot border-0"
-              aria-describedby="tooltip"
-              title="get your match, along with fun/snarky participation badges"
-            />
           </div>
         </div>
       </div>

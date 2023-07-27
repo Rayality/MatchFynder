@@ -47,7 +47,6 @@ class AccountRepo(BaseModel):
         info: AccountIn,
         hashed_password: str,
     ) -> HashedAccountOut:
-        # print(f"LOOK FOR ME {info.username}")
         with pool.connection() as conn:
             cur = conn.execute(
                 """
@@ -73,7 +72,6 @@ class AccountRepo(BaseModel):
             account_data = info.dict()
             account_data.pop("password")
             return AccountOut(id=id, **account_data)
-        return cur
 
     def create_hashed_account_from_record(self, record):
         user = HashedAccountOut(
@@ -85,6 +83,25 @@ class AccountRepo(BaseModel):
             hashed_password=record[5],
         )
         return user
+
+    def get_account_from_token(self, token):
+        with pool.conection() as conn:
+            cur = conn.execute(
+                """
+                SELECT id
+                     , username
+                     , email
+                     , first_name
+                     , last_name
+                     , hashed_password
+                FROM finder
+                WHERE hashed_password = %s
+                """,
+                [token],
+            )
+            record = cur.fetchone()
+            user = self.create_hashed_account_from_record(record)
+            return user
 
 
 class DuplicateAccountError(BaseException):
