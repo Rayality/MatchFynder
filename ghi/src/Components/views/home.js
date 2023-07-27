@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 function Home() {
   const { token } = useAuth()
-  const { navigate } = useNavigate()
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const handleClick = () => {
