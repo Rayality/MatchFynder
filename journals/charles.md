@@ -49,6 +49,8 @@ aha - npm modules get stored in the package.json when installed.
 --furthered knowledge of html/css layouts
 --completed match made page and all additional components except badge cards
 --created additional api endpoints and functionality
+--created a button/link to get directions to the place.
+    (will display a map in the future)
 ## 7/24/2023
 --made the buttons on the match made page functional
     --redirects to directions for the matched place
@@ -57,4 +59,10 @@ aha - npm modules get stored in the package.json when installed.
 ## 7/25/2023
 --added a column to the "search" table in sql to hold the
     google api response code for more options.
+--added the functionality to get more related places from google,
+--added the functionality to get more detailed information about a place
+    (want to store this in a mongodb in the future)
 
+## 7/26/2023
+--Implemented an autocomplete search bar for the location
+    using redux/google_api. Working on a way to autofill if an option wasn't selected
