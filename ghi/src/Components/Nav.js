@@ -31,7 +31,7 @@ function Nav() {
             data-bs-toggle="modal"
             data-bs-target="#loginModal"
           >
-            Insert Profile person thumbnail here!
+            <box-icon name='user'></box-icon>
             {/* replace this with a vector image, ask Nick if this doesnt make sense */}
           </button>
           <button
@@ -73,17 +73,6 @@ function Nav() {
                   </button>
                 </li>
               </ul>
-              <form className="d-flex mt-3" role="search">
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button className="btn btn-outline-success" type="submit">
-                  Search
-                </button>
-              </form>
             </div>
           </div>
         </div>

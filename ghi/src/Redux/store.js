@@ -16,7 +16,7 @@ export const store = configureStore({
     [loginApi.reducerPath]: loginApi.reducer,
     modalCheck: modalReducer,
     autoLocation: autoLcationReducer,
-    // [wsApi.reducerPath]: wsApi.reducer
+    [wsApi.reducerPath]: wsApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

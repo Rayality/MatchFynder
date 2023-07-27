@@ -135,5 +135,6 @@ export default function CreateSearchForm() {
           </div>
         </div>
       </div>
-      );
+    </div>
+  );
 }
