@@ -4,7 +4,8 @@ from auth.authenticator import authenticator
 import os
 from routers import options, search, accounts, places_api
 from socks import search_socket
-from externals import send_mail
+
+# from externals import send_mail
 
 app = FastAPI()
 app.include_router(options.router)
