@@ -1,4 +1,3 @@
-import Root from "./root";
 import Login from "./login";
 import CreateAccount from "./createAccount";
 import PresentOption from "./presentOption";
@@ -7,35 +6,29 @@ import Layout from "./Layout";
 import NewSearch from "./search";
 import InviteFriends from "./inviteFriends";
 import Home from "../Components/views/home";
-import { createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MatchMadePage from "./matchMade";
+import { useAuth } from "../Components/AuthProvider";
+import { ProtectedRoute } from "./ProtectedRoute";
 
-const domain = /https:\/\/[^/]+/;
-const router = createBrowserRouter(
-  [
+const Routes = () => {
+  const { token } = useAuth();
+  const publicRoutes = [
     {
-      Component: Layout,
+      path: "/",
+      Component: Home,
+    },
+  ];
+  const authRoutes = [
+    {
+      path: "*",
+      Component: ProtectedRoute,
       children: [
-        {
-          path: "*",
-          Component: Root,
-        },
-        {
-          path: "home/",
-          Component: Home,
-        },
-        {
-          path: "login/",
-          Component: Login,
-        },
         {
           path: "signup/",
           Component: CreateAccount,
         },
-        {
-          path: "logout/",
-          Component: Logout,
-        },
+
         {
           path: "search/",
           Component: NewSearch,
@@ -48,20 +41,43 @@ const router = createBrowserRouter(
           // },
         },
         {
-          path: "match/:place_id/",
-          Component: MatchMadePage,
-        },
-        {
           path: "search/:searchId/options/",
           Component: PresentOption,
           // loader: async ({ params }) => {},
         },
+        {
+          path: "match/:place_id",
+          Component: MatchMadePage,
+        },
+        {
+          path: "logout/",
+          Component: Logout,
+        },
       ],
     },
-  ],
-  {
-    basename: process.env.PUBLIC_URL.replace(domain, ""),
-  }
-);
+  ];
+  const nonAuthRoutes = [
+    {
+      path: "/",
+      Component: Home,
+    },
+    {
+      path: "login/",
+      Component: Login,
+    },
+  ];
+  const router = createBrowserRouter([
+    {
+      Component: Layout,
+      path: "/",
+      children: [
+        ...publicRoutes,
+        ...(!token ? nonAuthRoutes : []),
+        ...authRoutes,
+      ],
+    },
+  ]);
+  return <RouterProvider router={router} />;
+};
 
-export { router };
+export default Routes;
