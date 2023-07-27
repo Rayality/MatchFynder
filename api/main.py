@@ -18,7 +18,7 @@ app.include_router(places_api.router)
 
 origins = [
     "http://localhost:3000",
-    "https://incognitoincredibles.gitlab.io/module3-project-finder/"
+    "https://incognitoincredibles.gitlab.io/"
 ]
 
 app.add_middleware(
