@@ -1,7 +1,7 @@
 import json
 import requests
 import os
-from queries.generic_sql import generic_insert, generic_find, generic_update
+from queries.generic_sql import generic_insert, generic_find
 from queries.options import OptionIn, OptionRepository
 from queries.pool import pool
 from psycopg import sql
@@ -111,7 +111,7 @@ def get_next_page(search_id):
         search = search[0]
         token = search["next_page_token"]
         if token != 1:
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"  # noqa
             params = {"pagetoken": token, "key": GOOGLE_MAPS_API_KEY}
             response = requests.get(url, params=params)
             content = json.loads(response.content)

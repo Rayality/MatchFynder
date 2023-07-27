@@ -7,15 +7,16 @@ const AutoComplete = () => {
     const dispatch = useDispatch()
     const autoCompleteRef = useRef();
     const inputRef = useRef();
-    const options = {
-        componentRestrictions: { country: "us" },
-        fields: ["address_components", "geometry", "name"],
-        types: ["geocode"]
-    };
+
     useEffect(() => {
         let load = async () => {
+            const options = {
+                componentRestrictions: { country: "us" },
+                fields: ["address_components", "geometry", "name"],
+                types: ["geocode"]
+            };
             let google = window.google
-            let { AutocompleteService } = await google.maps.importLibrary("places");
+            await google.maps.importLibrary("places");
             autoCompleteRef.current = await new google.maps.places.Autocomplete(
                 inputRef.current,
                 options
@@ -34,7 +35,7 @@ const AutoComplete = () => {
             );
         }
         load();
-    }, []);
+    }, [dispatch]);
     return (
         <div>
             <label>Select Location :</label>

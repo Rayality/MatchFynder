@@ -7,7 +7,7 @@ from psycopg.rows import dict_row
 # create records in postgresql using psycopg, and
 # return the record that was created
 def generic_insert(table_name, data):
-    if type(data) is not type({}):
+    if not isinstance(data, dict()):
         data = data.dict()
     identifiers = list(data.keys())
     values = list(data.values())
@@ -57,8 +57,13 @@ def generic_get_all(table_name: str):
 
 # given a table name, a set of data to change, and a where filter
 # update records that match the where filter using the data
-def generic_update(table_name, data, where_identifier: str, where_equal_to: str):
-    if type(data) is not type({}):
+def generic_update(
+    table_name,
+    data,
+    where_identifier: str,
+    where_equal_to: str,
+):
+    if not isinstance(data, dict()):
         data = data.dict()
     identifiers = list(data.keys())
     values = list(data.values())
