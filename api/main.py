@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from auth.authenticator import authenticator
-import os
 from routers import options, search, accounts, places_api
 from socks import search_socket
 
