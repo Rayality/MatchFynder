@@ -13,6 +13,10 @@ export const loginApi = createApi({
         body: formBody,
         credentials: "include"
       }),
+      async onQueryStarted(
+        arg,
+        { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }
+      ) { },
     }),
     logout: builder.mutation({
       query: () => ({

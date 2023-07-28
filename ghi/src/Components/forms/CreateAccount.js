@@ -2,9 +2,12 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../AuthProvider";
 import { useCreateAccountMutation } from "../../Redux/loginAPI";
+import { useDispatch } from "react-redux";
+import { shown } from "../../Redux/modal-slice";
 
 export default function CreateAccountForm() {
   const { setToken } = useAuth();
+  const dispatch = useDispatch()
   const [createAccount] = useCreateAccountMutation()
   const [account, setAccount] = useState(
     {
@@ -39,8 +42,11 @@ export default function CreateAccountForm() {
     if (account.confirmPassword === account.password) {
       const data = cleanData(account);
       const response = await createAccount(data);
-      const token = response.data.access_token;
-      setToken(token);
+      if (!response.error) {
+        const token = response.data.access_token;
+        setToken(token);
+        dispatch(shown());
+      }
     } else {
       console.log("Passwords do not match");
     }
