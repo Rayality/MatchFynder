@@ -42,7 +42,7 @@ export default function CreateAccountForm() {
       const token = response.data.access_token;
       setToken(token);
     } else {
-      console.log("Passwords do not match  1");
+      console.log("Passwords do not match");
     }
   }
 
