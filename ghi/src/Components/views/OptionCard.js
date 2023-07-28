@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "boxicons";
 import { useSwipeable } from "react-swipeable";
 import ErrorNotification from "../../ErrorNotification";
@@ -14,6 +14,8 @@ function Option(props) {
   // in order to set/reset the index of the action option from the options list
   const [index, setIndex] = useState(0);
   const { data, error, isLoading } = useGetOptionsBySearchQuery(searchId);
+  const [thumbnail, setThumbnail] = useState('')
+
   // const [socketUrl, setSocketUrl] = useState(
   //   `ws://localhost:8000/search/${searchId}`
   // );
@@ -86,7 +88,7 @@ function Option(props) {
                   <img className="img-thumbnail object-fit-cover"
                     style={{ "max-height": "400px" }}
                     draggable="false"
-                    src={data[index][0].picture_url}
+                    src={thumbnail}
                     alt="google maps sourced pic associated with restaurant"
                   />
                   <div className="caption">
