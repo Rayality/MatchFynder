@@ -49,7 +49,8 @@ export default function CreateAccountForm() {
   return (
     <div className="container mb-3 shadow">
       <div className="mb-3">
-        <h1>Create A Fynder Account</h1>
+        <h1>Create</h1>
+        <h1>Fynder Account</h1>
       </div>
       <form onSubmit={handleSubmit} className="form-floating mb-3">
         <div className="mb-3">
