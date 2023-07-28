@@ -1,12 +1,22 @@
 import { NavLink } from "react-router-dom";
-import SendData from "../../logic/SendData";
-import { useSelector, useDispatch } from "react-redux";
-import { updated, reset } from "../../Redux/account-slice";
+import { useState } from "react";
+import { useAuth } from "../AuthProvider";
+import { useCreateAccountMutation } from "../../Redux/loginAPI";
 
 export default function CreateAccountForm() {
-  const account = useSelector((state) => state.accountCreator.value);
-  const dispatch = useDispatch();
-  const url = process.env.REACT_APP_API_HOST + "/api/accounts/";
+  const { setToken } = useAuth();
+  const [createAccount] = useCreateAccountMutation()
+  const [account, setAccount] = useState(
+    {
+      username: "",
+      email: "",
+      first_name: "",
+      last_name: "",
+      password: "",
+      confirmPassword: "",
+    },
+  )
+  let agreed = false
 
   function cleanData(data = {}) {
     const clean = {};
@@ -19,16 +29,18 @@ export default function CreateAccountForm() {
   }
 
   function handleChange(e) {
-    let value = [e.target.name, e.target.value];
-    dispatch(updated(value));
+    let value = e.target.value;
+    let name = e.target.name
+    setAccount({ ...account, [name]: value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (account.confirmPassword === account.password) {
       const data = cleanData(account);
-      SendData(url, "post", data);
-      dispatch(reset());
+      const response = await createAccount(data);
+      const token = response.data.access_token;
+      setToken(token);
     } else {
       console.log("Passwords do not match  1");
     }
@@ -37,7 +49,8 @@ export default function CreateAccountForm() {
   return (
     <div className="container mb-3 shadow">
       <div className="mb-3">
-        <h1>Create A Fynder Account</h1>
+        <h1>Create</h1>
+        <h1>Fynder Account</h1>
       </div>
       <form onSubmit={handleSubmit} className="form-floating mb-3">
         <div className="mb-3">
@@ -126,7 +139,7 @@ export default function CreateAccountForm() {
           />
         </div>
         <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input" id="termsCheck" />
+          <input onClick={() => agreed = !agreed} type="checkbox" className="form-check-input" id="termsCheck" />
           <label className="form-check-label" htmlFor="exampleCheck1">
             I agree to the <NavLink href="#">terms and conditions</NavLink>
           </label>

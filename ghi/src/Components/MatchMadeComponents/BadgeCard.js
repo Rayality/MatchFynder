@@ -1,5 +1,5 @@
 import React from "react";
-import "./match-made.css";
+import "./match-pics.css";
 
 export const BadgeCard = () => {
   return (
@@ -8,7 +8,7 @@ export const BadgeCard = () => {
         <div className="PIC">PIC</div>
       </div>
       <div className="username">Username</div>
-        <div className="badge-award">Badge award</div>
+      <div className="badge-award">Badge award</div>
     </div>
   );
 };

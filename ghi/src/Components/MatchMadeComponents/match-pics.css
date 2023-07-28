@@ -1,0 +1,57 @@
+/* $custom-colors: (
+    "custom-atomic-tangerine": #FCA17D,
+    "custom-lavender": #DADFF7,
+    "custom-flax": #FFEE93,
+    "custom-slate-grey": #254441,
+    "custom-oxford-blue": #020122,
+    ); */
+
+.pictures-bg {
+  display: flex;
+  width: 80%;
+  position: relative;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 0;
+  margin: 2%;
+  flex: 0 1 45%;
+}
+
+.pictures-bg .slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  height: 100%;
+  padding: 1.5% 0;
+}
+
+.slick-list .pic {
+  object-fit: cover;
+  height: 35vh;
+  width: 20%;
+}
+
+.pictures-bg .slick-list .slick-active {
+  display: block;
+  transform: scale(1.1);
+  padding: 0;
+  margin: 0 0.1%;
+  transition: 1s ease-in-out;
+}
+
+.pictures-bg .slick-slide {
+  object-fit: cover;
+  height: 100%;
+  width: 30rem;
+  transform: scale(0.75);
+  transition: 0.9s ease;
+}

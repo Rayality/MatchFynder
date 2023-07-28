@@ -20,6 +20,12 @@ services:
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
       GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY}
+      # MAIL_USERNAME: ${MAIL_USERNAME}
+      # MAIL_PASSWORD: ${MAIL_PASSWORD}
+      # MAIL_FROM: ${MAIL_FROM}
+      # MAIL_PORT: ${MAIL_PORT}
+      # MAIL_SERVER: ${MAIL_SERVER}
+      # MAIL_FROM_NAME: ${MAIL_FROM_NAME}
       DATABASE_URL: postgresql://example_user:secret@postgres/example_db
       WAIT_HOSTS: postgres:5432
       CORS_HOST: http://localhost:3000
@@ -44,6 +50,7 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
+      REACT_APP_API_KEY: ${GOOGLE_MAPS_API_KEY}
       REACT_APP_API_HOST: ${REACT_APP_API_HOST}
   pg-admin:
     image: dpage/pgadmin4

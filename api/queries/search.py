@@ -1,12 +1,11 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Union, Optional
+from typing import Union
 from .pool import pool
 from .generic_sql import (
     generic_insert,
     generic_find,
     generic_get_all,
-    generic_update,
 )
 from .options import OptionRepository
 from externals.google_place import get_next_page
@@ -172,7 +171,10 @@ class SearchRepository:
             )
             result = []
             for row in search_options_by_search_id:
-                option = OptionRepository.get_single_option(self, row["option_id"])
+                option = OptionRepository.get_single_option(
+                    self,
+                    row["option_id"],
+                )
                 result.append(option)
             return result
 

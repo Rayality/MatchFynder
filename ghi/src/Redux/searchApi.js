@@ -22,26 +22,28 @@ export const searchApi = createApi({
     createSearch: builder.mutation({
       query: (data) => ({
         url: "/search/create",
-        body: {
-          owner: 1,
-        },
-        method: "post"
+        method: "post",
+        credentials: "include"
       }),
     }),
     getSearch: builder.query({
       // define a query function to return
       // the endpoints
-      query: (search_id) => `search/${search_id}/options`,
+      query: (search_id) => ({
+        url: `search/${search_id}/options`,
+        credentials: "include",
+      }),
       transformResponse: (response, meta, arg) => response.data,
       transformErrorResponse: (response, meta, arg) => response.status,
       providesTags: ["Search"],
     }),
     optionsApiZip: builder.query({
       query: (params) => {
-        const zipCode = params["location"];
+        const latLong = params["location"];
         const searchId = params["search_id"];
         return {
-          url: `/query/zipcode?zipcode=${zipCode}&search_id=${searchId}`,
+          url: `/query/latlong?latlong=${latLong}&search_id=${searchId}`,
+          credentials: "include"
         };
       },
     }),
@@ -49,6 +51,7 @@ export const searchApi = createApi({
       query: (data) => ({
         url: "/query/city",
         body: data,
+        credentials: "include",
       }),
     }),
 
@@ -63,6 +66,7 @@ export const searchApi = createApi({
           search_id: search_id,
         },
         method: "post",
+        credentials: "include",
       }),
     }),
     updateEdibleOption: builder.mutation({
@@ -73,11 +77,13 @@ export const searchApi = createApi({
           search_id: search_id,
         },
         method: "post",
+        credentials: "include",
       }),
     }),
     getOptionsBySearch: builder.query({
       query: (search_id) => ({
         url: `/search/${search_id}/options/`,
+        credentials: "include",
       }),
     }),
   }),

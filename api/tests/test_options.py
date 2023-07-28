@@ -1,8 +1,20 @@
 from fastapi.testclient import TestClient
 from main import app
 from queries.options import OptionRepository
+from auth.authenticator import authenticator
+from queries.accounts import AccountOut
 
 client = TestClient(app)
+
+
+def fake_get_current_account_data():
+    return AccountOut(
+        id="1",
+        username="KDawg",
+        email="kdawg@gmail.com",
+        first_name="K",
+        last_name="Dawg",
+    )
 
 
 class EmptyOptionQueries:
@@ -12,6 +24,9 @@ class EmptyOptionQueries:
 
 def test_get_all_options():
     # Setup
+    app.dependency_overrides[
+        authenticator.get_current_account_data
+    ] = fake_get_current_account_data
     app.dependency_overrides[OptionRepository] = EmptyOptionQueries
     # Enact
     response = client.get("/options")
@@ -35,6 +50,9 @@ class CreateQueries:
 
 def test_create_option():
     # Setup
+    app.dependency_overrides[
+        authenticator.get_current_account_data
+    ] = fake_get_current_account_data
     app.dependency_overrides[OptionRepository] = CreateQueries
     json = {
         "business_status": "OPERATIONAL",
@@ -72,19 +90,3 @@ def test_create_option():
 
     # Teardown
     app.dependency_overrides = {}
-
-
-# class GetOption:
-#     def get_single_option(self, option_id):
-#         pass
-
-
-# def test_get_single_option():
-#     # Setup
-#     app.dependency_overrides[OptionRepository] = GetOption
-#     # Enact
-#     response = client.get("/options/12345")
-#     # Assert
-#     assert response.status_code == 200
-#     assert response.json == []
-#     # Teardown
