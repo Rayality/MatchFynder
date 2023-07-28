@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 function PageUnderConstruction(props) {
     const navigate = useNavigate()
-    const thumbnail = require('../images/cool-dinosaur-eating-burger-cartoon_145832-405.jpeg')
+    const thumbnail = require('../images/dino.png')
     const handleClick = () => {
         navigate(`options`, { replace: true })
     }

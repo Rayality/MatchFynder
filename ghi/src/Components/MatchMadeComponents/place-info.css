@@ -19,8 +19,8 @@
   width: 85%;
   height: 80%;
   padding: 10%;
-  /* align-items: stretch; */
-  /* justify-items: center; */
+  align-items: stretch;
+  justify-items: center;
   background: #dadff7;
 }
 
@@ -38,8 +38,8 @@
   font-weight: 600;
   height: 25%;
   gap: 30%;
-  /* align-items: center; */
-  /* justify-content: center; */
+  align-items: center;
+  justify-content: center;
 }
 
 .feature-block {
