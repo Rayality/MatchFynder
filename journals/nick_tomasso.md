@@ -1,17 +1,239 @@
-Hello World,
+# Nick's Crazy Awesome Totally not Batch Generated Journal
 
-Today it begins, no one knows when it will end, it very well may never end, but the prize is the journey not the destination.
+#### 06/26/2023
 
-Join me on this quest to make the greatest module 3 project ever.
+### FEATURE:
 
-## 6/26/2023
+No Features just got my group started discussion
 
-created P0 issues as a group with Kristen "driving"
+#### 06/27/2023
 
-## 6/27/2023
+### FEATURE:
 
-Picked up account creation/login issue
+Went over project design
 
-## 6/28/2023
+#### 06/28/2023
 
-Found the right librabry for JWT Tokens got blocked on a syntax error
+### FEATURE:
+
+Came up with an awesome name(retcon awesome name would not be used till the end of the project)
+
+#### 06/29/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 06/30/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/03/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/04/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/05/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/06/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/07/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/10/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/11/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/12/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/13/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/14/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/17/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/18/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/19/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/20/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/21/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/24/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/25/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/26/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/27/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
+
+#### 07/28/2023
+
+### FEATURE:
+
+What-I-did
+
+### AHA!!
+
+This is what i figured out
