@@ -1,15 +1,6 @@
-from fastapi import (
-    Depends,
-    HTTPException,
-    status,
-    Response,
-    APIRouter,
-    Request,
-)
 from fastapi.testclient import TestClient
 from main import app
-from queries.accounts import AccountRepo, AccountOut, HashedAccountOut, AccountIn
-
+from queries.accounts import AccountRepo, HashedAccountOut, AccountIn
 
 client = TestClient(app)
 
@@ -39,7 +30,7 @@ class CreateQueries:
         }
         user = self.create(
             AccountIn(**account),
-            "$2b$12$nRq7ZV8Y9ct/HwlCqGASnO6EYcV54MreKav6NVBu5gGy3LP2p3EKK",
+            "$2b$12$nRq7ZV8Y9ct/HwlCqGASnO6EYcV54MreKav6NVBu5gGy3LP2p3EKK",  # noqa
         )
         return user
 
