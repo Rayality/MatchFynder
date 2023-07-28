@@ -20,6 +20,21 @@ def fake_get_current_account_data():
 
 class TestingPlaces:
     def search_from_zipcode(self, latlong, search_id):
+        option = {
+            "id": 1,
+            "business_status": "opt",
+            "name": "str",
+            "picture_url": "Optional[str]",
+            "google_place_id": "Optional[str]",
+            "formatted_address": "str",
+            "latitude": 123.0,
+            "longitude": 123.0,
+            "price_level": 1,
+            "rating": 1.0,
+            "user_ratings_count": 1.0,
+            "created_on": "2023-07-18T20:19:41.935306",
+            "updated_on": "2023-07-18T20:19:41.935306",
+        }
         out = [option]
         return out
 
