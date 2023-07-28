@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "boxicons";
 import { useSwipeable } from "react-swipeable";
@@ -9,6 +9,7 @@ import ErrorNotification from "../../ErrorNotification";
 import { useGetOptionsBySearchQuery } from "../../Redux/searchApi";
 import { useUpdateEdibleOptionMutation } from "../../Redux/searchApi";
 import { useLazyGetMatchMadeQuery } from "../../Redux/searchApi";
+import dino from "../images/dino.png"
 
 function Option(props) {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ function Option(props) {
   // Create a local index variable leveraging React's useState functionality
   // in order to set/reset the index of the action option from the options list
   const [index, setIndex] = useState(0);
+  const { data, error, isLoading } = useGetOptionsBySearchQuery(searchId);
+  const [thumbnail, setThumbnail] = useState('')
 
   // const [socketUrl, setSocketUrl] = useState(
   //   `ws://localhost:8000/search/${searchId}`
@@ -24,7 +27,6 @@ function Option(props) {
   // const { sendJsonMessage, lastJsonMessage } = useWebSocket(socketUrl);
 
   // use useGetOptionsQuery to populate the list of options
-  const { data, error, isLoading } = useGetOptionsBySearchQuery(searchId);
   // const [addSearchOptionMutation, searchOptionData] =
   //   useAddSearchOptionMutation();
 
@@ -61,9 +63,22 @@ function Option(props) {
     //}
   };
 
+  const handleThumbnail = () => {
+    if (!data[index][0].picture_url) {
+      setThumbnail(dino)
+    } else {
+      setThumbnail(data[index][0].picture_url)
+    }
+  }
+  useEffect(() => {
+    if (!data) {
+      setThumbnail(dino)
+    } else {
+      setThumbnail(data[index][0].picture_url)
+    }
+  }, [data])
   // Upon swipe (or click/drag),
   // reset the index of the option to be displayed
-
   // Create a variable to be able to set where in the html
   // to detect swipe/click and drag
   // leverage useSwipeable package to call handleSwipe
@@ -74,13 +89,14 @@ function Option(props) {
   });
 
   // handle loading
-  if (isLoading) {
-    return <progress className="progress is-primary" max="100"></progress>;
-  } else {
+  if (!isLoading) {
     // var optionId = data[index][0].id;
+  } else {
+    return <progress className="progress is-primary" max="100"></progress>;
   }
   const handleSwipe = async (event) => {
     setIndex(index + 1);
+    handleThumbnail();
   };
 
   return (
@@ -92,9 +108,10 @@ function Option(props) {
               <div className="thumbnail options-container">
                 <ErrorNotification error={error} />
                 <div {...handlers}>
-                  <img className="img-thumbnail"
+                  <img className="img-thumbnail object-fit-cover"
+                    style={{ "max-height": "400px" }}
                     draggable="false"
-                    src={data[index][0].picture_url}
+                    src={thumbnail}
                     alt="google maps sourced pic associated with restaurant"
                   />
                   <div className="caption">

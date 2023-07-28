@@ -22,9 +22,6 @@ export const searchApi = createApi({
     createSearch: builder.mutation({
       query: (data) => ({
         url: "/search/create",
-        body: {
-          owner: 1,
-        },
         method: "post",
         credentials: "include"
       }),
