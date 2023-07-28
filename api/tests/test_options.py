@@ -1,20 +1,8 @@
 from fastapi.testclient import TestClient
 from main import app
 from queries.options import OptionRepository
-from auth.authenticator import authenticator
-from queries.accounts import AccountOut
 
 client = TestClient(app)
-
-
-def fake_get_current_account_data():
-    return AccountOut(
-        id="1",
-        username="KDawg",
-        email="kdawg@gmail.com",
-        first_name="K",
-        last_name="Dawg",
-    )
 
 
 class EmptyOptionQueries:

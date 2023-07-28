@@ -24,11 +24,6 @@ const Routes = () => {
       Component: ProtectedRoute,
       children: [
         {
-          path: "signup/",
-          Component: CreateAccount,
-        },
-
-        {
           path: "search/",
           Component: NewSearch,
         },
@@ -52,6 +47,10 @@ const Routes = () => {
     },
   ];
   const nonAuthRoutes = [
+    {
+      path: "signup/",
+      Component: CreateAccount,
+    },
     {
       path: "/",
       Component: Home,
