@@ -1,4 +1,11 @@
 /* General Styling */
+/* $custom-colors: (
+    "custom-atomic-tangerine": #FCA17D,
+    "custom-lavender": #DADFF7,
+    "custom-flax": #FFEE93,
+    "custom-slate-grey": #254441,
+    "custom-oxford-blue": #020122,
+    ); */
 
 .header {
   background-color: #dadff7;

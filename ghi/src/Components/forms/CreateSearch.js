@@ -38,11 +38,10 @@ export default function CreateSearchForm() {
     try {
       if (search_id) {
         let latLongString = `${formLat.payload} ${formLng.payload}`
-        const apizip_payload = await queryApiZip({
+        await queryApiZip({
           location: latLongString,
           search_id: search_id,
         }).unwrap();
-        console.log(apizip_payload)
         return search_id;
       }
     } catch (error) {
