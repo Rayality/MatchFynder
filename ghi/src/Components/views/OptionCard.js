@@ -6,6 +6,7 @@ import ErrorNotification from "../../ErrorNotification";
 //   useAddSearchOptionMutation
 // } from "../../Redux/searchApi";
 import { useGetOptionsBySearchQuery } from "../../Redux/searchApi";
+import dino from "../images/dino.png"
 
 function Option(props) {
   const searchId = props.searchId
@@ -37,6 +38,20 @@ function Option(props) {
     //}
   };
 
+  const handleThumbnail = () => {
+    if (!data[index][0].picture_url) {
+      setThumbnail(dino)
+    } else {
+      setThumbnail(data[index][0].picture_url)
+    }
+  }
+  useEffect(() => {
+    if (!data) {
+      setThumbnail(dino)
+    } else {
+      setThumbnail(data[index][0].picture_url)
+    }
+  }, [data])
   // Upon swipe (or click/drag),
   // reset the index of the option to be displayed
   // Create a variable to be able to set where in the html
@@ -56,6 +71,7 @@ function Option(props) {
   }
   const handleSwipe = async (event) => {
     setIndex(index + 1);
+    handleThumbnail();
   };
 
   return (

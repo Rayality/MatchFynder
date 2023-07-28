@@ -24,7 +24,9 @@ export default class PlaceInfo extends Component {
             <div>
                 <div className='place-info-bg'></div>
                 <div className='place-info' onClick={this.showfunc}>
-                    <div className="features" onClick={this.showfunc}>Phone#: {this.phone}</div>
+                    <div>
+                        <h1 className="fynder-dark-text text-top" onClick={this.showfunc}>Phone#: {this.phone}</h1>
+                    </div>
                     <div className="features">
                         <div className="feature-block">Reservable: <img className="check-img" src={this.reservable} alt="..." /></div>
                         <div className="feature-block">Delivery: <img className="check-img" src={this.delivery} alt="..." /></div>
