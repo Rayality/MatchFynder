@@ -58,7 +58,7 @@ export default function CreateSearchForm() {
         const search_id = await handleApiCalls();
         dispatch(setAutoLng(null))
         dispatch(setAutoLat(null))
-        //navigate(`${search_id}/options`);
+        navigate(`${search_id}/options`);
       }
     }
   }
