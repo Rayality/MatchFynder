@@ -1,6 +1,5 @@
 import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { useGetOptionsBySearchQuery } from '../../Redux/searchApi'
 
 function PageUnderConstruction(props) {
     const navigate = useNavigate()
