@@ -97,6 +97,7 @@ export const {
   useGetSearchQuery,
   useCreateSearchMutation,
   useGetMatchMadeQuery,
+  useLazyGetMatchMadeQuery,
   useAddSearchOptionMutation,
   useUpdateEdibleOptionMutation,
   useLazyOptionsApiZipQuery,

@@ -3,6 +3,10 @@
 --A reflection on any design conversations that you had
 --At least one ah-ha! moment that you had during your coding, however small
 
+## 7/28/2023
+
+--Aha! deploying things is hard and hard to debug
+
 ## 7/27/2023
 
 --Integrated changes as a group

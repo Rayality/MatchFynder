@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "boxicons";
 import { useSwipeable } from "react-swipeable";
 import ErrorNotification from "../../ErrorNotification";
@@ -6,8 +7,11 @@ import ErrorNotification from "../../ErrorNotification";
 //   useAddSearchOptionMutation
 // } from "../../Redux/searchApi";
 import { useGetOptionsBySearchQuery } from "../../Redux/searchApi";
+import { useUpdateEdibleOptionMutation } from "../../Redux/searchApi";
+import { useLazyGetMatchMadeQuery } from "../../Redux/searchApi";
 
 function Option(props) {
+  const navigate = useNavigate();
   const searchId = props.searchId;
   // Create a local index variable leveraging React's useState functionality
   // in order to set/reset the index of the action option from the options list
@@ -24,9 +28,28 @@ function Option(props) {
   // const [addSearchOptionMutation, searchOptionData] =
   //   useAddSearchOptionMutation();
 
+  const [incrementEdible] = useUpdateEdibleOptionMutation()
+  const [matchData] = useLazyGetMatchMadeQuery();
   // Upon button click, prevent the page from refreshing
   // and reset the index of the option to be displayed
-  const handleButton = async (event) => {
+  const handleYesButton = async (event) => {
+    event.preventDefault();
+    await incrementEdible({
+      search_id: searchId,
+      option_id: data[index][0].id,
+    });
+    const ismatch = await matchData(searchId).unwrap();
+    console.log(data)
+    if (ismatch["match_made"] === true) {
+      const google_id = data[index - 1][0].google_place_id
+      navigate(`/match/${google_id}/`, { replace: true })
+    }
+    else {
+      setIndex(index);
+    }
+  };
+
+  const handleNoButton = async (event) => {
     event.preventDefault();
     setIndex(index);
 
@@ -79,7 +102,7 @@ function Option(props) {
                     <p>Price: {data[index][0].price_level} out of 5</p>
                     <p>Rating: {data[index][0].rating} out of 5</p>
                     <p className="d-flex justify-content-between">
-                      <button onClick={handleButton} className="btn">
+                      <button onClick={handleNoButton} className="btn">
                         <box-icon
                           name="x-circle"
                           color="red"
@@ -88,7 +111,7 @@ function Option(props) {
                           title="click or swipe left to veto"
                         ></box-icon>
                       </button>
-                      <button onClick={handleButton} className="btn">
+                      <button onClick={handleYesButton} className="btn">
                         <box-icon
                           name="check-circle"
                           color="green"

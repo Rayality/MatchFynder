@@ -88,7 +88,7 @@ def update_edible_count(
 
 # set match made to true
 @router.put("/search/{search_id}", response_model=Union[bool, Error])
-def update_match_made(
+def set_match_made_true(
     search_id: int, response: Response, repo: SearchRepository = Depends()
 ):
     return repo.set_match_made_true(search_id)
