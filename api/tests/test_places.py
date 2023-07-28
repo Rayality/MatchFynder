@@ -42,6 +42,9 @@ class TestingPlaces:
         out = [option]
         return out
 
+    def place_details(self, place_id):
+        output = {"details": place_id}
+        return output
 
 def test_get_google_options_zipicode():
     # Arrange
@@ -56,6 +59,21 @@ def test_get_google_options_zipicode():
     # Assert
     assert result.status_code == 200
     assert result.json() == [option]
+
+    # Teardown
+    app.dependency_overrides = {}
+
+
+def test_get_place_details():
+    # Arrange
+    app.dependency_overrides[PlacesRepository] = TestingPlaces
+
+    # Enact
+    result = client.get("/place/details?place_id=string")
+
+    # Assert
+    assert result.status_code == 200
+    assert result.json() == {"details": "string"}
 
     # Teardown
     app.dependency_overrides = {}
