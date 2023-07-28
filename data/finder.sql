@@ -63,6 +63,11 @@ CREATE TABLE place_pictures (
     place_id VARCHAR(150) NOT NULL
 );
 
+CREATE TABLE friends (
+    owner INTEGER  REFERENCES finder(id),
+    friend INTEGER NOT NULL REFERENCES finder(id),
+)
+
 -- create trigger function to update the updated_on attribute
 -- to the current datetime whenever called
 CREATE FUNCTION update_updated_on()
