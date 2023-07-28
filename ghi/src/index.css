@@ -156,7 +156,12 @@ img {
   color: #254441;
 }
 
+.text-top {
+  vertical-align: top;
+}
+
 h1 {
+  text-align: center;
   text-transform: uppercase;
   margin: 10px;
   font-size: 3rem;
