@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "boxicons";
 import { useSwipeable } from "react-swipeable";
 import ErrorNotification from "../../ErrorNotification";
@@ -21,6 +21,7 @@ function Option(props) {
 
   // use useGetOptionsQuery to populate the list of options
   const { data, error, isLoading } = useGetOptionsBySearchQuery(searchId);
+  const [thumbnail, setThumbnail] = useState('')
   // const [addSearchOptionMutation, searchOptionData] =
   //   useAddSearchOptionMutation();
 
@@ -38,6 +39,13 @@ function Option(props) {
     //}
   };
 
+  const handleThumbnail = () => {
+    if (!data[index][0].picture_url) {
+      setThumbnail(require('../images/cool-dinosaur-eating-burger-cartoon_145832-405.jpeg'))
+    } else {
+      setThumbnail(data[index][0].picture_url)
+    }
+  }
   // Upon swipe (or click/drag),
   // reset the index of the option to be displayed
 
@@ -51,10 +59,11 @@ function Option(props) {
   });
 
   // handle loading
-  if (isLoading) {
-    return <progress className="progress is-primary" max="100"></progress>;
-  } else {
+  if (!isLoading) {
     // var optionId = data[index][0].id;
+  } else {
+
+    return <progress className="progress is-primary" max="100"></progress>;
   }
   const handleSwipe = async (event) => {
     setIndex(index + 1);
@@ -71,7 +80,7 @@ function Option(props) {
                 <div {...handlers}>
                   <img className="img-thumbnail"
                     draggable="false"
-                    src={data[index][0].picture_url}
+                    src={thumbnail}
                     alt="google maps sourced pic associated with restaurant"
                   />
                   <div className="caption">
