@@ -13,14 +13,16 @@
   background: none;
   border: none;
   height: 5rem;
-  width: 5rem;
+  width: 5em;
+  margin: 0 1rem;
 }
 
 .pictures-bg {
   display: flex;
-  width: 80%;
+  width: 70%;
   position: relative;
   overflow: hidden;
+  justify-items: center;
 }
 
 .pictures-bg .slick-slider {
