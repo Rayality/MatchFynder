@@ -40,29 +40,43 @@ aha - npm modules get stored in the package.json when installed.
 --implemented more api functionality and progressed match made page
 
 ## 7/13-14/2023
---worked on match made page layout and interactions
+-- worked on match made page layout and interactions
 
 ## 7/17-21/2023
---made sql table changes to facilitate api calls
---worked with modules for interactive sliders
---struggled with layouts
---furthered knowledge of html/css layouts
---completed match made page and all additional components except badge cards
---created additional api endpoints and functionality
---created a button/link to get directions to the place.
+-- made sql table changes to facilitate api calls
+-- worked with modules for interactive sliders
+-- struggled with layouts
+-- furthered knowledge of html/css layouts
+-- completed match made page and all additional components except badge cards
+-- created additional api endpoints and functionality
+-- created a button/link to get directions to the place.
     (will display a map in the future)
 ## 7/24/2023
---made the buttons on the match made page functional
-    --redirects to directions for the matched place
-    --displays overlay for additional information
+-- made the buttons on the match made page functional
+    -- redirects to directions for the matched place
+    -- displays overlay for additional information
 
 ## 7/25/2023
 --added a column to the "search" table in sql to hold the
     google api response code for more options.
---added the functionality to get more related places from google,
---added the functionality to get more detailed information about a place
+-- added the functionality to get more related places from google,
+-- added the functionality to get more detailed information about a place
     (want to store this in a mongodb in the future)
 
 ## 7/26/2023
---Implemented an autocomplete search bar for the location
+-- Implemented an autocomplete search bar for the location
     using redux/google_api. Working on a way to autofill if an option wasn't selected
+
+## 7/27/2023
+-- Tag-teamed 'lint' issues all morning and did deployment troublehsooting all evening
+
+## 7/28/2023
+-- fixed issue with not displaying a default photo, if no option image was present.
+-- More time troubleshooting deployment problems.
+-- had to restore local variables to be functionally correct for development.
+-- created 2 unit tests for places_api
+-- created 'friends' table
+    - created 'FynderFriends' repo with add function and...
+        a get-all-friends function for a specific user
+    - created router endpoints for the above repo (tested and working)
+
