@@ -10,7 +10,7 @@ from typing import Union
 from queries.fynder_friends import FynderRepository
 
 
-router = APIRouter
+router = APIRouter()
 
 
 @router.post("/friend/{owner}/add/")
