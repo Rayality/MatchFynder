@@ -4,8 +4,10 @@ from queries.search import (
     SearchRepository,
 )
 from typing import Union
+from queries.fynder_friends import FynderRepository
 
 
+<<<<<<< HEAD
 router = APIRouter
 not_authorized = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,
@@ -31,3 +33,21 @@ def include_in_search(
 
     else:
         raise not_authorized
+=======
+router = APIRouter()
+
+
+@router.post("/friends/{owner}/add/")
+def add_friend(
+    owner: int,
+    friend_id: int,
+    response: Response,
+    repo: FynderRepository = Depends(),
+):
+    return repo.add_friend(owner, friend_id)
+
+
+@router.get("/friends/{owner}")
+def get_friends(owner: int, repo: FynderRepository = Depends()):
+    return repo.get_friends(owner)
+>>>>>>> af3b51fc4c585ec78efbcee501e537eee46c93d7
