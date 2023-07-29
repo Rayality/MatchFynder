@@ -13,19 +13,16 @@ from queries.fynder_friends import FynderRepository
 router = APIRouter()
 
 
-@router.post("/friend/{owner}/add/")
+@router.post("/friends/{owner}/add/")
 def add_friend(
     owner: int,
     friend_id: int,
     response: Response,
-    repo: FynderRepository=Depends()
+    repo: FynderRepository = Depends(),
 ):
     return repo.add_friend(owner, friend_id)
 
 
-@router.get("/friend/{owner}")
-def get_friends(
-    owner: int,
-    repo: FynderRepository=Depends()
-):
+@router.get("/friends/{owner}")
+def get_friends(owner: int, repo: FynderRepository = Depends()):
     return repo.get_friends(owner)
