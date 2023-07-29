@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS search;
 DROP TABLE IF EXISTS search_finders;
 DROP TABLE IF EXISTS search_options;
 DROP TABLE IF EXISTS place_pictures;
+DROP TABLE IF EXISTS friends;
 
 CREATE TABLE options (
     id SERIAL PRIMARY KEY NOT NULL,

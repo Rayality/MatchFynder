@@ -8,21 +8,20 @@ class FynderRepository:
     def get_friends(self, table_owner_id):
         query = sql.SQL(
             """
-            SELECT o.username, f.*
+            SELECT f.*
             FROM friends
-            WHERE owner = %s
-            JOIN finder o
-                ON friends.owner=o.id
             JOIN finder f
-                ON friends.friend=f.id
-            RETURNING *
+                ON (friends.friend=f.id)
+            WHERE friends.owner={o};
             """
+        ).format(
+            o=table_owner_id
         )
         try:
             with pool.connection() as conn:
                 with conn.cursor(row_factory=dict_row) as db:
-                    result = db.execute(query, table_owner_id)
-                    return result.fetchone()
+                    result = db.execute(query)
+                    return result.fetchall()
         except Exception as e:
             print("Error in 'get_friends'")
             raise e
