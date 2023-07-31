@@ -131,6 +131,7 @@ export default function CreateAccountForm() {
             type="password"
             className="form-control"
             id="inputPassword"
+            autocomplete="off"
           />
         </div>
         <div className="mb-3">
@@ -144,6 +145,7 @@ export default function CreateAccountForm() {
             type="password"
             className="form-control"
             id="inputConfirmPassword"
+            autocomplete="off"
           />
         </div>
         <div className="mb-3 form-check">

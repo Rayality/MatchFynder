@@ -50,6 +50,15 @@ build-api-image:
   only:
     - main
 
+# # Set up SQL database
+build-sql:
+  stage: build
+  image: docker:git
+  script:
+    - docker build --tag $GITLAB_IMAGE:latest ./data
+    - docker push $GITLAB_IMAGE:latest
+  only: -main
+
 # # Build the React/JavaScript front-end
 build-front-end-job:
   rules:
