@@ -23,7 +23,7 @@ export const loginApi = createApi({
     }),
     createAccount: builder.mutation({
       query: (formBody) => ({
-        url: "accounts",
+        url: "api/accounts",
         method: "POST",
         body: formBody,
         credentials: "include",
