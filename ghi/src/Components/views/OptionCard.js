@@ -64,7 +64,7 @@ function Option(props) {
   };
 
   const handleThumbnail = () => {
-    if (!data[index][0].picture_url) {
+    if (!data) {
       setThumbnail(dino)
     } else {
       setThumbnail(data[index][0].picture_url)
@@ -76,7 +76,7 @@ function Option(props) {
     } else {
       setThumbnail(data[index][0].picture_url)
     }
-  }, [data])
+  }, [data, index])
   // Upon swipe (or click/drag),
   // reset the index of the option to be displayed
   // Create a variable to be able to set where in the html
