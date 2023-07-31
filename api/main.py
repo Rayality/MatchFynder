@@ -19,7 +19,7 @@ app.include_router(places_api.router)
 
 origins = [
     "http://localhost:3000",
-    os.environ.get("CORS_HOST", None),
+    # os.environ.get("CORS_HOST", None),
     "https://incognitoincredibles.gitlab.io",
 ]
 
