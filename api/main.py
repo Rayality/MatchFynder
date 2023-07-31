@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from auth.authenticator import authenticator
 from routers import options, search, accounts, places_api
 from socks import search_socket
-import os
+# import os # temp comment trying to fix CORS
 
 # from externals import send_mail
 
