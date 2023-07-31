@@ -24,7 +24,6 @@ function Nav() {
     <>
       <nav className="navbar bg-body-tertiary">
         <div className="container-fluid">
-          {/* <NavLink className="navbar-brand" href="#">Finder</NavLink> */}
           <button
             onClick={initModal}
             className="btn btn-lg btn-secondary fynder-button btn3d"
@@ -32,7 +31,6 @@ function Nav() {
             data-bs-target="#loginModal"
           >
             <box-icon name='user' color="white"></box-icon>
-            {/* replace this with a vector image, ask Nick if this doesnt make sense */}
           </button>
           <button
             className="navbar-toggler"

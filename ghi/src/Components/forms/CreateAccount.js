@@ -1,9 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../AuthProvider";
 import { useCreateAccountMutation } from "../../Redux/loginAPI";
+import { useDispatch } from "react-redux";
+import { shown } from "../../Redux/modal-slice";
 
 export default function CreateAccountForm() {
+  const dispatch = useDispatch();
   const { setToken } = useAuth();
   const [createAccount] = useCreateAccountMutation()
   const [account, setAccount] = useState(
@@ -17,6 +20,10 @@ export default function CreateAccountForm() {
     },
   )
   let agreed = false
+  const navigate = useNavigate()
+  const initModal = () => {
+    dispatch(shown());
+  };
 
   function cleanData(data = {}) {
     const clean = {};
@@ -41,6 +48,7 @@ export default function CreateAccountForm() {
       const response = await createAccount(data);
       const token = response.data.access_token;
       setToken(token);
+      navigate("/search", { replace: true })
     } else {
       console.log("Passwords do not match");
     }
@@ -144,7 +152,7 @@ export default function CreateAccountForm() {
             I agree to the <NavLink href="#">terms and conditions</NavLink>
           </label>
         </div>
-        <button type="submit" className="btn btn-primary mb-3">
+        <button onClick={initModal} type="submit" className="btn btn-primary mb-3">
           Submit
         </button>
       </form>
