@@ -1,6 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-//import Option, {optionId} from "../Components/views/OptionCard";
-//<Option optionId={optionId} />
 
 // create an API object called searchApi which
 // will contain (i) where in our store we'll

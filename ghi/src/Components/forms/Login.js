@@ -4,6 +4,7 @@ import { useAuth } from "../AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUsername, setPassword } from '../../Redux/account-slice'
+import { shown } from "../../Redux/modal-slice";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -14,6 +15,9 @@ export default function LoginForm() {
   });
   const [loginPost] = usePostLoginMutation();
   const navigate = useNavigate()
+  const initModal = () => {
+    dispatch(shown());
+  };
 
   function handleChange(e) {
     let value = e.target.value;
@@ -33,7 +37,7 @@ export default function LoginForm() {
       username: "",
       password: "",
     })
-    navigate("/", { replace: true })
+    navigate("/search", { replace: true })
   }
   return (
     <div className="container mb-3 shadow">
@@ -70,7 +74,7 @@ export default function LoginForm() {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary mb-3">
+        <button onClick={initModal} type="submit" className="btn btn-primary mb-3">
           Submit
         </button>
       </form>
