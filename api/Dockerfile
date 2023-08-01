@@ -16,6 +16,7 @@ COPY queries queries
 COPY routers routers
 COPY socks socks
 COPY tests tests
+COPY migrations migrations
 
 RUN python -m pip install -r requirements.txt
 
