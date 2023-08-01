@@ -67,6 +67,7 @@ build-front-end-job:
     #     # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
     PUBLIC_URL: https://incognitoincredibles.gitlab.io/module3-project-finder
     REACT_APP_API_HOST: https://mar-1-et-fynder.mod3projects.com
+    REACT_APP_API_KEY: $REACT_APP_API_KEY
   script:
     - cd ghi
     - npm install
