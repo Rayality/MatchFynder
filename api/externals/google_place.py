@@ -7,7 +7,7 @@ from queries.pool import pool
 from psycopg import sql
 from psycopg.rows import dict_row
 
-GOOGLE_MAPS_API_KEY = os.environ["GOOGLE_MAPS_API_KEY"]
+GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY")
 
 
 def update_search_token(token, search_id):
