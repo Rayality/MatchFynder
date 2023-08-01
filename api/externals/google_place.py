@@ -61,8 +61,10 @@ def get_google_options(location, search_id, query="restaurants", radius=1500):
             "radius": radius,
             "key": GOOGLE_MAPS_API_KEY,
         }
+        print(params)
         url = "https://maps.googleapis.com/maps/api/place/textsearch/json?"
         response = requests.get(url, params=params)
+        print(response)
         content = json.loads(response.content)
         token = content.get("next_page_token")
         if token is None:
