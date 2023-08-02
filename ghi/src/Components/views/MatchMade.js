@@ -3,25 +3,27 @@ import '../../App.css';
 import React from "react";
 // import { BadgeCard } from "../MatchMadeComponents/BadgeCard";
 import { medal, page, map } from "../MatchMadeComponents/MatchMadadeImgs";
-import MySlider from '../MatchMadeComponents/Slider';
+import { PlaceInfo, Directions, MySlider, Location } from "../MatchMadeComponents/componentList"
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import "../MatchMadeComponents/match-pics.css";
 import "../MatchMadeComponents/match-made-buttons.css";
 import "../MatchMadeComponents/badge-card.css";
-import PlaceInfo from '../MatchMadeComponents/PlaceInfo';
+
 
 function MatchMade(props) {
     const place_id = props.place_id
     const [googlePictures, setGooglePictures] = useState([]);
     const [googleDetails, setGoogleDetails] = useState({});
+    const [showMap, setShowMap] = useState(false)
     const [show, setShow] = useState(false);
-
+    const [userLocation, setUserLocation] = useState({lat:1, lng:1})
     useEffect(() => {
         async function getPictures() {
             const response = await fetch(`http://localhost:8000/place/details?place_id=${place_id}`);
             if (response.ok) {
                 const option_details = await response.json();
+                await window.google.maps.importLibrary("routes")
                 setGoogleDetails(option_details);
                 setGooglePictures(option_details.photos);
             }
@@ -29,8 +31,14 @@ function MatchMade(props) {
         getPictures();
     }, [place_id])
 
-    function directionsClick(event) {
-        window.open(googleDetails["url"]);
+    function directionsButtonClick() {
+        let user = Location()
+        setUserLocation(user)
+        setTimeout(toggleMap(), 1000)
+    }
+
+    function toggleMap() {
+        setTimeout(setShowMap(!showMap), 1000)
     }
 
     function toggle() {
@@ -47,12 +55,13 @@ function MatchMade(props) {
                             <img alt="Details" src={page} />
                         </div>
                     </button>
-                    <button className="badges-button" onClick={directionsClick}>
+                    <button className="badges-button" onClick={directionsButtonClick}>
                         <div className="badges-button-div">
                             <h4>Directions</h4>
                             <img alt="Directions" src={map} />
                         </div>
                     </button>
+                    {showMap ? <Directions show={toggleMap} user={userLocation} place={googleDetails} />: null}
                     <button className="badges-button">
                         <div className="badges-button-div">
                             <h4>Badges</h4>

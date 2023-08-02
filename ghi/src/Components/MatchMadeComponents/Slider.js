@@ -38,7 +38,7 @@ export default class MySlider extends Component {
             arrows:false,
         };
         return (
-            <div style={{display: "flex", height: "300px",width: "100%", position: "relative", alignItems: "center"}}>
+            <div style={{display: "flex", height: "300px",width: "100%", position: "relative", alignItems: "center", justifyContent: "space-around"}}>
                 <div>
                     <button onClick={this.previous} className="arrows">
                         <box-icon

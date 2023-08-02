@@ -1,0 +1,9 @@
+.map-screen {
+    position: absolute;
+    z-index: 3;
+    top: 10%;
+    left: 10%;
+    width: 60%;
+    height: 60%;
+    padding: 10%;
+}
