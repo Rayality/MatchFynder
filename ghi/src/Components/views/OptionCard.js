@@ -109,7 +109,7 @@ function Option(props) {
                 <ErrorNotification error={error} />
                 <div {...handlers}>
                   <img className="img-thumbnail object-fit-cover"
-                    style={{ "max-height": "400px" }}
+                    style={{ "maxHeight": "400px" }}
                     draggable="false"
                     src={thumbnail}
                     alt="google maps sourced pic associated with restaurant"

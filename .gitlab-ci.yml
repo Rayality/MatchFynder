@@ -50,6 +50,15 @@ build-api-image:
   only:
     - main
 
+# # Set up SQL database
+# build-sql:
+#   stage: build
+#   image: docker:git
+#   script:
+#     - docker build --tag $GITLAB_IMAGE:latest ./data
+#     - docker push $GITLAB_IMAGE:latest
+#   only: -main
+
 # # Build the React/JavaScript front-end
 build-front-end-job:
   rules:
@@ -66,7 +75,8 @@ build-front-end-job:
     #     # You need to substitute in your real values for
     #     # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
     PUBLIC_URL: https://incognitoincredibles.gitlab.io/module3-project-finder
-    REACT_APP_API_HOST: https://DEPLOYED_API_SERVICE.mod3projects.com
+    REACT_APP_API_HOST: https://mar-1-et-fynder.mod3projects.com
+    REACT_APP_API_KEY: $REACT_APP_API_KEY
   script:
     - cd ghi
     - npm install

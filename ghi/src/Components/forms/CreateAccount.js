@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../AuthProvider";
 import { useCreateAccountMutation } from "../../Redux/loginAPI";
@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { shown } from "../../Redux/modal-slice";
 
 export default function CreateAccountForm() {
+  const dispatch = useDispatch();
   const { setToken } = useAuth();
   const dispatch = useDispatch()
   const [createAccount] = useCreateAccountMutation()
@@ -20,6 +21,10 @@ export default function CreateAccountForm() {
     },
   )
   let agreed = false
+  const navigate = useNavigate()
+  const initModal = () => {
+    dispatch(shown());
+  };
 
   function cleanData(data = {}) {
     const clean = {};
@@ -129,6 +134,7 @@ export default function CreateAccountForm() {
             type="password"
             className="form-control"
             id="inputPassword"
+            autocomplete="off"
           />
         </div>
         <div className="mb-3">
@@ -142,6 +148,7 @@ export default function CreateAccountForm() {
             type="password"
             className="form-control"
             id="inputConfirmPassword"
+            autocomplete="off"
           />
         </div>
         <div className="mb-3 form-check">
@@ -150,7 +157,7 @@ export default function CreateAccountForm() {
             I agree to the <NavLink href="#">terms and conditions</NavLink>
           </label>
         </div>
-        <button type="submit" className="btn btn-primary mb-3">
+        <button onClick={initModal} type="submit" className="btn btn-primary mb-3">
           Submit
         </button>
       </form>

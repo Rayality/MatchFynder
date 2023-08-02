@@ -16,11 +16,12 @@ COPY queries queries
 COPY routers routers
 COPY socks socks
 COPY tests tests
+COPY migrations migrations
 
 RUN python -m pip install -r requirements.txt
 
 # !! PORT env var needs to match with exposed port in caprover dashboard
-CMD uvicorn main:app --host 0.0.0.0 --port 80
+# CMD uvicorn main:app --host 0.0.0.0 --port 80
 
 
 # If you're using a relational database and want migrations
@@ -28,4 +29,4 @@ CMD uvicorn main:app --host 0.0.0.0 --port 80
 # uncomment the following COPY and CMD lines
 # COPY migrations migrations
 # # !! PORT env var needs to match with exposed port in caprover dashboard
-# CMD python -m migrations up && uvicorn main:app --host 0.0.0.0 --port 80
+CMD python -m migrations up && uvicorn main:app --host 0.0.0.0 --port 80

@@ -22,6 +22,7 @@ origins = [
     "http://localhost:3000",
     os.environ.get("CORS_HOST", None),
     "https://incognitoincredibles.gitlab.io",
+    "https://matchfynder.com/",
 ]
 
 app.add_middleware(
