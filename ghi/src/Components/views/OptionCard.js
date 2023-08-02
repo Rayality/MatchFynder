@@ -6,7 +6,7 @@ import ErrorNotification from "../../ErrorNotification";
 // import {
 //   useAddSearchOptionMutation
 // } from "../../Redux/searchApi";
-import { useGetOptionsBySearchQuery } from "../../Redux/searchApi";
+import { useAddSearchParticipantMutation, useGetOptionsBySearchQuery } from "../../Redux/searchApi";
 import { useUpdateEdibleOptionMutation } from "../../Redux/searchApi";
 import { useLazyGetMatchMadeQuery } from "../../Redux/searchApi";
 import dino from "../images/dino.png"
@@ -14,6 +14,7 @@ import dino from "../images/dino.png"
 function Option(props) {
   const navigate = useNavigate();
   const searchId = props.searchId;
+  const { addPaticipant } = useAddSearchParticipantMutation(searchId)
   // Create a local index variable leveraging React's useState functionality
   // in order to set/reset the index of the action option from the options list
   const [index, setIndex] = useState(0);
@@ -71,6 +72,7 @@ function Option(props) {
     }
   }
   useEffect(() => {
+    addPaticipant()
     if (!data) {
       setThumbnail(dino)
     } else {
