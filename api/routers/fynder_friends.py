@@ -3,7 +3,6 @@ from auth.authenticator import authenticator
 from queries.search import (
     SearchRepository,
 )
-from typing import Union
 from queries.fynder_friends import FynderRepository
 
 
@@ -26,7 +25,6 @@ def include_in_search(
         try:
             # adds this user to this search participant table
             repo.add_search_finder(account_id, search_id)
-
         except Exception:
             pass
 
