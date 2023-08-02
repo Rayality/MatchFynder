@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ToggleButton, Form, Row, Button } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 
 export default function InviteFriends(props) {
     const searchId = props.searchId;
