@@ -7,8 +7,7 @@ from typing import Union
 from queries.fynder_friends import FynderRepository
 
 
-<<<<<<< HEAD
-router = APIRouter
+router = APIRouter()
 not_authorized = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,
     detail="Invalid authentication credentials",
@@ -33,8 +32,6 @@ def include_in_search(
 
     else:
         raise not_authorized
-=======
-router = APIRouter()
 
 
 @router.post("/friends/{owner}/add/")
@@ -50,4 +47,3 @@ def add_friend(
 @router.get("/friends/{owner}")
 def get_friends(owner: int, repo: FynderRepository = Depends()):
     return repo.get_friends(owner)
->>>>>>> af3b51fc4c585ec78efbcee501e537eee46c93d7

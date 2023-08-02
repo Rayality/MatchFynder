@@ -21,7 +21,7 @@ app.include_router(fynder_friends.router)
 origins = [
     "http://localhost:3000",
     os.environ.get("CORS_HOST", None),
-    "https://incognitoincredibles.gitlab.io/module3-project-finder",
+    "https://incognitoincredibles.gitlab.io",
 ]
 
 app.add_middleware(
