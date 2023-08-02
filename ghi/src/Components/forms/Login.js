@@ -29,15 +29,18 @@ export default function LoginForm() {
     e.preventDefault();
     let params = new URLSearchParams(account)
     const response = await loginPost(params);
-    const token = response.data.access_token
-    dispatch(setUsername(account.username))
-    dispatch(setPassword(account.password))
-    setToken(token);
-    setAccount({
-      username: "",
-      password: "",
-    })
-    navigate("/search", { replace: true })
+    if (!response.error) {
+      const token = response.data.access_token
+      dispatch(setUsername(account.username))
+      dispatch(setPassword(account.password))
+      setToken(token);
+      setAccount({
+        username: "",
+        password: "",
+      });
+      dispatch(shown());
+      navigate("/");
+    }
   }
   return (
     <div className="container mb-3 shadow">

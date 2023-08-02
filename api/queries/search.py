@@ -6,6 +6,7 @@ from .generic_sql import (
     generic_insert,
     generic_find,
     generic_get_all,
+    generic_update,
 )
 from .options import OptionRepository
 from externals.google_place import get_next_page
@@ -67,6 +68,12 @@ class SearchRepository:
     # using the search id and the user id, create a search_finder record
     def add_search_finder(self, search_id: int, finder_id: int):
         try:
+            generic_update(
+                "search_finders",
+                {"participant_count": "participant_count + 1"},
+                "search_id",
+                search_id,
+            )
             return generic_insert(
                 "search_finders",
                 {"search_id": search_id, "finder_id": finder_id},
