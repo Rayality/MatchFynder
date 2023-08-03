@@ -1,60 +1,59 @@
 .place-info-bg {
-  position: absolute;
-  z-index: 3;
-  top: 0%;
-  left: 0%;
-  width: 100%;
-  height: 100%;
-  padding: 3%;
-  background: #020122c9;
+    position: absolute;
+    display: flex;
+    gap: 2%;
+    z-index: 3;
+    top: 6%;
+    left: 5%;
+    width: 80vw;
+    height: 90%;
+    padding: .5rem;
 }
 
 .place-info {
-  position: absolute;
   display: flex;
   flex-direction: column;
-  z-index: 3;
-  top: 10%;
-  left: 10%;
-  width: 85%;
-  height: 80%;
-  padding: 10%;
-  align-items: stretch;
+  padding: 1rem;
+  height: 100%;
+  width: 100%;
+  gap: 3%;
+  align-items: center;
   justify-items: center;
   background: #dadff7;
 }
 
 .check-img {
-  display: block;
-  flex: 0 1 20%;
-  object-fit: scale-down;
-  max-width: 10%;
+  display: inline-block;
+  max-width: 2.5rem;
   border: 2px solid black;
 }
 
 .features {
   display: flex;
-  font-size: xx-large;
+  font-size: 1.5vw;
   font-weight: 600;
-  height: 25%;
-  gap: 30%;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 20%;
+  width: 50rem;
 }
 
 .feature-block {
-  display: flex;
-  align-items: center;
-  width: 40%;
-  justify-content: flex-end;
-  font-size: large;
-  font-weight: 600;
-  height: 50%;
-  gap: 5%;
+  display: inline-block;
+  padding: 0 0 0 3px;
+  border: ridge rgba(0, 0, 0, 0.178);
 }
 
-.overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+.close-info {
+    display: flex;
+    flex-direction: column;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    color: #DADff7;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    width: 3%;
+    height: 100%;
+    background: #020122;
 }

@@ -80,3 +80,13 @@ aha - npm modules get stored in the package.json when installed.
         a get-all-friends function for a specific user
     - created router endpoints for the above repo (tested and working)
 
+## 7/31/2023
+-- fixed cors issue on the deployed page with gitlab and galvanize cloud
+-- remade migrations folder in fast api
+-- implemented a directions map on the match made page instead of redirecting to google
+    still working on displaying the route
+
+## 8/01/2023
+-- We got help with deploying pg-admin to galvanize cloud
+-- Worked through multiple issues on deploying with
+    gitlab pages and galvanize cloud

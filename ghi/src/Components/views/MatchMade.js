@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import '../../App.css';
-import React from "react";
 // import { BadgeCard } from "../MatchMadeComponents/BadgeCard";
 import { medal, page, map } from "../MatchMadeComponents/MatchMadadeImgs";
-import MySlider from '../MatchMadeComponents/Slider';
+import { PlaceInfo, Directions, MySlider, Location } from "../MatchMadeComponents/componentList"
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import "../MatchMadeComponents/match-pics.css";
 import "../MatchMadeComponents/match-made-buttons.css";
 import "../MatchMadeComponents/badge-card.css";
-import PlaceInfo from '../MatchMadeComponents/PlaceInfo';
+
 
 function MatchMade(props) {
     const place_id = props.place_id
     const [googlePictures, setGooglePictures] = useState([]);
     const [googleDetails, setGoogleDetails] = useState({});
+    const [showMap, setShowMap] = useState(false)
     const [show, setShow] = useState(false);
-
+    const [userLocation, setUserLocation] = useState({'lat':NaN, 'lng':NaN, 'access':'NA'})
     useEffect(() => {
         async function getPictures() {
             const response = await fetch(`http://localhost:8000/place/details?place_id=${place_id}`);
@@ -24,16 +24,24 @@ function MatchMade(props) {
                 const option_details = await response.json();
                 setGoogleDetails(option_details);
                 setGooglePictures(option_details.photos);
+                await window.google.maps.importLibrary("routes")
             }
         }
         getPictures();
     }, [place_id])
 
-    function directionsClick(event) {
-        window.open(googleDetails["url"]);
+    async function directionsButtonClick() {
+        await Location(setUserLocation);
+        toggleMap();
+    }
+
+    function toggleMap() {
+        setShow(false)
+        setShowMap(!showMap)
     }
 
     function toggle() {
+        setShowMap(false)
         setShow(!show);
     }
 
@@ -47,7 +55,7 @@ function MatchMade(props) {
                             <img alt="Details" src={page} />
                         </div>
                     </button>
-                    <button className="badges-button" onClick={directionsClick}>
+                    <button className="badges-button" onClick={directionsButtonClick}>
                         <div className="badges-button-div">
                             <h4>Directions</h4>
                             <img alt="Directions" src={map} />
@@ -60,8 +68,9 @@ function MatchMade(props) {
                         </div>
                     </button>
                 </div>
-                {show ? <PlaceInfo google={googleDetails} show={toggle} /> : null}
                 <div className="matched-container">
+                    {show ? <PlaceInfo google={googleDetails} show={toggle} /> : null}
+                    {showMap ? <Directions show={toggleMap} user={userLocation} place={googleDetails} />: null}
                     <h4 className='fynder-dark-text'>
                         You're going to . . .
                     </h4>
