@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import '../../App.css';
-import React from "react";
 // import { BadgeCard } from "../MatchMadeComponents/BadgeCard";
 import { medal, page, map } from "../MatchMadeComponents/MatchMadadeImgs";
 import { PlaceInfo, Directions, MySlider, Location } from "../MatchMadeComponents/componentList"
@@ -17,31 +16,32 @@ function MatchMade(props) {
     const [googleDetails, setGoogleDetails] = useState({});
     const [showMap, setShowMap] = useState(false)
     const [show, setShow] = useState(false);
-    const [userLocation, setUserLocation] = useState({lat:1, lng:1})
+    const [userLocation, setUserLocation] = useState({'lat':NaN, 'lng':NaN, 'access':'NA'})
     useEffect(() => {
         async function getPictures() {
             const response = await fetch(`http://localhost:8000/place/details?place_id=${place_id}`);
             if (response.ok) {
                 const option_details = await response.json();
-                await window.google.maps.importLibrary("routes")
                 setGoogleDetails(option_details);
                 setGooglePictures(option_details.photos);
+                await window.google.maps.importLibrary("routes")
             }
         }
         getPictures();
     }, [place_id])
 
-    function directionsButtonClick() {
-        let user = Location()
-        setUserLocation(user)
-        setTimeout(toggleMap(), 1000)
+    async function directionsButtonClick() {
+        await Location(setUserLocation);
+        toggleMap();
     }
 
     function toggleMap() {
-        setTimeout(setShowMap(!showMap), 1000)
+        setShow(false)
+        setShowMap(!showMap)
     }
 
     function toggle() {
+        setShowMap(false)
         setShow(!show);
     }
 
@@ -61,7 +61,6 @@ function MatchMade(props) {
                             <img alt="Directions" src={map} />
                         </div>
                     </button>
-                    {showMap ? <Directions show={toggleMap} user={userLocation} place={googleDetails} />: null}
                     <button className="badges-button">
                         <div className="badges-button-div">
                             <h4>Badges</h4>
@@ -69,8 +68,9 @@ function MatchMade(props) {
                         </div>
                     </button>
                 </div>
-                {show ? <PlaceInfo google={googleDetails} show={toggle} /> : null}
                 <div className="matched-container">
+                    {show ? <PlaceInfo google={googleDetails} show={toggle} /> : null}
+                    {showMap ? <Directions show={toggleMap} user={userLocation} place={googleDetails} />: null}
                     <h4 className='fynder-dark-text'>
                         You're going to . . .
                     </h4>

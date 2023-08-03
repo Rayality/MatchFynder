@@ -1,22 +1,20 @@
-import { Component, useState } from 'react'
 
-
-export default function Location() {
-    let lat;
-    let lng;
+export default async function Location(setUserLocation) {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(access);
+        navigator.geolocation.getCurrentPosition(good, denied);
     } else {
-        console.log("Unable to get location")
+        await denied();
     }
 
-    function access(position) {
+    async function denied() {
+        await setUserLocation({ lat: NaN, lng: NaN, access: 'NA' });
+        return
+    }
+
+    async function good(position) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        lat = latitude;
-        lng = longitude;
-        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+        await setUserLocation({ lat: latitude, lng: longitude, access: 'OK' });
+        return
     }
-
-    return { "lat": lat, "lng": lng }
 }

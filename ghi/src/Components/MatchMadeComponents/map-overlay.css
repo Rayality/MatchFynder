@@ -1,9 +1,31 @@
-.map-screen {
+.map-overlay {
     position: absolute;
+    display: flex;
+    gap: 2%;
     z-index: 3;
-    top: 10%;
-    left: 10%;
-    width: 60%;
-    height: 60%;
-    padding: 10%;
+    top: 6%;
+    left: 5%;
+    width: 80vw;
+    height: 90%;
+    padding: .5rem;
+}
+
+.map-screen {
+    height: 100%;
+    width: 100%;
+}
+
+.close-map {
+    display: flex;
+    flex-direction: column;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    color: #DADFF7;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    width: 3%;
+    min-width: 2ch;
+    height: 100%;
+    background: #020122;
 }
