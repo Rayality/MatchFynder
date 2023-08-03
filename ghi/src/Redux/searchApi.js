@@ -84,6 +84,12 @@ export const searchApi = createApi({
         credentials: "include",
       }),
     }),
+    addSearchParticipant: builder.mutation({
+      query: (search_id) => ({
+        url: `/search/${search_id}/include`,
+        credentials: "include",
+      })
+    })
   }),
 });
 
@@ -98,4 +104,5 @@ export const {
   useLazyOptionsApiZipQuery,
   useOptionsApiCityQuery,
   useGetOptionsBySearchQuery,
+  useAddSearchParticipantMutation,
 } = searchApi;

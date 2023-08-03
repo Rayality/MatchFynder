@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from auth.authenticator import authenticator
-from routers import options, search, accounts, places_api
+from routers import options, search, accounts, places_api, fynder_friends
 from socks import search_socket
 import os
 
@@ -16,11 +16,13 @@ app.include_router(search.router)
 app.include_router(search_socket.router)
 # app.include_router(send_mail.router)
 app.include_router(places_api.router)
+app.include_router(fynder_friends.router)
 
 origins = [
     "http://localhost:3000",
     os.environ.get("CORS_HOST", None),
     "https://incognitoincredibles.gitlab.io",
+    "https://matchfynder.com/",
 ]
 
 app.add_middleware(

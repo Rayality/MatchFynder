@@ -8,6 +8,7 @@ import { shown } from "../../Redux/modal-slice";
 export default function CreateAccountForm() {
   const dispatch = useDispatch();
   const { setToken } = useAuth();
+  const dispatch = useDispatch()
   const [createAccount] = useCreateAccountMutation()
   const [account, setAccount] = useState(
     {
@@ -46,9 +47,11 @@ export default function CreateAccountForm() {
     if (account.confirmPassword === account.password) {
       const data = cleanData(account);
       const response = await createAccount(data);
-      const token = response.data.access_token;
-      setToken(token);
-      navigate("/search", { replace: true })
+      if (!response.error) {
+        const token = response.data.access_token;
+        setToken(token);
+        dispatch(shown());
+      }
     } else {
       console.log("Passwords do not match");
     }

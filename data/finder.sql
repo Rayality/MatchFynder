@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS search;
 DROP TABLE IF EXISTS search_finders;
 DROP TABLE IF EXISTS search_options;
 DROP TABLE IF EXISTS place_pictures;
+DROP TABLE IF EXISTS friends;
 
 CREATE TABLE options (
     id SERIAL PRIMARY KEY NOT NULL,
@@ -61,6 +62,11 @@ CREATE TABLE place_pictures (
     id SERIAL PRIMARY KEY NOT NULL,
     picture_url VARCHAR(1000) NOT NULL,
     place_id VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE friends (
+    owner INTEGER  REFERENCES finder(id),
+    friend INTEGER NOT NULL REFERENCES finder(id)
 );
 
 -- create trigger function to update the updated_on attribute
