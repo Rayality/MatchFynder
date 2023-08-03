@@ -8,7 +8,6 @@ import { shown } from "../../Redux/modal-slice";
 export default function CreateAccountForm() {
   const dispatch = useDispatch();
   const { setToken } = useAuth();
-  const dispatch = useDispatch()
   const [createAccount] = useCreateAccountMutation()
   const [account, setAccount] = useState(
     {
