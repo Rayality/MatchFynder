@@ -10,7 +10,7 @@ export default function InviteFriends(props) {
 
     const handleInvite = (e) => {
         const contactInfo = e.target.value;
-        const name = e.taget.setInvites({ ...invites, name: contactInfo });
+        setInvites({ ...invites, name: contactInfo });
     };
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -50,7 +50,7 @@ export default function InviteFriends(props) {
                     <h3>Let them eat cake</h3>
                     <h4>{inviteLink}</h4>
                 </Row>
-                <Button variant='primary' type='submit'>
+                <Button variant='primary' type='submit' onClick={window.location.href = 'http://localhost:3000/search/6/options'}>
                     Lets Get Swiping!
                 </Button>
             </Form>
