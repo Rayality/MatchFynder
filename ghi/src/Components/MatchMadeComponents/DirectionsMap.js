@@ -29,7 +29,7 @@ export default class Directions extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps !== this.props) {
-            if ( this.props.user.access='OK' ){
+            if ( this.props.user.access === 'OK' ){
             this.directionsService.route({
                 origin: {
                     'lat': this.props.user.lat,

@@ -20,7 +20,7 @@ export default function CreateAccountForm() {
     },
   )
   let agreed = false
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const initModal = () => {
     dispatch(shown());
   };
