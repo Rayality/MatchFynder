@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Form, Row, Button } from "react-bootstrap";
 
 export default function InviteFriends(props) {
@@ -7,13 +8,15 @@ export default function InviteFriends(props) {
     // const [friends, setFriends] = useState([]);
     const [invites, setInvites] = useState([]);
     const inviteLink = window.location.href + '/options'
-
+    const navigate = useNavigate()
     const handleInvite = (e) => {
         const contactInfo = e.target.value;
         setInvites({ ...invites, name: contactInfo });
     };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        navigate(`options`)
     };
 
     return (
@@ -50,7 +53,7 @@ export default function InviteFriends(props) {
                     <h3>Let them eat cake</h3>
                     <h4>{inviteLink}</h4>
                 </Row>
-                <Button variant='primary' type='submit' onClick={window.location.href = inviteLink}>
+                <Button variant='primary' type='submit' onClick={handleSubmit}>
                     Lets Get Swiping!
                 </Button>
             </Form>
