@@ -19,7 +19,7 @@ function MatchMade(props) {
     const [userLocation, setUserLocation] = useState({'lat':NaN, 'lng':NaN, 'access':'NA'})
     useEffect(() => {
         async function getPictures() {
-            const response = await fetch(`http://localhost:8000/place/details?place_id=${place_id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/place/details?place_id=${place_id}`);
             if (response.ok) {
                 const option_details = await response.json();
                 setGoogleDetails(option_details);
