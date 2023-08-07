@@ -50,7 +50,7 @@ export default function InviteFriends(props) {
                     <h3>Let them eat cake</h3>
                     <h4>{inviteLink}</h4>
                 </Row>
-                <Button variant='primary' type='submit' onClick={window.location.href = 'http://localhost:3000/search/6/options'}>
+                <Button variant='primary' type='submit' onClick={window.location.href = inviteLink}>
                     Lets Get Swiping!
                 </Button>
             </Form>
