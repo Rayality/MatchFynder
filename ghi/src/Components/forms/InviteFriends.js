@@ -2,9 +2,9 @@ import { useState } from "react";
 import { ToggleButton, Form, Row, Button } from "react-bootstrap";
 
 export default function InviteFriends(props) {
-    const searchId = props.searchId;
-    const [checked, setChecked] = useState(false);
-    const [friends, setFriends] = useState([]);
+    // const searchId = props.searchId;
+    // const [checked, setChecked] = useState(false);
+    // const [friends, setFriends] = useState([]);
     const [invites, setInvites] = useState([]);
     const inviteLink = window.location.href + '/options'
 
@@ -20,7 +20,7 @@ export default function InviteFriends(props) {
         <div className="container">
             <h3>Friends List</h3>
             <Form onSubmit={handleSubmit}>
-                {friends.map((friend) => {
+                {/* {friends.map((friend) => {
                     return (
                         <Row className='mb-3'>
                             <Form.Group>
@@ -35,7 +35,7 @@ export default function InviteFriends(props) {
                             </Form.Group>
                         </Row>
                     );
-                })}
+                })} */}
                 <Row className='mb-3'>
                     <h3>No Freinds? No problem! Just Put Some Rando's Contact Info Here</h3>
                     <p><i>Random invites are a great ice breaker.....trust me</i></p>
