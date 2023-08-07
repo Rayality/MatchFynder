@@ -6,7 +6,7 @@ import ErrorNotification from "../../ErrorNotification";
 // import {
 //   useAddSearchOptionMutation
 // } from "../../Redux/searchApi";
-import { useAddSearchParticipantMutation, useGetOptionsBySearchQuery } from "../../Redux/searchApi";
+import { useGetOptionsBySearchQuery } from "../../Redux/searchApi";
 import { useUpdateEdibleOptionMutation } from "../../Redux/searchApi";
 import { useLazyGetMatchMadeQuery } from "../../Redux/searchApi";
 import dino from "../images/dino.png"
