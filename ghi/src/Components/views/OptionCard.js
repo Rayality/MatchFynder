@@ -14,7 +14,7 @@ import dino from "../images/dino.png"
 function Option(props) {
   const navigate = useNavigate();
   const searchId = props.searchId;
-  const { addPaticipant } = useAddSearchParticipantMutation(searchId)
+  // const { addPaticipant } = useAddSearchParticipantMutation(searchId)
   // Create a local index variable leveraging React's useState functionality
   // in order to set/reset the index of the action option from the options list
   const [index, setIndex] = useState(0);
@@ -72,7 +72,7 @@ function Option(props) {
     }
   }
   useEffect(() => {
-    addPaticipant()
+    // addPaticipant()
     if (!data) {
       setThumbnail(dino)
     } else {

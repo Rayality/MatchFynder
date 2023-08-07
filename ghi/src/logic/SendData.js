@@ -5,7 +5,7 @@ export default async function SendData(url, method, data = {}) {
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: "include",
+    credentials: "false",
   };
 
   try {
