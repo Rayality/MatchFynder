@@ -77,6 +77,9 @@ def test_get_google_options_latlng():
 
 def test_get_place_details():
     # Arrange
+    app.dependency_overrides[
+        authenticator.get_current_account_data
+    ] = fake_get_current_account_data
     app.dependency_overrides[PlacesRepository] = TestingPlaces
 
     # Enact
