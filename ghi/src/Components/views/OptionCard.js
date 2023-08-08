@@ -42,7 +42,6 @@ function Option(props) {
       option_id: data[index][0].id,
     });
     const ismatch = await matchData(searchId).unwrap();
-    console.log(data)
     if (ismatch["match_made"] === true) {
       const google_id = data[index - 1][0].google_place_id
       navigate(`/match/${google_id}/`, { replace: true })
