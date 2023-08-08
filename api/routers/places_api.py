@@ -51,5 +51,9 @@ def get_google_options_city(
 def get_google_place_details(
     place_id: str,
     repo: PlacesRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data)
 ):
-    return repo.place_details(place_id)
+    if account_data:
+        return repo.place_details(place_id)
+    else:
+        raise not_authorized
