@@ -8,27 +8,32 @@ import 'slick-carousel/slick/slick-theme.css';
 import "../MatchMadeComponents/match-pics.css";
 import "../MatchMadeComponents/match-made-buttons.css";
 import "../MatchMadeComponents/badge-card.css";
+import { useLazyPlaceDetailsQuery } from '../../Redux/searchApi';
 
 
 function MatchMade(props) {
+    const [getPlaceDetails] = useLazyPlaceDetailsQuery();
     const place_id = props.place_id
     const [googlePictures, setGooglePictures] = useState([]);
     const [googleDetails, setGoogleDetails] = useState({});
     const [showMap, setShowMap] = useState(false)
     const [show, setShow] = useState(false);
     const [userLocation, setUserLocation] = useState({'lat':NaN, 'lng':NaN, 'access':'NA'})
+
     useEffect(() => {
         async function getPictures() {
-            const response = await fetch(`${process.env.REACT_APP_API_HOST}/place/details?place_id=${place_id}`);
-            if (response.ok) {
-                const option_details = await response.json();
+            try{
+                const option_details = await getPlaceDetails(place_id).unwrap();
                 setGoogleDetails(option_details);
                 setGooglePictures(option_details.photos);
                 await window.google.maps.importLibrary("routes")
             }
+            catch (error) {
+                console.error("Could not get place details");
+            }
         }
         getPictures();
-    }, [place_id])
+    }, [getPlaceDetails, place_id])
 
     async function directionsButtonClick() {
         await Location(setUserLocation);
