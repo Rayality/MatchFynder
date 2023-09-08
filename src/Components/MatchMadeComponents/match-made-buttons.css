@@ -1,0 +1,52 @@
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20%;
+  padding: 2rem 0;
+  flex: 0 1 8rem;
+}
+
+.badges-button {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  justify-content: right;
+  align-content: center;
+  overflow: hidden;
+}
+
+.badges-button img {
+  height: 80%;
+  width: 25%;
+  padding: 0 2.5% 0 0;
+}
+
+.badges-button h4 {
+  color: #020122;
+  width: 40%;
+  font-weight: 500;
+  font-size-adjust: 10%;
+}
+
+.badges-button-div {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  height: 100%;
+  min-width: 25ch;
+  width: 220%;
+  column-gap: 20%;
+  transform: translateX(0%);
+  transition: 0.2s ease-in-out;
+  padding: 2.5% 0;
+  padding-left: 0;
+}
+
+.badges-button-div:hover {
+  transform: translateX(50%);
+  transition: 0.2s ease-in-out;
+}

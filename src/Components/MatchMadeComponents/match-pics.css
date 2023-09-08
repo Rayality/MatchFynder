@@ -1,0 +1,51 @@
+/* $custom-colors: (
+    "custom-atomic-tangerine": #FCA17D,
+    "custom-lavender": #DADFF7,
+    "custom-flax": #FFEE93,
+    "custom-slate-grey": #254441,
+    "custom-oxford-blue": #020122,
+    ); */
+
+.arrows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  height: 5rem;
+  width: 5em;
+  margin: 0 1rem;
+}
+
+.pictures-bg {
+  display: flex;
+  width: 70%;
+  position: relative;
+  overflow: hidden;
+  justify-items: center;
+}
+
+.pictures-bg .slick-slider {
+  display: flex;
+  width: 80%;
+  height: 100%;
+  align-items: center;
+}
+
+.slick-list .pic {
+  object-fit: cover;
+  height: 15rem;
+}
+
+.pictures-bg .slick-list .slick-active {
+  display: block;
+  transform: scale(1.05);
+  transition: 1s ease-in-out;
+}
+
+.pictures-bg .slick-slide {
+  height: 15rem;
+  width: 20rem;
+  transform: scale(0.75);
+  transition: 0.9s ease;
+}
