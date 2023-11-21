@@ -53,7 +53,7 @@ export default class Directions extends Component {
 
         return (
             <div className='map-overlay'>
-                <button className='close-map' onClick={this.showMap} >CLOSE</button>
+                <button className='close-map' onClick={this.showMap} ><p className='close-text'>CLOSE</p></button>
                 <div id='map' className='map-screen' ></div>
             </div>
         );

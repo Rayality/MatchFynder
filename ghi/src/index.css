@@ -55,6 +55,15 @@ img {
   height: 520px;
 }
 
+.invite-jumbotron {
+  background-image: url(./images/invite.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  position: relative;
+  height: 520px;
+}
+
 .options-jumbotron {
   background-image: url(https://images.pexels.com/photos/4518646/pexels-photo-4518646.jpeg);
   background-size: cover;
@@ -97,6 +106,17 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.invite-container {
+  background-color: #dadff7de;
+  padding: 1%;
+  position: absolute;
+  border-radius: 1rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 
 .options-container {
   background-color: #dadff7;

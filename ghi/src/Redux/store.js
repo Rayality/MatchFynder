@@ -5,7 +5,7 @@ import { optionsApi } from "./optionsApi";
 import { searchApi } from "./searchApi";
 import { loginApi } from "./loginAPI";
 import modalReducer from "./modal-slice";
-import autoLcationReducer from "./locationSlice"
+import autoLocationReducer from "./locationSlice"
 import { wsApi } from "./webSocket-slice";
 
 export const store = configureStore({
@@ -15,7 +15,7 @@ export const store = configureStore({
     [searchApi.reducerPath]: searchApi.reducer,
     [loginApi.reducerPath]: loginApi.reducer,
     modalCheck: modalReducer,
-    autoLocation: autoLcationReducer,
+    autoLocation: autoLocationReducer,
     [wsApi.reducerPath]: wsApi.reducer
   },
   middleware: (getDefaultMiddleware) =>

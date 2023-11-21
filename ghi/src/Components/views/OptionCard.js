@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "boxicons";
 import { useSwipeable } from "react-swipeable";
 import ErrorNotification from "../../ErrorNotification";
+import '../../css/options.css'
 // import {
 //   useAddSearchOptionMutation
 // } from "../../Redux/searchApi";
@@ -105,21 +106,23 @@ function Option(props) {
       <div className="cover-container d-flex mx-auto flex-column">
         <div className="options-jumbotron jumbotron-fluid">
           <div className="prevent-select">
-            <div className="d-flex container justify-content-center">
-              <div className="thumbnail options-container">
-                <ErrorNotification error={error} />
-                <div {...handlers}>
-                  <img className="img-thumbnail object-fit-cover"
+
+              <ErrorNotification error={error} />
+            <div {...handlers}>
+              <div className="option-background">
+
+              <div className="option-card">
+                  <img className=""
                     style={{ "maxHeight": "400px" }}
                     draggable="false"
                     src={thumbnail}
                     alt="google maps sourced pic associated with restaurant"
                   />
-                  <div className="caption">
-                    <h4>{data[index][0].name}</h4>
+                  <div className="info">
+                    <h4 className="name">{data[index][0].name}</h4>
                     <p>Price: {data[index][0].price_level} out of 5</p>
                     <p>Rating: {data[index][0].rating} out of 5</p>
-                    <p className="d-flex justify-content-between">
+                    <div className="d-flex justify-content-between">
                       <button onClick={handleNoButton} className="btn">
                         <box-icon
                           name="x-circle"
@@ -138,11 +141,12 @@ function Option(props) {
                           title="click or swipe right to approve"
                         ></box-icon>
                       </button>
-                    </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>

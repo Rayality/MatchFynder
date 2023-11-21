@@ -16,16 +16,8 @@
 }
 
 .close-map {
-    display: flex;
-    flex-direction: column;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    color: #DADFF7;
-    align-items: center;
-    justify-content: center;
-    gap: 5%;
-    width: 3%;
-    min-width: 2ch;
     height: 100%;
+    width: max-content;
     background: #020122;
 }
+

@@ -53,3 +53,21 @@ async def create_account(
     form = AccountForm(username=info.username, password=info.password)
     token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
+
+
+@router.get("/api/accounts/accountinfo")
+def account_info(
+    username: str,
+    request: Request,
+    respone: Response,
+    repo: AccountRepo = Depends()
+):
+    try:
+        account = repo.get(username)
+    except Exception as e:
+        print(e)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="There was an issue retrieving an account with that username." # noqa
+        )
+    return account

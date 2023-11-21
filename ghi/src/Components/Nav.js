@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import ModalForm from "./forms/Modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { shown } from "../Redux/modal-slice";
 import { useLogoutMutation } from "../Redux/loginAPI";
 import { useAuth } from "./AuthProvider";
+import { setUsername, setPassword } from '../Redux/account-slice'
 
 function Nav() {
+  const name = useSelector((state) => state.accountCreator.account.username);
   const dispatch = useDispatch();
   const initModal = () => {
     dispatch(shown());
@@ -15,23 +17,30 @@ function Nav() {
   const { setToken } = useAuth()
 
   const handleLogout = () => {
-    logout()
-    setToken(undefined)
-    navigate("/", { replace: true })
+    dispatch(setUsername(''));
+    dispatch(setPassword(''));
+    logout();
+    setToken(undefined);
+    navigate("/", { replace: true });
   }
 
   return (
     <>
       <nav className="navbar bg-body-tertiary">
         <div className="container-fluid">
-          <button
-            onClick={initModal}
-            className="btn btn-lg btn-secondary fynder-button btn3d"
-            data-bs-toggle="modal"
-            data-bs-target="#loginModal"
-          >
-            <box-icon name='user' color="white"></box-icon>
-          </button>
+          {
+            name ?
+              null
+              :
+              <button
+                onClick={initModal}
+                className="btn btn-lg btn-secondary fynder-button btn3d"
+                data-bs-toggle="modal"
+                data-bs-target="#loginModal"
+              >
+                <box-icon name='user' color="white"></box-icon>
+              </button>
+          }
           <button
             className="navbar-toggler"
             type="button"
@@ -51,7 +60,9 @@ function Nav() {
           >
             <div className="offcanvas-header">
               <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-                Menu
+                {
+                  {name} ? `Welcome ${name}` : ""
+                }
               </h5>
               <button
                 type="button"

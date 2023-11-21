@@ -61,7 +61,7 @@ class MyAuthenticator(Authenticator):
         except JWTError:
             raise credentials_exception
         user = AccountOut(**payload.get("account"))
-        print(user.dict())
+        print(user)
         if user is None:
             raise credentials_exception
         return user

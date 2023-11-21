@@ -45,15 +45,15 @@
 }
 
 .close-info {
-    display: flex;
-    flex-direction: column;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    color: #DADff7;
-    align-items: center;
-    justify-content: center;
-    gap: 5%;
-    width: 3%;
-    height: 100%;
-    background: #020122;
+  width: max-content;
+  height: 100%;
+  background: #020122;
+}
+
+.close-text {
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  color: #DADff7;
+  background: #020122;
+  margin: 0;
 }

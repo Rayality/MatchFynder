@@ -23,7 +23,7 @@ export default class PlaceInfo extends Component {
     render() {
         return (
             <div className='place-info-bg'>
-                <button className="close-info" onClick={this.showfunc}>CLOSE</button>
+                <button className="close-info" onClick={this.showfunc}><p className="close-text">CLOSE</p></button>
                 <div className='place-info'>
                     <div>
                         <h1 className="fynder-dark-text text-top" onClick={this.showfunc}>Phone#: {this.phone ? this.phone : 'Number not available'}</h1>

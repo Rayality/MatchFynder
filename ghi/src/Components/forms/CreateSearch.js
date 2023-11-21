@@ -5,7 +5,7 @@ import {
 } from "../../Redux/searchApi";
 import { useSelector, useDispatch } from 'react-redux'
 import { setAutoLat, setAutoLng } from "../../Redux/locationSlice";
-import AutoComplete from "../AutoComplete";
+import AutoComplete from "./AutoComplete";
 
 
 export default function CreateSearchForm() {
@@ -58,7 +58,7 @@ export default function CreateSearchForm() {
         const search_id = await handleApiCalls();
         dispatch(setAutoLng(null))
         dispatch(setAutoLat(null))
-        navigate(`${search_id}`);
+        navigate(`${search_id}/options`);
       }
     }
   }

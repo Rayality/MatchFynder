@@ -18,10 +18,10 @@ const accountSlice = createSlice({
       };
     },
     setUsername(state, val) {
-      state.account.username = val.payload[0]
+      state.account.username = val.payload
     },
     setPassword(state, val) {
-      state.account.password = val.payload[0]
+      state.account.password = val.payload
     }
   },
 });

@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setAutoLat, setAutoLng } from "../Redux/locationSlice";
+import { setAutoLat, setAutoLng } from "../../Redux/locationSlice";
 
 const AutoComplete = () => {
     const [invalid, setInvalid] = useState(false)

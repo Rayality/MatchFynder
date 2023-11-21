@@ -36,7 +36,6 @@ def include_in_search(
 def add_friend(
     owner: int,
     friend_id: int,
-    response: Response,
     repo: FynderRepository = Depends(),
 ):
     return repo.add_friend(owner, friend_id)

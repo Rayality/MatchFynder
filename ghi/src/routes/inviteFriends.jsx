@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import InviteFriendsForm from "../Components/forms/InviteFriends";
+import InviteFriendsForm from "../Components/views/InviteFriends";
 // import PageUnderConstruction from "../Components/views/PageInDev";
 
 export default function InviteFriends() {

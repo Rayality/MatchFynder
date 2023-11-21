@@ -1,7 +1,6 @@
 import { usePostLoginMutation } from "../../Redux/loginAPI";
 import { useState } from "react";
 import { useAuth } from "../AuthProvider";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUsername, setPassword } from '../../Redux/account-slice'
 import { shown } from "../../Redux/modal-slice";
@@ -14,7 +13,6 @@ export default function LoginForm() {
     password: "",
   });
   const [loginPost] = usePostLoginMutation();
-  const navigate = useNavigate()
   const initModal = () => {
     dispatch(shown());
   };
@@ -30,18 +28,13 @@ export default function LoginForm() {
     let params = new URLSearchParams(account)
     const response = await loginPost(params);
     if (!response.error) {
-      const token = response.data.access_token
-      dispatch(setUsername(account.username))
-      dispatch(setPassword(account.password))
+      dispatch(setUsername(account.username));
+      dispatch(setPassword(account.password));
+      const token = response.data.access_token;
       setToken(token);
-      setAccount({
-        username: "",
-        password: "",
-      });
-      dispatch(shown());
-      navigate("/");
     }
   }
+
   return (
     <div className="container mb-3 shadow">
       <div className="mb-3 title">
@@ -64,7 +57,7 @@ export default function LoginForm() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
+          <label htmlFor="inputPassword" className="form-label">
             Password
           </label>
           <input
